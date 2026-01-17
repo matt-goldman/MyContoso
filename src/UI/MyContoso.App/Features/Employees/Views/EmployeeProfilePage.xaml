@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fs="clr-namespace:FlagstoneUI.Core.Controls;assembly=FlagstoneUI.Core"
+             xmlns:vm="clr-namespace:MyContoso.App.Features.Employees.ViewModels"
+             x:Class="MyContoso.App.Features.Employees.Views.EmployeeProfilePage"
+             x:DataType="vm:EmployeeProfileViewModel"
+             Title="Employee Profile">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="16">
+
+            <!-- Loading Indicator -->
+            <ActivityIndicator IsRunning="{Binding IsLoading}"
+                               IsVisible="{Binding IsLoading}"
+                               Color="{DynamicResource Color.Primary}"
+                               Margin="0,20" />
+
+            <!-- Profile Content -->
+            <VerticalStackLayout Spacing="16"
+                                 IsVisible="{Binding IsLoading, Converter={StaticResource InvertedBoolConverter}}">
+
+                <fs:FsCard Style="{StaticResource ElevatedCard}">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="{Binding Employee.Name}"
+                               FontSize="{DynamicResource FontSize.HeadlineMedium}"
+                               FontAttributes="Bold"
+                               TextColor="{DynamicResource Color.OnSurface}" />
+
+                        <Label Text="{Binding Employee.Role}"
+                               FontSize="{DynamicResource FontSize.TitleMedium}"
+                               TextColor="{DynamicResource Color.OnSurfaceVariant}" />
+                    </VerticalStackLayout>
+                </fs:FsCard>
+
+                <fs:FsCard>
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="Department"
+                               FontSize="{DynamicResource FontSize.LabelMedium}"
+                               TextColor="{DynamicResource Color.OnSurfaceVariant}" />
+                        
+                        <Label Text="{Binding Employee.Department}"
+                               FontSize="{DynamicResource FontSize.BodyLarge}"
+                               TextColor="{DynamicResource Color.OnSurface}" />
+                    </VerticalStackLayout>
+                </fs:FsCard>
+
+                <fs:FsCard>
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="Profile Summary"
+                               FontSize="{DynamicResource FontSize.LabelMedium}"
+                               TextColor="{DynamicResource Color.OnSurfaceVariant}" />
+                        
+                        <Label Text="{Binding Employee.ProfileSummary}"
+                               FontSize="{DynamicResource FontSize.BodyLarge}"
+                               TextColor="{DynamicResource Color.OnSurface}" />
+                    </VerticalStackLayout>
+                </fs:FsCard>
+
+                <fs:FsCard>
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="Accreditation Status"
+                               FontSize="{DynamicResource FontSize.LabelMedium}"
+                               TextColor="{DynamicResource Color.OnSurfaceVariant}" />
+                        
+                        <Label Text="{Binding Employee.AccreditationStatus}"
+                               FontSize="{DynamicResource FontSize.BodyLarge}"
+                               TextColor="{DynamicResource Color.Primary}" />
+                    </VerticalStackLayout>
+                </fs:FsCard>
+
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

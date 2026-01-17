@@ -4,6 +4,6 @@ using System.Text;
 
 namespace MyContoso.App.Services;
 
-internal class ApiClient
+public class ApiClient
 {
 }

@@ -2,6 +2,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Maui;
 using OpenTelemetry;
 using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
@@ -30,8 +31,10 @@ namespace Microsoft.Extensions.Hosting
                 http.AddServiceDiscovery();
             });
 
-            builder.Services.TryAddEnumerable(
-                ServiceDescriptor.Transient<IMauiInitializeService, OpenTelemetryInitializer>(_ => new OpenTelemetryInitializer()));
+            // NOTE: IMauiInitializeService is not available in .NET 10 MAUI
+            // OpenTelemetry providers will be initialized on first use
+            // builder.Services.TryAddEnumerable(
+            //     ServiceDescriptor.Transient<IMauiInitializeService, OpenTelemetryInitializer>(_ => new OpenTelemetryInitializer()));
 
             // Uncomment the following to restrict the allowed schemes for service discovery.
             // builder.Services.Configure<ServiceDiscoveryOptions>(options =>
@@ -75,15 +78,17 @@ namespace Microsoft.Extensions.Hosting
             return builder;
         }
 
-        private class OpenTelemetryInitializer : IMauiInitializeService
-        {
-            public void Initialize(IServiceProvider services)
-            {
-                services.GetService<MeterProvider>();
-                services.GetService<TracerProvider>();
-                services.GetService<LoggerProvider>();
-            }
-        }
+        // NOTE: IMauiInitializeService is not available in .NET 10 MAUI
+        // Commented out until a suitable replacement is found
+        // private class OpenTelemetryInitializer : IMauiInitializeService
+        // {
+        //     public void Initialize(IServiceProvider services)
+        //     {
+        //         services.GetService<MeterProvider>();
+        //         services.GetService<TracerProvider>();
+        //         services.GetService<LoggerProvider>();
+        //     }
+        // }
 
         private static TBuilder AddOpenTelemetryExporters<TBuilder>(this TBuilder builder) where TBuilder : IHostApplicationBuilder
         {

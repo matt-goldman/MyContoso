@@ -25,13 +25,15 @@ namespace MyContoso.App
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
-            // Add service defaults
-            builder.AddServiceDefaults();
+            // TODO: Add service defaults once MauiServiceDefaults build issues are resolved
+            // Issue: IMauiInitializeService interface is not available in .NET 10 MAUI
+            // builder.AddServiceDefaults();
 
-            // configure HTTP client with service discovery
+            // configure HTTP client
             builder.Services.AddHttpClient<ApiClient>(client =>
             {
-                client.BaseAddress = new Uri("https+http://webapi");
+                // TODO: Use service discovery once Aspire integration is fixed
+                client.BaseAddress = new Uri("http://localhost:5000");
             });
 
             // Register ViewModels

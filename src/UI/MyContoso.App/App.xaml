@@ -2,6 +2,8 @@
 <Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:MyContoso.App"
+             xmlns:material="clr-namespace:FlagstoneUI.Themes.Material;assembly=FlagstoneUI.Themes.Material"
+             xmlns:converters="clr-namespace:MyContoso.App.Converters"
              x:Class="MyContoso.App.App">
     <Application.Resources>
         <ResourceDictionary>
@@ -9,7 +11,14 @@
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Icons.xaml" />
+                
+                <!-- Add FlagstoneUI Material theme -->
+                <material:Theme />
             </ResourceDictionary.MergedDictionaries>
+            
+            <!-- Converters -->
+            <converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+            <converters:IsNotNullConverter x:Key="IsNotNullConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fs="clr-namespace:FlagstoneUI.Core.Controls;assembly=FlagstoneUI.Core"
+             xmlns:vm="clr-namespace:MyContoso.App.ViewModels"
+             x:Class="MyContoso.App.Views.EmployeeProfilePage"
+             x:DataType="vm:EmployeeProfileViewModel"
+             Title="Employee Profile">
+
+    <ScrollView Padding="16">
+        <VerticalStackLayout Spacing="16">
+            <!-- Loading indicator -->
+            <ActivityIndicator IsRunning="{Binding IsLoading}"
+                              IsVisible="{Binding IsLoading}"
+                              VerticalOptions="Center"
+                              HorizontalOptions="Center" />
+
+            <!-- Employee details -->
+            <VerticalStackLayout Spacing="16"
+                                IsVisible="{Binding Employee, Converter={StaticResource IsNotNullConverter}}">
+                
+                <fs:FsCard Style="{StaticResource ElevatedCard}">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="{Binding Employee.Name}"
+                              FontSize="{DynamicResource FontSize.HeadlineMedium}"
+                              FontAttributes="Bold"
+                              TextColor="{DynamicResource Color.OnSurface}" />
+                        
+                        <Label Text="{Binding Employee.Role}"
+                              FontSize="{DynamicResource FontSize.TitleMedium}"
+                              TextColor="{DynamicResource Color.OnSurfaceVariant}" />
+                        
+                        <BoxView HeightRequest="1"
+                                Background="{DynamicResource Color.OutlineVariant}" />
+                        
+                        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto" 
+                              RowSpacing="8" ColumnSpacing="12">
+                            <Label Grid.Row="0" Grid.Column="0"
+                                  Text="Department:"
+                                  FontSize="{DynamicResource FontSize.BodyMedium}"
+                                  FontAttributes="Bold"
+                                  TextColor="{DynamicResource Color.OnSurface}" />
+                            <Label Grid.Row="0" Grid.Column="1"
+                                  Text="{Binding Employee.Department}"
+                                  FontSize="{DynamicResource FontSize.BodyMedium}"
+                                  TextColor="{DynamicResource Color.OnSurfaceVariant}" />
+                            
+                            <Label Grid.Row="1" Grid.Column="0"
+                                  Text="Status:"
+                                  FontSize="{DynamicResource FontSize.BodyMedium}"
+                                  FontAttributes="Bold"
+                                  TextColor="{DynamicResource Color.OnSurface}" />
+                            <Label Grid.Row="1" Grid.Column="1"
+                                  Text="{Binding Employee.AccreditationStatus}"
+                                  FontSize="{DynamicResource FontSize.BodyMedium}"
+                                  TextColor="{DynamicResource Color.OnSurfaceVariant}" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </fs:FsCard>
+
+                <fs:FsCard>
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Profile Summary"
+                              FontSize="{DynamicResource FontSize.TitleMedium}"
+                              FontAttributes="Bold"
+                              TextColor="{DynamicResource Color.OnSurface}" />
+                        
+                        <Label Text="{Binding Employee.ProfileSummary}"
+                              FontSize="{DynamicResource FontSize.BodyMedium}"
+                              TextColor="{DynamicResource Color.OnSurfaceVariant}" />
+                    </VerticalStackLayout>
+                </fs:FsCard>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

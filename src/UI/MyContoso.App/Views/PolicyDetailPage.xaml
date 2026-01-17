@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fs="clr-namespace:FlagstoneUI.Core.Controls;assembly=FlagstoneUI.Core"
+             xmlns:vm="clr-namespace:MyContoso.App.ViewModels"
+             x:Class="MyContoso.App.Views.PolicyDetailPage"
+             x:DataType="vm:PolicyDetailViewModel"
+             Title="Policy Details">
+
+    <ScrollView Padding="16">
+        <VerticalStackLayout Spacing="16">
+            <!-- Loading indicator -->
+            <ActivityIndicator IsRunning="{Binding IsLoading}"
+                              IsVisible="{Binding IsLoading}"
+                              VerticalOptions="Center"
+                              HorizontalOptions="Center" />
+
+            <!-- Policy details -->
+            <VerticalStackLayout Spacing="16"
+                                IsVisible="{Binding Policy, Converter={StaticResource IsNotNullConverter}}">
+                
+                <fs:FsCard Style="{StaticResource ElevatedCard}">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="{Binding Policy.Title}"
+                              FontSize="{DynamicResource FontSize.HeadlineMedium}"
+                              FontAttributes="Bold"
+                              TextColor="{DynamicResource Color.OnSurface}" />
+                        
+                        <HorizontalStackLayout Spacing="8">
+                            <Label Text="{Binding Policy.Category}"
+                                  FontSize="{DynamicResource FontSize.BodyMedium}"
+                                  TextColor="{DynamicResource Color.Primary}"
+                                  FontAttributes="Bold" />
+                            <Label Text="•"
+                                  FontSize="{DynamicResource FontSize.BodyMedium}"
+                                  TextColor="{DynamicResource Color.OnSurfaceVariant}" />
+                            <Label Text="{Binding Policy.LastUpdated, StringFormat='Updated: {0:MMM dd, yyyy}'}"
+                                  FontSize="{DynamicResource FontSize.BodyMedium}"
+                                  TextColor="{DynamicResource Color.OnSurfaceVariant}" />
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </fs:FsCard>
+
+                <fs:FsCard>
+                    <Label Text="{Binding Policy.Content}"
+                          FontSize="{DynamicResource FontSize.BodyMedium}"
+                          TextColor="{DynamicResource Color.OnSurface}" />
+                </fs:FsCard>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

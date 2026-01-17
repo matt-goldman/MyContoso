@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fs="clr-namespace:FlagstoneUI.Core.Controls;assembly=FlagstoneUI.Core"
+             xmlns:vm="clr-namespace:MyContoso.App.ViewModels"
+             x:Class="MyContoso.App.Views.EmployeeDirectoryPage"
+             x:DataType="vm:EmployeeDirectoryViewModel"
+             Title="Employees">
+
+    <Grid RowDefinitions="*">
+        <!-- Loading indicator -->
+        <ActivityIndicator IsRunning="{Binding IsLoading}"
+                          IsVisible="{Binding IsLoading}"
+                          VerticalOptions="Center"
+                          HorizontalOptions="Center" />
+
+        <!-- Employees list -->
+        <CollectionView ItemsSource="{Binding Employees}"
+                       IsVisible="{Binding IsLoading, Converter={StaticResource InvertedBoolConverter}}"
+                       Margin="16">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <fs:FsCard Margin="0,0,0,12">
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                            <VerticalStackLayout Grid.Column="0" Spacing="4">
+                                <Label Text="{Binding Name}"
+                                      FontSize="{DynamicResource FontSize.TitleMedium}"
+                                      FontAttributes="Bold"
+                                      TextColor="{DynamicResource Color.OnSurface}" />
+                                
+                                <Label Text="{Binding Role}"
+                                      FontSize="{DynamicResource FontSize.BodyMedium}"
+                                      TextColor="{DynamicResource Color.OnSurfaceVariant}" />
+                                
+                                <Label Text="{Binding Department}"
+                                      FontSize="{DynamicResource FontSize.BodySmall}"
+                                      TextColor="{DynamicResource Color.OnSurfaceVariant}" />
+                            </VerticalStackLayout>
+
+                            <fs:FsButton Grid.Column="1"
+                                        Text="View"
+                                        Style="{StaticResource OutlinedButton}"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:EmployeeDirectoryViewModel}}, Path=NavigateToEmployeeCommand}"
+                                        CommandParameter="{Binding EmployeeId}"
+                                        VerticalOptions="Center" />
+                        </Grid>
+                    </fs:FsCard>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

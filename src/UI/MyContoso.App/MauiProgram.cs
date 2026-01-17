@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using CommunityToolkit.Maui;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MyContoso.App.Services;
 
@@ -15,7 +16,8 @@ namespace MyContoso.App
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                });
+                })
+                .UseMauiCommunityToolkit();
 
 #if DEBUG
     		builder.Logging.AddDebug();

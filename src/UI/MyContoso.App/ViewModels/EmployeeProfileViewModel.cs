@@ -23,7 +23,14 @@ public partial class EmployeeProfileViewModel : ObservableObject, IQueryAttribut
     {
         if (query.TryGetValue("id", out var idObj) && idObj is string idString && int.TryParse(idString, out var employeeId))
         {
-            _ = LoadEmployeeAsync(employeeId);
+            _ = LoadEmployeeAsync(employeeId).ContinueWith(task =>
+            {
+                if (task.Exception != null)
+                {
+                    // Log the exception (in a real app, you'd use proper logging)
+                    System.Diagnostics.Debug.WriteLine($"Error loading employee: {task.Exception}");
+                }
+            }, TaskScheduler.FromCurrentSynchronizationContext());
         }
     }
 

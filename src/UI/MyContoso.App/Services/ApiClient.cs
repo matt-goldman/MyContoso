@@ -22,6 +22,7 @@ public class ApiClient
         catch
         {
             // Return empty list if API is not available
+            // This is acceptable for demo/stub purposes
             return new List<CompanyUpdate>();
         }
     }
@@ -35,6 +36,7 @@ public class ApiClient
         }
         catch
         {
+            // Return empty list if API is not available
             return new List<Employee>();
         }
     }
@@ -47,6 +49,7 @@ public class ApiClient
         }
         catch
         {
+            // Return null if API is not available or employee not found
             return null;
         }
     }
@@ -60,6 +63,7 @@ public class ApiClient
         }
         catch
         {
+            // Return empty list if API is not available
             return new List<Policy>();
         }
     }
@@ -72,6 +76,7 @@ public class ApiClient
         }
         catch
         {
+            // Return null if API is not available or policy not found
             return null;
         }
     }

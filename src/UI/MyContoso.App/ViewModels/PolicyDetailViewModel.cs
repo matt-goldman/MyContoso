@@ -23,7 +23,14 @@ public partial class PolicyDetailViewModel : ObservableObject, IQueryAttributabl
     {
         if (query.TryGetValue("id", out var idObj) && idObj is string idString && int.TryParse(idString, out var policyId))
         {
-            _ = LoadPolicyAsync(policyId);
+            _ = LoadPolicyAsync(policyId).ContinueWith(task =>
+            {
+                if (task.Exception != null)
+                {
+                    // Log the exception (in a real app, you'd use proper logging)
+                    System.Diagnostics.Debug.WriteLine($"Error loading policy: {task.Exception}");
+                }
+            }, TaskScheduler.FromCurrentSynchronizationContext());
         }
     }
 

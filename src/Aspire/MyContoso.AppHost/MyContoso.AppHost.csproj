@@ -1,0 +1,23 @@
+<Project Sdk="Aspire.AppHost.Sdk/13.1.0">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UserSecretsId>5d25d4e5-fe3f-4b55-9526-0a353e6a579e</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.Maui" Version="13.1.0-preview.1.25616.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\API\MyContoso.ApiService\MyContoso.ApiService.csproj" />
+    <ProjectReference Include="..\..\UI\MyContoso.App\MyContoso.App.csproj" />
+    <ProjectReference Include="..\..\UI\MyContoso.Web\MyContoso.Web.csproj" />
+    <ProjectReference Include="..\MyContoso.ApiService\MyContoso.ApiService.csproj" />
+    <ProjectReference Include="..\MyContoso.Web\MyContoso.Web.csproj" />
+  </ItemGroup>
+
+</Project>

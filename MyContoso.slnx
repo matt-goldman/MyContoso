@@ -1,0 +1,24 @@
+<Solution>
+  
+  <Folder Name="/src/" />
+  <Folder Name="/src/API/">
+    <Project Path="src/API/MyContoso.ApiService/MyContoso.ApiService.csproj" />
+  </Folder>
+  <Folder Name="/src/Aspire/">
+    <Project Path="src/Aspire/MyContoso.AppHost/MyContoso.AppHost.csproj" />
+    <Project Path="src/Aspire/MyContoso.MauiServiceDefaults/MyContoso.MauiServiceDefaults.csproj" Id="1206f9cd-62eb-42b8-9d3f-b6862ae92b59" />
+    <Project Path="src/Aspire/MyContoso.ServiceDefaults/MyContoso.ServiceDefaults.csproj" />
+  </Folder>
+  <Folder Name="/src/Common/">
+    <Project Path="src/Common/Shared/Shared.csproj" />
+  </Folder>
+  <Folder Name="/src/UI/">
+    <Project Path="src/UI/MyContoso.App/MyContoso.App.csproj" Id="04fc3be0-52d6-46dc-9ff1-9b16e3796a1f">
+      <Deploy Solution="Debug|*" />
+    </Project>
+    <Project Path="src/UI/MyContoso.Web/MyContoso.Web.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/MyContoso.Tests/MyContoso.Tests.csproj" />
+  </Folder>
+</Solution>

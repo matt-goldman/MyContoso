@@ -1112,3 +1112,318 @@ string token = await SecureStorage.GetAsync("oauth_token");
 4. **Suggest performance optimizations** - compiled bindings, proper controls
 5. **Provide working XAML examples** with modern patterns
 6. **Consider cross-platform implications**
+
+# Architectural Guidelines
+
+## Purpose
+
+This document codifies the architectural rules and guardrails for the **MyContoso** mobile app.
+
+It exists to:
+
+* Reduce cognitive load during development
+* Eliminate entire classes of predictable runtime bugs
+* Make architectural intent explicit and enforceable
+* Enable parallel work without ambiguity
+
+These rules are **deliberately opinionated**. They are not intended to be universally correct; they are intended to be *locally safe*.
+
+The rules apply only to the mobile app, except where patterns intersect with the full stack (for example shared DTOs).
+
+---
+
+## Core Principles
+
+### 1. Single Authoritative Source of Truth
+
+Every piece of state must have **one clear owner**.
+
+If you cannot immediately answer *"where does this truth live?"*, the design is incomplete.
+
+---
+
+### 2. Illegal States Should Be Unrepresentable (Where Cheap)
+
+If a mistake can be prevented structurally at low cost, it should be.
+
+We prefer:
+
+* Structural guardrails
+* Compile-time guarantees
+* Lifetime-based correctness
+
+Over:
+
+* Discipline
+* Conventions
+* Runtime checks
+
+---
+
+### 3. Concrete Before Abstract
+
+Architectural abstractions must be justified by concrete failure modes.
+
+We do not introduce patterns preemptively.
+We introduce them *in response to demonstrated problems*.
+
+---
+
+## Layer Responsibilities
+
+### Model (Domain)
+
+The **Model** represents the domain and owns truth.
+
+Includes:
+
+* Domain entities
+* Domain services
+* State-owning services
+
+Rules:
+
+* All **publishers** live here
+* State may be mutable or immutable
+* No dependency on UI concepts
+
+---
+
+### ViewModel
+
+The **ViewModel** adapts domain state for presentation.
+
+Includes:
+
+* Commands
+* Presentation state
+* Subscriptions to domain publishers
+
+Rules:
+
+* All **subscribers** live here
+* Must not publish domain events
+* Must not own authoritative domain state
+
+---
+
+### View (UI)
+
+The **View** owns visual behaviour.
+
+Includes:
+
+* Layout
+* Styling
+* Visual State Manager
+* Animations
+
+Rules:
+
+* No domain logic
+* No subscriptions
+* Responds to ViewModel state only
+
+---
+
+## Dependency Flow
+
+Allowed:
+
+* View → ViewModel
+* ViewModel → Model
+
+Disallowed:
+
+* Model → ViewModel
+* ViewModel → View
+* Horizontal dependencies
+
+Diagonal dependencies (ViewModel → Domain Service) are allowed **by design**, but must be explicit.
+
+---
+
+## Messaging and Events
+
+### Rule: No Message Buses
+
+The app must **not** use:
+
+* MessagingCenter
+* EventAggregator-style global buses
+* CommunityToolkit Messenger
+
+Reason:
+
+* Subscribing to messages removes ownership
+* Dependencies become invisible
+* Correctness becomes a runtime concern
+
+---
+
+### Rule: Subscribe to Publishers, Not Channels
+
+Allowed communication mechanisms:
+
+* .NET events
+* Reactive Extensions (IObservable)
+
+Constraints:
+
+* Publishers live in the Model
+* Subscribers live in ViewModels
+* Subscriptions must be explicit and disposable
+
+---
+
+## Navigation
+
+### Navigation Is a System
+
+Navigation is not incidental glue code.
+
+Rules:
+
+* Routes must be defined centrally
+* Magic strings are discouraged
+* Navigation parameters must be explicit
+
+The navigation system must make it difficult to:
+
+* Navigate to unregistered routes
+* Navigate with invalid parameters
+
+---
+
+## Page Lifetime Rules
+
+Page lifetime is a **correctness decision**, not a performance tweak.
+
+### Singleton Pages
+
+Use when:
+
+* State is shared
+* Content is long-lived
+* Reinitialisation is expensive
+
+Example:
+
+* Company feed
+
+---
+
+### Transient Pages
+
+Use when:
+
+* State is parameterised
+* Content is short-lived
+* State leakage would be harmful
+
+Example:
+
+* Employee profile
+
+Transient lifetimes are preferred when they reduce the blast radius of mistakes.
+
+---
+
+## State Management
+
+### No Global State God Objects
+
+State must be:
+
+* Owned
+* Scoped
+* Discoverable
+
+Cross-cutting visibility does **not** justify global ownership.
+
+---
+
+### State Propagation
+
+State changes must be propagated via:
+
+* Explicit events, or
+* Explicit observables
+
+Never via broadcast or implicit discovery.
+
+---
+
+## Modules
+
+### Modular Structure
+
+Apps exceeding five pages must be modularised.
+
+Each module is organised by **domain concept**, not technical role.
+
+Standard module layout:
+
+* Pages/
+* ViewModels/
+* Models/
+* Services/
+* Routes.cs
+* DependencyInjection.cs
+
+---
+
+### Module Boundaries
+
+Rules:
+
+* Modules must not depend on each other
+* Internal implementation must remain internal
+* Explicit sharing requires a PublicAPI surface
+
+---
+
+## WET vs DRY
+
+### Early Development
+
+Being WET is acceptable when:
+
+* UI and backend evolve independently
+* Models are provisional
+
+Early UI models are considered **disposable**.
+
+---
+
+### Stabilisation Phase
+
+Once domain contracts stabilise:
+
+* Shared DTOs are introduced
+* Duplication is removed deliberately
+* Ownership is clarified
+
+DRY is about **behaviour**, not classes.
+
+---
+
+## Non-Goals
+
+This architecture explicitly does **not** attempt to solve:
+
+* Authentication
+* Authorisation
+* Persistence
+* Offline sync
+* Performance tuning
+
+These concerns are intentionally out of scope.
+
+---
+
+## Closing Note
+
+These rules exist to make the *wrong thing hard*, not to make the *right thing clever*.
+
+If a rule feels restrictive, that friction is intentional.

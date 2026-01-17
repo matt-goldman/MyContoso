@@ -59,6 +59,9 @@
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="13.0.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+		<PackageReference Include="FlagstoneUI.Core" Version="0.0.1" />
+		<PackageReference Include="FlagstoneUI.Integrations.MCT" Version="0.0.1" />
+		<PackageReference Include="FlagstoneUI.Themes.Material" Version="0.0.1" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.30" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.2" />
 	</ItemGroup>

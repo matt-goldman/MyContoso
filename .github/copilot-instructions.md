@@ -111,6 +111,16 @@ The app may intentionally start with less robust patterns (magic strings, weak t
 
 ### Recommended Controls
 
+**Important**: This project may use FlagstoneUI (a custom UI framework for .NET MAUI). When FlagstoneUI controls are available, prefer them over standard MAUI controls for consistency and theming. See `src/UI/MyContoso.App/AGENTS.MD` for FlagstoneUI details.
+
+**FlagstoneUI Controls** (when available/in use):
+- `FsButton` - Fully styleable button (prefer over `Button`)
+- `FsCard` - Container with elevation and borders (prefer over `Border` or `Frame` for card-style containers)
+- `FsEntry` - Single-line text input with full visual control (prefer over `Entry`)
+- `FsEditor` - Multi-line text input (prefer over `Editor`)
+
+**Standard MAUI Controls** (use when FlagstoneUI equivalent not available):
+
 **Layouts**:
 - `Grid` - Complex layouts (preferred over StackLayout)
 - `Border` - Container with border (preferred over Frame)
@@ -122,13 +132,11 @@ The app may intentionally start with less robust patterns (magic strings, weak t
 - `BindableLayout` - Small lists ≤20 items (no virtualization)
 - `CarouselView` + `IndicatorView` - Galleries and sliders
 
-**Input Controls**:
-- `Entry` - Single-line text input
-- `Editor` - Multi-line text input (`AutoSize="TextChanges"`)
-- `Button` / `ImageButton` - Actions
+**Other Input Controls**:
 - `CheckBox` / `Switch` - Boolean selection
 - `Picker` - Dropdown selection
 - `SearchBar` - Search input
+- `ImageButton` - Image-based actions
 
 ### Performance Best Practices
 

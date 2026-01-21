@@ -67,16 +67,9 @@
                         <HorizontalStackLayout Spacing="{DynamicResource Space.8}">
                             <Label Text="{StaticResource BadgeCheckIcon}"
                                    FontFamily="Lucide"
+                                   TextColor="{Binding Employee.AccreditationStatus, Converter={StaticResource AccreditationColorConverter}}"
                                    FontSize="20"
-                                   VerticalOptions="Center">
-                                <Label.TextColor>
-                                    <Binding Path="Employee.AccreditationStatus">
-                                        <Binding.Converter>
-                                            <StaticResource x:Key="AccreditationColorConverter" />
-                                        </Binding.Converter>
-                                    </Binding>
-                                </Label.TextColor>
-                            </Label>
+                                   VerticalOptions="Center" />
                             <Label Text="{Binding Employee.AccreditationStatus}"
                                    TextColor="{DynamicResource Color.OnSurface}"
                                    FontSize="{DynamicResource FontSize.BodyLarge}"

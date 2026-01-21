@@ -4,11 +4,27 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MyContoso.App"
-    Title="MyContoso.App">
+    xmlns:views="clr-namespace:MyContoso.App.Views"
+    Title="MyContoso">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <ShellContent
+            Title="Feed"
+            Icon="{StaticResource RssIcon}"
+            ContentTemplate="{DataTemplate views:CompanyFeedPage}"
+            Route="feed" />
+
+        <ShellContent
+            Title="Employees"
+            Icon="{StaticResource UsersIcon}"
+            ContentTemplate="{DataTemplate views:EmployeeListPage}"
+            Route="employees" />
+
+        <ShellContent
+            Title="Policies"
+            Icon="{StaticResource FileTextIcon}"
+            ContentTemplate="{DataTemplate views:PolicyListPage}"
+            Route="policies" />
+    </TabBar>
 
 </Shell>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fs="clr-namespace:FlagstoneUI.Core.Controls;assembly=FlagstoneUI.Core"
+             xmlns:vm="clr-namespace:MyContoso.App.ViewModels"
+             xmlns:shared="clr-namespace:Shared;assembly=Shared"
+             x:Class="MyContoso.App.Views.PolicyListPage"
+             x:DataType="vm:PolicyListViewModel"
+             Title="Policies">
+    
+    <Grid RowDefinitions="*">
+        <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                     Command="{Binding RefreshCommand}">
+            <CollectionView ItemsSource="{Binding Policies}"
+                           SelectionMode="None">
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       Spacing="{DynamicResource Space.16}">
+                        <Label Text="No policies available"
+                               TextColor="{DynamicResource Color.OnSurface}"
+                               FontSize="{DynamicResource FontSize.BodyLarge}"
+                               HorizontalOptions="Center" />
+                        <ActivityIndicator IsRunning="{Binding IsLoading}"
+                                         Color="{DynamicResource Color.Primary}" />
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
+                
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="shared:Policy">
+                        <fs:FsCard Margin="{DynamicResource Space.16}"
+                                   Style="{StaticResource ElevatedCard}">
+                            <fs:FsCard.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PolicyListViewModel}}, Path=ViewPolicyCommand}"
+                                                    CommandParameter="{Binding .}" />
+                            </fs:FsCard.GestureRecognizers>
+                            
+                            <Grid ColumnDefinitions="*,Auto">
+                                <VerticalStackLayout Spacing="{DynamicResource Space.4}">
+                                    <Label Text="{Binding Title}"
+                                           TextColor="{DynamicResource Color.OnSurface}"
+                                           FontSize="{DynamicResource FontSize.TitleMedium}"
+                                           FontAttributes="Bold" />
+                                    
+                                    <HorizontalStackLayout Spacing="{DynamicResource Space.8}">
+                                        <Label Text="{StaticResource FolderIcon}"
+                                               FontFamily="Lucide"
+                                               TextColor="{DynamicResource Color.Primary}"
+                                               FontSize="16"
+                                               VerticalOptions="Center" />
+                                        <Label Text="{Binding Category}"
+                                               TextColor="{DynamicResource Color.OnSurfaceVariant}"
+                                               FontSize="{DynamicResource FontSize.BodyMedium}"
+                                               VerticalOptions="Center" />
+                                    </HorizontalStackLayout>
+                                    
+                                    <Label TextColor="{DynamicResource Color.OnSurfaceVariant}"
+                                           FontSize="{DynamicResource FontSize.BodySmall}">
+                                        <Label.Text>
+                                            <Binding Path="LastUpdated" StringFormat="Updated {0:MMM dd, yyyy}" />
+                                        </Label.Text>
+                                    </Label>
+                                </VerticalStackLayout>
+                                
+                                <Label Grid.Column="1"
+                                       Text="{StaticResource ChevronRightIcon}"
+                                       FontFamily="Lucide"
+                                       TextColor="{DynamicResource Color.OnSurfaceVariant}"
+                                       FontSize="24"
+                                       VerticalOptions="Center" />
+                            </Grid>
+                        </fs:FsCard>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+        
+        <ActivityIndicator IsRunning="{Binding IsLoading}"
+                         IsVisible="{Binding IsLoading}"
+                         Color="{DynamicResource Color.Primary}"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center" />
+    </Grid>
+</ContentPage>

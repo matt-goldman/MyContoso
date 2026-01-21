@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MyContoso.App.Services;
+using MyContoso.App.ViewModels;
+using MyContoso.App.Views;
 using Plugin.Maui.Lucide;
 
 namespace MyContoso.App
@@ -33,6 +35,22 @@ namespace MyContoso.App
             {
                 client.BaseAddress = new Uri("https+http://webapi");
             });
+
+            // Register ViewModels
+            builder.Services.AddSingleton<CompanyFeedViewModel>();
+            builder.Services.AddTransient<CompanyUpdateDetailViewModel>();
+            builder.Services.AddTransient<EmployeeListViewModel>();
+            builder.Services.AddTransient<EmployeeProfileViewModel>();
+            builder.Services.AddTransient<PolicyListViewModel>();
+            builder.Services.AddTransient<PolicyDetailViewModel>();
+
+            // Register Views
+            builder.Services.AddSingleton<CompanyFeedPage>();
+            builder.Services.AddTransient<CompanyUpdateDetailPage>();
+            builder.Services.AddTransient<EmployeeListPage>();
+            builder.Services.AddTransient<EmployeeProfilePage>();
+            builder.Services.AddTransient<PolicyListPage>();
+            builder.Services.AddTransient<PolicyDetailPage>();
 
             return builder.Build();
         }

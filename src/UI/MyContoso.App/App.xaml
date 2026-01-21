@@ -4,14 +4,21 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MyContoso.App"
-    xmlns:lucide="clr-namespace:Plugin.Maui.Lucide.Resources.Styles;assembly=Plugin.Maui.Lucide">
+    xmlns:lucide="clr-namespace:Plugin.Maui.Lucide.Resources.Styles;assembly=Plugin.Maui.Lucide"
+    xmlns:material="clr-namespace:FlagstoneUI.Themes.Material;assembly=FlagstoneUI.Themes.Material"
+    xmlns:converters="clr-namespace:MyContoso.App.Converters">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
                 <lucide:Icons />
+                <material:Theme />
             </ResourceDictionary.MergedDictionaries>
+            
+            <!-- Converters -->
+            <converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+            <converters:AccreditationStatusColorConverter x:Key="AccreditationColorConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

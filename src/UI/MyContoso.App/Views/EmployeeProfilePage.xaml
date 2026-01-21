@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fs="clr-namespace:FlagstoneUI.Core.Controls;assembly=FlagstoneUI.Core"
+             xmlns:vm="clr-namespace:MyContoso.App.ViewModels"
+             x:Class="MyContoso.App.Views.EmployeeProfilePage"
+             x:DataType="vm:EmployeeProfileViewModel"
+             Title="Employee Profile">
+    
+    <ScrollView>
+        <VerticalStackLayout Padding="{DynamicResource Space.16}"
+                           Spacing="{DynamicResource Space.16}">
+            <ActivityIndicator IsRunning="{Binding IsLoading}"
+                             IsVisible="{Binding IsLoading}"
+                             Color="{DynamicResource Color.Primary}"
+                             HorizontalOptions="Center" />
+            
+            <VerticalStackLayout IsVisible="{Binding Employee, Converter={StaticResource IsNotNullConverter}}"
+                               Spacing="{DynamicResource Space.16}">
+                
+                <fs:FsCard Style="{StaticResource ElevatedCard}">
+                    <VerticalStackLayout Spacing="{DynamicResource Space.12}">
+                        <Label Text="{Binding Employee.Name}"
+                               TextColor="{DynamicResource Color.OnSurface}"
+                               FontSize="{DynamicResource FontSize.HeadlineMedium}"
+                               FontAttributes="Bold" />
+                        
+                        <Label Text="{Binding Employee.Role}"
+                               TextColor="{DynamicResource Color.OnSurfaceVariant}"
+                               FontSize="{DynamicResource FontSize.TitleMedium}" />
+                        
+                        <HorizontalStackLayout Spacing="{DynamicResource Space.8}">
+                            <Label Text="{StaticResource BuildingIcon}"
+                                   FontFamily="Lucide"
+                                   TextColor="{DynamicResource Color.Primary}"
+                                   FontSize="20"
+                                   VerticalOptions="Center" />
+                            <Label Text="{Binding Employee.Department}"
+                                   TextColor="{DynamicResource Color.OnSurface}"
+                                   FontSize="{DynamicResource FontSize.BodyLarge}"
+                                   VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </fs:FsCard>
+                
+                <fs:FsCard Style="{StaticResource ElevatedCard}">
+                    <VerticalStackLayout Spacing="{DynamicResource Space.12}">
+                        <Label Text="About"
+                               TextColor="{DynamicResource Color.OnSurface}"
+                               FontSize="{DynamicResource FontSize.TitleMedium}"
+                               FontAttributes="Bold" />
+                        
+                        <Label Text="{Binding Employee.ProfileSummary}"
+                               TextColor="{DynamicResource Color.OnSurface}"
+                               FontSize="{DynamicResource FontSize.BodyLarge}"
+                               LineBreakMode="WordWrap" />
+                    </VerticalStackLayout>
+                </fs:FsCard>
+                
+                <fs:FsCard Style="{StaticResource ElevatedCard}">
+                    <VerticalStackLayout Spacing="{DynamicResource Space.12}">
+                        <Label Text="Accreditation Status"
+                               TextColor="{DynamicResource Color.OnSurface}"
+                               FontSize="{DynamicResource FontSize.TitleMedium}"
+                               FontAttributes="Bold" />
+                        
+                        <HorizontalStackLayout Spacing="{DynamicResource Space.8}">
+                            <Label Text="{StaticResource BadgeCheckIcon}"
+                                   FontFamily="Lucide"
+                                   FontSize="20"
+                                   VerticalOptions="Center">
+                                <Label.TextColor>
+                                    <Binding Path="Employee.AccreditationStatus">
+                                        <Binding.Converter>
+                                            <StaticResource x:Key="AccreditationColorConverter" />
+                                        </Binding.Converter>
+                                    </Binding>
+                                </Label.TextColor>
+                            </Label>
+                            <Label Text="{Binding Employee.AccreditationStatus}"
+                                   TextColor="{DynamicResource Color.OnSurface}"
+                                   FontSize="{DynamicResource FontSize.BodyLarge}"
+                                   VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </fs:FsCard>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

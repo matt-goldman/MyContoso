@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fs="clr-namespace:FlagstoneUI.Core.Controls;assembly=FlagstoneUI.Core"
+             xmlns:vm="clr-namespace:MyContoso.App.ViewModels"
+             xmlns:shared="clr-namespace:Shared;assembly=Shared"
+             x:Class="MyContoso.App.Views.EmployeeListPage"
+             x:DataType="vm:EmployeeListViewModel"
+             Title="Employees">
+    
+    <Grid RowDefinitions="*">
+        <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                     Command="{Binding RefreshCommand}">
+            <CollectionView ItemsSource="{Binding Employees}"
+                           SelectionMode="None">
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       Spacing="{DynamicResource Space.16}">
+                        <Label Text="No employees found"
+                               TextColor="{DynamicResource Color.OnSurface}"
+                               FontSize="{DynamicResource FontSize.BodyLarge}"
+                               HorizontalOptions="Center" />
+                        <ActivityIndicator IsRunning="{Binding IsLoading}"
+                                         Color="{DynamicResource Color.Primary}" />
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
+                
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="shared:Employee">
+                        <fs:FsCard Margin="{DynamicResource Space.16}"
+                                   Style="{StaticResource ElevatedCard}">
+                            <fs:FsCard.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:EmployeeListViewModel}}, Path=ViewEmployeeCommand}"
+                                                    CommandParameter="{Binding .}" />
+                            </fs:FsCard.GestureRecognizers>
+                            
+                            <Grid ColumnDefinitions="*,Auto">
+                                <VerticalStackLayout Spacing="{DynamicResource Space.4}">
+                                    <Label Text="{Binding Name}"
+                                           TextColor="{DynamicResource Color.OnSurface}"
+                                           FontSize="{DynamicResource FontSize.TitleMedium}"
+                                           FontAttributes="Bold" />
+                                    
+                                    <Label Text="{Binding Role}"
+                                           TextColor="{DynamicResource Color.OnSurfaceVariant}"
+                                           FontSize="{DynamicResource FontSize.BodyMedium}" />
+                                    
+                                    <Label Text="{Binding Department}"
+                                           TextColor="{DynamicResource Color.OnSurfaceVariant}"
+                                           FontSize="{DynamicResource FontSize.BodySmall}" />
+                                </VerticalStackLayout>
+                                
+                                <Label Grid.Column="1"
+                                       Text="{StaticResource ChevronRightIcon}"
+                                       FontFamily="Lucide"
+                                       TextColor="{DynamicResource Color.OnSurfaceVariant}"
+                                       FontSize="24"
+                                       VerticalOptions="Center" />
+                            </Grid>
+                        </fs:FsCard>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+        
+        <ActivityIndicator IsRunning="{Binding IsLoading}"
+                         IsVisible="{Binding IsLoading}"
+                         Color="{DynamicResource Color.Primary}"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center" />
+    </Grid>
+</ContentPage>

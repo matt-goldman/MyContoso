@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MyContoso.App.Services;
+using Plugin.Maui.Lucide;
 
 namespace MyContoso.App
 {
@@ -18,7 +19,8 @@ namespace MyContoso.App
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                     fonts.AddFont("icofont.ttf", "IcoFont");
                 })
-                .UseMauiCommunityToolkit();
+                .UseMauiCommunityToolkit()
+                .UseLucide();
 
 #if DEBUG
     		builder.Logging.AddDebug();

@@ -1,6 +1,6 @@
 using MyContoso.App.ViewModels;
 
-namespace MyContoso.App.Views;
+namespace MyContoso.App.Pages;
 
 public partial class PolicyDetailPage : ContentPage
 {

@@ -1,4 +1,4 @@
-﻿using MyContoso.App.Views;
+﻿using MyContoso.App.Pages;
 
 namespace MyContoso.App
 {
@@ -12,6 +12,7 @@ namespace MyContoso.App
             Routing.RegisterRoute("companyupdate", typeof(CompanyUpdateDetailPage));
             Routing.RegisterRoute("employee", typeof(EmployeeProfilePage));
             Routing.RegisterRoute("policy", typeof(PolicyDetailPage));
+            Routing.RegisterRoute("accreditation", typeof(AccreditationDetailPage));
         }
     }
 }

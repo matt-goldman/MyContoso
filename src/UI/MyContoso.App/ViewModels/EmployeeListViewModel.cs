@@ -14,10 +14,13 @@ public partial class EmployeeListViewModel(ApiClient apiClient) : ObservableObje
     [ObservableProperty]
     private bool isRefreshing;
 
+    [ObservableProperty]
+    private string searchText = string.Empty;
+
     public ObservableCollection<Employee> Employees { get; } = [];
 
     [RelayCommand]
-    private async Task LoadEmployeesAsync()
+    public async Task LoadEmployeesAsync()
     {
         if (IsLoading)
             return;
@@ -40,7 +43,7 @@ public partial class EmployeeListViewModel(ApiClient apiClient) : ObservableObje
     }
 
     [RelayCommand]
-    private async Task RefreshAsync()
+    public async Task RefreshAsync()
     {
         try
         {
@@ -60,6 +63,8 @@ public partial class EmployeeListViewModel(ApiClient apiClient) : ObservableObje
     }
 
     [RelayCommand]
-    private static Task ViewEmployeeAsync(Employee employee)
-        => Shell.Current.GoToAsync($"employee?id={employee.EmployeeId}");
+    public async Task ViewEmployeeAsync(Employee employee)
+    {
+        await Shell.Current.GoToAsync($"employee?id={employee.EmployeeId}");
+    }
 }

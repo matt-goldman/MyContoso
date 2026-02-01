@@ -17,7 +17,7 @@ public partial class CompanyFeedViewModel(ApiClient apiClient) : ObservableObjec
     public ObservableCollection<CompanyUpdate> Updates { get; } = [];
 
     [RelayCommand]
-    private async Task LoadUpdatesAsync()
+    public async Task LoadUpdatesAsync()
     {
         if (IsLoading)
             return;
@@ -40,7 +40,7 @@ public partial class CompanyFeedViewModel(ApiClient apiClient) : ObservableObjec
     }
 
     [RelayCommand]
-    private async Task RefreshAsync()
+    public async Task RefreshAsync()
     {
         try
         {
@@ -60,6 +60,8 @@ public partial class CompanyFeedViewModel(ApiClient apiClient) : ObservableObjec
     }
 
     [RelayCommand]
-    private static Task ViewUpdateAsync(CompanyUpdate update) 
-        => Shell.Current.GoToAsync($"companyupdate?id={update.UpdateId}");
+    public async Task ViewUpdateAsync(CompanyUpdate update)
+    {
+        await Shell.Current.GoToAsync($"companyupdate?id={update.UpdateId}");
+    }
 }

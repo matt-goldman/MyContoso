@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -29,9 +30,6 @@ namespace Microsoft.Extensions.Hosting
                 // Turn on service discovery by default
                 http.AddServiceDiscovery();
             });
-
-            builder.Services.TryAddEnumerable(
-                ServiceDescriptor.Transient<IMauiInitializeService, OpenTelemetryInitializer>(_ => new OpenTelemetryInitializer()));
 
             // Uncomment the following to restrict the allowed schemes for service discovery.
             // builder.Services.Configure<ServiceDiscoveryOptions>(options =>
@@ -73,16 +71,6 @@ namespace Microsoft.Extensions.Hosting
             builder.AddOpenTelemetryExporters();
 
             return builder;
-        }
-
-        private class OpenTelemetryInitializer : IMauiInitializeService
-        {
-            public void Initialize(IServiceProvider services)
-            {
-                services.GetService<MeterProvider>();
-                services.GetService<TracerProvider>();
-                services.GetService<LoggerProvider>();
-            }
         }
 
         private static TBuilder AddOpenTelemetryExporters<TBuilder>(this TBuilder builder) where TBuilder : IHostApplicationBuilder

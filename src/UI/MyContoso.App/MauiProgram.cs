@@ -3,7 +3,7 @@
 using Microsoft.Extensions.Logging;
 using MyContoso.App.Services;
 using MyContoso.App.ViewModels;
-using MyContoso.App.Views;
+using MyContoso.App.Pages;
 using Plugin.Maui.Lucide;
 
 namespace MyContoso.App
@@ -43,6 +43,8 @@ namespace MyContoso.App
             builder.Services.AddTransient<EmployeeProfileViewModel>();
             builder.Services.AddTransient<PolicyListViewModel>();
             builder.Services.AddTransient<PolicyDetailViewModel>();
+            builder.Services.AddTransient<AccreditationListViewModel>();
+            builder.Services.AddTransient<AccreditationDetailViewModel>();
 
             // Register Views
             builder.Services.AddSingleton<CompanyFeedPage>();
@@ -51,6 +53,8 @@ namespace MyContoso.App
             builder.Services.AddTransient<EmployeeProfilePage>();
             builder.Services.AddTransient<PolicyListPage>();
             builder.Services.AddTransient<PolicyDetailPage>();
+            builder.Services.AddTransient<AccreditationListPage>();
+            builder.Services.AddTransient<AccreditationDetailPage>();
 
             return builder.Build();
         }

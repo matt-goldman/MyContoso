@@ -6,6 +6,7 @@
   </Folder>
   <Folder Name="/src/Aspire/">
     <Project Path="src/Aspire/MyContoso.AppHost/MyContoso.AppHost.csproj" />
+    <Project Path="src/Aspire/MyContoso.MauiServiceDefaults/MyContoso.MauiServiceDefaults.csproj" Id="1206f9cd-62eb-42b8-9d3f-b6862ae92b59" />
     <Project Path="src/Aspire/MyContoso.ServiceDefaults/MyContoso.ServiceDefaults.csproj" />
   </Folder>
   <Folder Name="/src/Common/">

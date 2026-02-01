@@ -19,6 +19,8 @@
             <!-- Converters -->
             <converters:IsNotNullConverter x:Key="IsNotNullConverter" />
             <converters:AccreditationStatusColorConverter x:Key="AccreditationColorConverter" />
+            <converters:InitialsConverter x:Key="InitialsConverter" />
+            <converters:IsLikedToColorConverter x:Key="LikedToColorConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

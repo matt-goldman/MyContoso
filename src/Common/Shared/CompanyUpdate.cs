@@ -5,5 +5,8 @@ public record CompanyUpdate(
     string Title,
     string Body,
     DateTime PublishedDate,
-    string Author
+    string Author,
+    int Likes,
+    int Comments,
+    bool IsLiked
 );

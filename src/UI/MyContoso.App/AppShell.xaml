@@ -3,8 +3,7 @@
     x:Class="MyContoso.App.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:MyContoso.App"
-    xmlns:views="clr-namespace:MyContoso.App.Views"
+    xmlns:views="clr-namespace:MyContoso.App.Pages"
     Title="MyContoso">
 
     <TabBar>
@@ -15,16 +14,22 @@
             Route="feed" />
 
         <ShellContent
-            Title="Employees"
+            Title="People"
             Icon="{FontImageSource FontFamily='lucide', Glyph={DynamicResource Users}}"
             ContentTemplate="{DataTemplate views:EmployeeListPage}"
             Route="employees" />
 
         <ShellContent
-            Title="Policies"
-            Icon="{FontImageSource FontFamily='lucide', Glyph={DynamicResource FileText}}"
+            Title="Handbook"
+            Icon="{FontImageSource FontFamily='lucide', Glyph={DynamicResource BookOpen}}"
             ContentTemplate="{DataTemplate views:PolicyListPage}"
             Route="policies" />
+
+        <ShellContent
+            Title="Credentials"
+            Icon="{FontImageSource FontFamily='lucide', Glyph={DynamicResource Award}}"
+            ContentTemplate="{DataTemplate views:AccreditationListPage}"
+            Route="accreditations" />
     </TabBar>
 
 </Shell>

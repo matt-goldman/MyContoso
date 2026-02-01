@@ -6,6 +6,14 @@ using System.Collections.ObjectModel;
 
 namespace MyContoso.App.ViewModels;
 
+/// <summary>
+/// Grouping class for policies by category
+/// </summary>
+public class PolicyGroup(string category, IEnumerable<Policy> policies) : ObservableCollection<Policy>(policies)
+{
+    public string Category { get; } = category;
+}
+
 public partial class PolicyListViewModel(ApiClient apiClient) : ObservableObject
 {
     [ObservableProperty]
@@ -14,10 +22,13 @@ public partial class PolicyListViewModel(ApiClient apiClient) : ObservableObject
     [ObservableProperty]
     private bool isRefreshing;
 
-    public ObservableCollection<Policy> Policies { get; } = [];
+    [ObservableProperty]
+    private string searchText = string.Empty;
+
+    public ObservableCollection<PolicyGroup> Policies { get; } = [];
 
     [RelayCommand]
-    private async Task LoadPoliciesAsync()
+    public async Task LoadPoliciesAsync()
     {
         if (IsLoading)
             return;
@@ -28,9 +39,14 @@ public partial class PolicyListViewModel(ApiClient apiClient) : ObservableObject
             Policies.Clear();
 
             var policies = await apiClient.GetPoliciesAsync();
-            foreach (var policy in policies.OrderBy(p => p.Category).ThenBy(p => p.Title))
+            var grouped = policies
+                .GroupBy(p => p.Category)
+                .OrderBy(g => g.Key)
+                .Select(g => new PolicyGroup(g.Key, g.OrderBy(p => p.Title)));
+
+            foreach (var group in grouped)
             {
-                Policies.Add(policy);
+                Policies.Add(group);
             }
         }
         finally
@@ -40,7 +56,7 @@ public partial class PolicyListViewModel(ApiClient apiClient) : ObservableObject
     }
 
     [RelayCommand]
-    private async Task RefreshAsync()
+    public async Task RefreshAsync()
     {
         try
         {
@@ -48,9 +64,14 @@ public partial class PolicyListViewModel(ApiClient apiClient) : ObservableObject
             Policies.Clear();
 
             var policies = await apiClient.GetPoliciesAsync();
-            foreach (var policy in policies.OrderBy(p => p.Category).ThenBy(p => p.Title))
+            var grouped = policies
+                .GroupBy(p => p.Category)
+                .OrderBy(g => g.Key)
+                .Select(g => new PolicyGroup(g.Key, g.OrderBy(p => p.Title)));
+
+            foreach (var group in grouped)
             {
-                Policies.Add(policy);
+                Policies.Add(group);
             }
         }
         finally
@@ -60,6 +81,8 @@ public partial class PolicyListViewModel(ApiClient apiClient) : ObservableObject
     }
 
     [RelayCommand]
-    private static Task ViewPolicyAsync(Policy policy)
-        => Shell.Current.GoToAsync($"policy?id={policy.PolicyId}");
+    public async Task ViewPolicyAsync(Policy policy)
+    {
+        await Shell.Current.GoToAsync($"policy?id={policy.PolicyId}");
+    }
 }

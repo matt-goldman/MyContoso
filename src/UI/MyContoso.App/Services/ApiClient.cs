@@ -39,4 +39,15 @@ public class ApiClient(HttpClient httpClient)
     {
         return await _httpClient.GetFromJsonAsync<Policy>($"/policies/{id}");
     }
+
+    public async Task<IEnumerable<Accreditation>> GetAccreditationsAsync()
+    {
+        var accreditations = await _httpClient.GetFromJsonAsync<IEnumerable<Accreditation>>("/accreditations");
+        return accreditations ?? [];
+    }
+
+    public async Task<Accreditation?> GetAccreditationAsync(int id)
+    {
+        return await _httpClient.GetFromJsonAsync<Accreditation>($"/accreditations/{id}");
+    }
 }

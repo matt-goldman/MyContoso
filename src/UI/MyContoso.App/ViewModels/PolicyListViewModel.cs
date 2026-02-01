@@ -6,10 +6,8 @@ using System.Collections.ObjectModel;
 
 namespace MyContoso.App.ViewModels;
 
-public partial class PolicyListViewModel : ObservableObject
+public partial class PolicyListViewModel(ApiClient apiClient) : ObservableObject
 {
-    private readonly ApiClient _apiClient;
-
     [ObservableProperty]
     private bool isLoading;
 
@@ -18,13 +16,8 @@ public partial class PolicyListViewModel : ObservableObject
 
     public ObservableCollection<Policy> Policies { get; } = [];
 
-    public PolicyListViewModel(ApiClient apiClient)
-    {
-        _apiClient = apiClient;
-    }
-
     [RelayCommand]
-    public async Task LoadPoliciesAsync()
+    private async Task LoadPoliciesAsync()
     {
         if (IsLoading)
             return;
@@ -34,7 +27,7 @@ public partial class PolicyListViewModel : ObservableObject
             IsLoading = true;
             Policies.Clear();
 
-            var policies = await _apiClient.GetPoliciesAsync();
+            var policies = await apiClient.GetPoliciesAsync();
             foreach (var policy in policies.OrderBy(p => p.Category).ThenBy(p => p.Title))
             {
                 Policies.Add(policy);
@@ -47,14 +40,14 @@ public partial class PolicyListViewModel : ObservableObject
     }
 
     [RelayCommand]
-    public async Task RefreshAsync()
+    private async Task RefreshAsync()
     {
         try
         {
             IsRefreshing = true;
             Policies.Clear();
 
-            var policies = await _apiClient.GetPoliciesAsync();
+            var policies = await apiClient.GetPoliciesAsync();
             foreach (var policy in policies.OrderBy(p => p.Category).ThenBy(p => p.Title))
             {
                 Policies.Add(policy);
@@ -67,8 +60,6 @@ public partial class PolicyListViewModel : ObservableObject
     }
 
     [RelayCommand]
-    public async Task ViewPolicyAsync(Policy policy)
-    {
-        await Shell.Current.GoToAsync($"policy?id={policy.PolicyId}");
-    }
+    private static Task ViewPolicyAsync(Policy policy)
+        => Shell.Current.GoToAsync($"policy?id={policy.PolicyId}");
 }

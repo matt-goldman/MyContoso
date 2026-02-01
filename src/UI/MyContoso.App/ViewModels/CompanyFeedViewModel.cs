@@ -6,10 +6,8 @@ using System.Collections.ObjectModel;
 
 namespace MyContoso.App.ViewModels;
 
-public partial class CompanyFeedViewModel : ObservableObject
+public partial class CompanyFeedViewModel(ApiClient apiClient) : ObservableObject
 {
-    private readonly ApiClient _apiClient;
-
     [ObservableProperty]
     private bool isLoading;
 
@@ -18,13 +16,8 @@ public partial class CompanyFeedViewModel : ObservableObject
 
     public ObservableCollection<CompanyUpdate> Updates { get; } = [];
 
-    public CompanyFeedViewModel(ApiClient apiClient)
-    {
-        _apiClient = apiClient;
-    }
-
     [RelayCommand]
-    public async Task LoadUpdatesAsync()
+    private async Task LoadUpdatesAsync()
     {
         if (IsLoading)
             return;
@@ -34,7 +27,7 @@ public partial class CompanyFeedViewModel : ObservableObject
             IsLoading = true;
             Updates.Clear();
 
-            var updates = await _apiClient.GetCompanyUpdatesAsync();
+            var updates = await apiClient.GetCompanyUpdatesAsync();
             foreach (var update in updates.OrderByDescending(u => u.PublishedDate))
             {
                 Updates.Add(update);
@@ -47,14 +40,14 @@ public partial class CompanyFeedViewModel : ObservableObject
     }
 
     [RelayCommand]
-    public async Task RefreshAsync()
+    private async Task RefreshAsync()
     {
         try
         {
             IsRefreshing = true;
             Updates.Clear();
 
-            var updates = await _apiClient.GetCompanyUpdatesAsync();
+            var updates = await apiClient.GetCompanyUpdatesAsync();
             foreach (var update in updates.OrderByDescending(u => u.PublishedDate))
             {
                 Updates.Add(update);
@@ -67,8 +60,6 @@ public partial class CompanyFeedViewModel : ObservableObject
     }
 
     [RelayCommand]
-    public async Task ViewUpdateAsync(CompanyUpdate update)
-    {
-        await Shell.Current.GoToAsync($"companyupdate?id={update.UpdateId}");
-    }
+    private static Task ViewUpdateAsync(CompanyUpdate update) 
+        => Shell.Current.GoToAsync($"companyupdate?id={update.UpdateId}");
 }

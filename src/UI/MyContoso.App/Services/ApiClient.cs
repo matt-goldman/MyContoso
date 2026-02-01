@@ -3,7 +3,7 @@ using Shared;
 
 namespace MyContoso.App.Services;
 
-internal class ApiClient(HttpClient httpClient)
+public class ApiClient(HttpClient httpClient)
 {
     private readonly HttpClient _httpClient = httpClient;
 

@@ -5,10 +5,8 @@ using Shared;
 namespace MyContoso.App.ViewModels;
 
 [QueryProperty(nameof(PolicyId), "id")]
-public partial class PolicyDetailViewModel : ObservableObject
+public partial class PolicyDetailViewModel(ApiClient apiClient) : ObservableObject
 {
-    private readonly ApiClient _apiClient;
-
     [ObservableProperty]
     private int policyId;
 
@@ -17,11 +15,6 @@ public partial class PolicyDetailViewModel : ObservableObject
 
     [ObservableProperty]
     private bool isLoading;
-
-    public PolicyDetailViewModel(ApiClient apiClient)
-    {
-        _apiClient = apiClient;
-    }
 
     partial void OnPolicyIdChanged(int value)
     {
@@ -36,7 +29,7 @@ public partial class PolicyDetailViewModel : ObservableObject
         try
         {
             IsLoading = true;
-            Policy = await _apiClient.GetPolicyAsync(PolicyId);
+            Policy = await apiClient.GetPolicyAsync(PolicyId);
         }
         finally
         {

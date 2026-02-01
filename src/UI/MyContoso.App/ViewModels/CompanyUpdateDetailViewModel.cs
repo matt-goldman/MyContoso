@@ -5,10 +5,8 @@ using Shared;
 namespace MyContoso.App.ViewModels;
 
 [QueryProperty(nameof(UpdateId), "id")]
-public partial class CompanyUpdateDetailViewModel : ObservableObject
+public partial class CompanyUpdateDetailViewModel(ApiClient apiClient) : ObservableObject
 {
-    private readonly ApiClient _apiClient;
-
     [ObservableProperty]
     private int updateId;
 
@@ -17,11 +15,6 @@ public partial class CompanyUpdateDetailViewModel : ObservableObject
 
     [ObservableProperty]
     private bool isLoading;
-
-    public CompanyUpdateDetailViewModel(ApiClient apiClient)
-    {
-        _apiClient = apiClient;
-    }
 
     partial void OnUpdateIdChanged(int value)
     {
@@ -36,7 +29,7 @@ public partial class CompanyUpdateDetailViewModel : ObservableObject
         try
         {
             IsLoading = true;
-            Update = await _apiClient.GetCompanyUpdateAsync(UpdateId);
+            Update = await apiClient.GetCompanyUpdateAsync(UpdateId);
         }
         finally
         {

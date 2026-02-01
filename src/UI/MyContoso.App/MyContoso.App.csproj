@@ -74,6 +74,7 @@
 		<PackageReference Include="FlagstoneUI.Themes.Material" Version="0.0.1" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.30" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.2" />
+		<PackageReference Include="Plugin.Maui.Lucide" Version="1.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>

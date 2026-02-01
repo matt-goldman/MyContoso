@@ -6,10 +6,8 @@ using System.Collections.ObjectModel;
 
 namespace MyContoso.App.ViewModels;
 
-public partial class EmployeeListViewModel : ObservableObject
+public partial class EmployeeListViewModel(ApiClient apiClient) : ObservableObject
 {
-    private readonly ApiClient _apiClient;
-
     [ObservableProperty]
     private bool isLoading;
 
@@ -18,13 +16,8 @@ public partial class EmployeeListViewModel : ObservableObject
 
     public ObservableCollection<Employee> Employees { get; } = [];
 
-    public EmployeeListViewModel(ApiClient apiClient)
-    {
-        _apiClient = apiClient;
-    }
-
     [RelayCommand]
-    public async Task LoadEmployeesAsync()
+    private async Task LoadEmployeesAsync()
     {
         if (IsLoading)
             return;
@@ -34,7 +27,7 @@ public partial class EmployeeListViewModel : ObservableObject
             IsLoading = true;
             Employees.Clear();
 
-            var employees = await _apiClient.GetEmployeesAsync();
+            var employees = await apiClient.GetEmployeesAsync();
             foreach (var employee in employees.OrderBy(e => e.Name))
             {
                 Employees.Add(employee);
@@ -47,14 +40,14 @@ public partial class EmployeeListViewModel : ObservableObject
     }
 
     [RelayCommand]
-    public async Task RefreshAsync()
+    private async Task RefreshAsync()
     {
         try
         {
             IsRefreshing = true;
             Employees.Clear();
 
-            var employees = await _apiClient.GetEmployeesAsync();
+            var employees = await apiClient.GetEmployeesAsync();
             foreach (var employee in employees.OrderBy(e => e.Name))
             {
                 Employees.Add(employee);
@@ -67,8 +60,6 @@ public partial class EmployeeListViewModel : ObservableObject
     }
 
     [RelayCommand]
-    public async Task ViewEmployeeAsync(Employee employee)
-    {
-        await Shell.Current.GoToAsync($"employee?id={employee.EmployeeId}");
-    }
+    private static Task ViewEmployeeAsync(Employee employee)
+        => Shell.Current.GoToAsync($"employee?id={employee.EmployeeId}");
 }

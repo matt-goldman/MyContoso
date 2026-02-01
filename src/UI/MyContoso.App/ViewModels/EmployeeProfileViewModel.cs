@@ -5,10 +5,8 @@ using Shared;
 namespace MyContoso.App.ViewModels;
 
 [QueryProperty(nameof(EmployeeId), "id")]
-public partial class EmployeeProfileViewModel : ObservableObject
+public partial class EmployeeProfileViewModel(ApiClient apiClient) : ObservableObject
 {
-    private readonly ApiClient _apiClient;
-
     [ObservableProperty]
     private int employeeId;
 
@@ -17,11 +15,6 @@ public partial class EmployeeProfileViewModel : ObservableObject
 
     [ObservableProperty]
     private bool isLoading;
-
-    public EmployeeProfileViewModel(ApiClient apiClient)
-    {
-        _apiClient = apiClient;
-    }
 
     partial void OnEmployeeIdChanged(int value)
     {
@@ -36,7 +29,7 @@ public partial class EmployeeProfileViewModel : ObservableObject
         try
         {
             IsLoading = true;
-            Employee = await _apiClient.GetEmployeeAsync(EmployeeId);
+            Employee = await apiClient.GetEmployeeAsync(EmployeeId);
         }
         finally
         {

@@ -20,7 +20,8 @@
             <converters:IsNotNullConverter x:Key="IsNotNullConverter" />
             <converters:AccreditationStatusColorConverter x:Key="AccreditationColorConverter" />
             <converters:InitialsConverter x:Key="InitialsConverter" />
-            <converters:IsLikedToColorConverter x:Key="LikedToColorConverter" />
+            <converters:IsLikedToBackgroundColorConverter x:Key="LikedToColorConverter" />
+            <converters:IsLikedToTextColorConverter x:Key="IsLikedToTextColor" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

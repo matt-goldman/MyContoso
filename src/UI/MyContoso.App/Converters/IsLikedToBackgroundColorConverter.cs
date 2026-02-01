@@ -2,7 +2,7 @@ using System.Globalization;
 
 namespace MyContoso.App.Converters;
 
-public class IsLikedToColorConverter : IValueConverter
+public class IsLikedToBackgroundColorConverter : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
@@ -12,7 +12,7 @@ public class IsLikedToColorConverter : IValueConverter
             {
                 return color;
             }
-
+            
             return Colors.Transparent;
         }
         

@@ -29,7 +29,7 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="shared:CompanyUpdate">
                         <fs:FsCard Margin="{DynamicResource Space.16}"
-                                   Style="{StaticResource ElevatedCard}">
+                                   Style="{DynamicResource ElevatedCard}">
                             <fs:FsCard.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CompanyFeedViewModel}}, Path=ViewUpdateCommand}"
                                                     CommandParameter="{Binding .}" />

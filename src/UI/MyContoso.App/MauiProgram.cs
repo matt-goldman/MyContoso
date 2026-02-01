@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Maui;
-using Microsoft.Extensions.Hosting;
+//using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MyContoso.App.Services;
 using MyContoso.App.ViewModels;
@@ -28,12 +28,12 @@ namespace MyContoso.App
     		builder.Logging.AddDebug();
 #endif
             // Add service defaults
-            builder.AddServiceDefaults();
+            //builder.AddServiceDefaults();
 
             // configure HTTP client with service discovery
             builder.Services.AddHttpClient<ApiClient>(client =>
             {
-                client.BaseAddress = new Uri("https+http://webapi");
+                client.BaseAddress = new Uri("http://localhost:5506");//"https+http://webapi");
             });
 
             // Register ViewModels

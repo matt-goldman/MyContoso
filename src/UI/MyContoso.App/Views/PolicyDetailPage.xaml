@@ -23,7 +23,7 @@
                        FontAttributes="Bold" />
                 
                 <HorizontalStackLayout Spacing="{DynamicResource Space.8}">
-                    <Label Text="{StaticResource FolderIcon}"
+                    <Label Text="{DynamicResource Folder}"
                            FontFamily="Lucide"
                            TextColor="{DynamicResource Color.Primary}"
                            FontSize="20"

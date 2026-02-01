@@ -18,7 +18,7 @@
             <VerticalStackLayout IsVisible="{Binding Employee, Converter={StaticResource IsNotNullConverter}}"
                                Spacing="{DynamicResource Space.16}">
                 
-                <fs:FsCard Style="{StaticResource ElevatedCard}">
+                <fs:FsCard Style="{DynamicResource ElevatedCard}">
                     <VerticalStackLayout Spacing="{DynamicResource Space.12}">
                         <Label Text="{Binding Employee.Name}"
                                TextColor="{DynamicResource Color.OnSurface}"
@@ -30,7 +30,7 @@
                                FontSize="{DynamicResource FontSize.TitleMedium}" />
                         
                         <HorizontalStackLayout Spacing="{DynamicResource Space.8}">
-                            <Label Text="{StaticResource BuildingIcon}"
+                            <Label Text="{DynamicResource Building}"
                                    FontFamily="Lucide"
                                    TextColor="{DynamicResource Color.Primary}"
                                    FontSize="20"
@@ -43,7 +43,7 @@
                     </VerticalStackLayout>
                 </fs:FsCard>
                 
-                <fs:FsCard Style="{StaticResource ElevatedCard}">
+                <fs:FsCard Style="{DynamicResource ElevatedCard}">
                     <VerticalStackLayout Spacing="{DynamicResource Space.12}">
                         <Label Text="About"
                                TextColor="{DynamicResource Color.OnSurface}"
@@ -57,7 +57,7 @@
                     </VerticalStackLayout>
                 </fs:FsCard>
                 
-                <fs:FsCard Style="{StaticResource ElevatedCard}">
+                <fs:FsCard Style="{DynamicResource ElevatedCard}">
                     <VerticalStackLayout Spacing="{DynamicResource Space.12}">
                         <Label Text="Accreditation Status"
                                TextColor="{DynamicResource Color.OnSurface}"
@@ -65,7 +65,7 @@
                                FontAttributes="Bold" />
                         
                         <HorizontalStackLayout Spacing="{DynamicResource Space.8}">
-                            <Label Text="{StaticResource BadgeCheckIcon}"
+                            <Label Text="{DynamicResource BadgeCheck}"
                                    FontFamily="Lucide"
                                    TextColor="{Binding Employee.AccreditationStatus, Converter={StaticResource AccreditationColorConverter}}"
                                    FontSize="20"

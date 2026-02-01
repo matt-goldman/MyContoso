@@ -10,19 +10,19 @@
     <TabBar>
         <ShellContent
             Title="Feed"
-            Icon="{StaticResource RssIcon}"
+            Icon="{FontImageSource FontFamily='lucide', Glyph={DynamicResource Rss}}"
             ContentTemplate="{DataTemplate views:CompanyFeedPage}"
             Route="feed" />
 
         <ShellContent
             Title="Employees"
-            Icon="{StaticResource UsersIcon}"
+            Icon="{FontImageSource FontFamily='lucide', Glyph={DynamicResource Users}}"
             ContentTemplate="{DataTemplate views:EmployeeListPage}"
             Route="employees" />
 
         <ShellContent
             Title="Policies"
-            Icon="{StaticResource FileTextIcon}"
+            Icon="{FontImageSource FontFamily='lucide', Glyph={DynamicResource FileText}}"
             ContentTemplate="{DataTemplate views:PolicyListPage}"
             Route="policies" />
     </TabBar>

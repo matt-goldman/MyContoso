@@ -5,7 +5,6 @@
              xmlns:vm="clr-namespace:MyContoso.App.ViewModels"
              x:Class="MyContoso.App.Pages.AccreditationDetailPage"
              x:DataType="vm:AccreditationDetailViewModel"
-             Title="Accreditation Details"
              BackgroundColor="{DynamicResource Color.Background}">
 
     <ScrollView>

@@ -4,8 +4,7 @@
              xmlns:fs="clr-namespace:FlagstoneUI.Core.Controls;assembly=FlagstoneUI.Core"
              xmlns:vm="clr-namespace:MyContoso.App.ViewModels"
              x:Class="MyContoso.App.Pages.CompanyUpdateDetailPage"
-             x:DataType="vm:CompanyUpdateDetailViewModel"
-             Title="Update Details">
+             x:DataType="vm:CompanyUpdateDetailViewModel">
     
     <ScrollView>
         <VerticalStackLayout Padding="{DynamicResource Space.16}"

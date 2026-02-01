@@ -6,7 +6,6 @@
              xmlns:controls="clr-namespace:MyContoso.App.Controls"
              x:Class="MyContoso.App.Pages.CompanyFeedPage"
              x:DataType="vm:CompanyFeedViewModel"
-             Title="Company Feed"
              BackgroundColor="{DynamicResource Color.Background}">
     
     <Grid RowDefinitions="Auto,*">

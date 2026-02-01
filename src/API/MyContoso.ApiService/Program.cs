@@ -50,7 +50,9 @@ app.MapGet("/policies", () => Mocks.Updates)
 app.MapGet("/policies/{id}", (int id) => Mocks.Policies.FirstOrDefault(p => p.PolicyId == id))
 .WithName("GetPolicy");
 
-// TODO: add accreditation endpoint
+app.MapGet("/accreditations", () => Mocks.Accreditations);
+
+app.MapGet("/accreditations/{id}", (int id) => Mocks.Accreditations.FirstOrDefault(a => a.AccreditationId == id));
 
 app.MapDefaultEndpoints();
 
@@ -122,5 +124,30 @@ public static class Mocks
         new Policy(2, "Remote Work Policy", "Workplace", DateTime.Now.AddMonths(-2), "Employees may work remotely up to 3 days per week with manager approval..."),
         new Policy(3, "Data Protection", "Security", DateTime.Now.AddMonths(-4), "All company and customer data must be handled in accordance with applicable regulations..."),
         new Policy(4, "Leave Policy", "HR", DateTime.Now.AddMonths(-8), "Employees accrue 15 days of paid time off annually, prorated for partial years...")
+    ];
+
+    public static readonly List<Accreditation> Accreditations =
+    [
+        new (1,
+            "Health and Safety Certificate", 
+            "Employees with this accreditation are permitted to work from any Contoso site, as well as their home address upon agreement. Ensure you keep this up to date.",
+            "Overdue",
+            DateTime.Now.AddDays(-3)),
+        new (2,
+            "Accounting Level 1",
+            "Required for all staff wishing to work in Contoso's Finance department.",
+            "Pending",
+            DateTime.Today),
+        new (3,
+            "People Leadership",
+            "This accreditation signifies that an employee has met the requirements to hold a management level position at Contoso.",
+            "Valid",
+            DateTime.Today.AddMonths(6)),
+        new (4,
+            "Bomb Disposal",
+            "Advanced qualification for Contoso security staff that qualifies employees to act and disarm explosives.",
+            "Valid",
+            DateTime.Today.AddMonths(9))
+        
     ];
 }

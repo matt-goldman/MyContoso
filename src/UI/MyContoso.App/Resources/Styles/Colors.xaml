@@ -101,4 +101,10 @@
     
     <!-- other named colors -->
     <Color x:Key="Magenta">#ff00ff</Color>
+    
+    <!-- TitleView gradient -->
+    <LinearGradientBrush x:Key="PrimaryToSecondary" StartPoint="0,0.5" EndPoint="1,0.5">
+        <GradientStop Color="{StaticResource Color.Primary}" Offset="0"/>
+        <GradientStop Color="{StaticResource Color.Secondary}" Offset="1"/>
+    </LinearGradientBrush>
 </ResourceDictionary>

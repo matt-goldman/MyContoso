@@ -7,7 +7,6 @@
              xmlns:lucide="clr-namespace:Plugin.Maui.Lucide.Controls;assembly=Plugin.Maui.Lucide"
              x:Class="MyContoso.App.Pages.AccreditationListPage"
              x:DataType="vm:AccreditationListViewModel"
-             Title="Credentials"
              BackgroundColor="{DynamicResource Color.Background}">
 
     <Grid RowDefinitions="Auto,Auto,Auto,*">

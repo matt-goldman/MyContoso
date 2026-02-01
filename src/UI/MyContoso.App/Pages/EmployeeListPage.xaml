@@ -7,7 +7,6 @@
              xmlns:shared="clr-namespace:Shared;assembly=Shared"
              x:Class="MyContoso.App.Pages.EmployeeListPage"
              x:DataType="vm:EmployeeListViewModel"
-             Title="Employees"
              BackgroundColor="{DynamicResource Color.Background}">
     
     <Grid RowDefinitions="Auto,Auto,*">

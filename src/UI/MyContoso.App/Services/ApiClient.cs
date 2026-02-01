@@ -5,49 +5,47 @@ namespace MyContoso.App.Services;
 
 public class ApiClient(HttpClient httpClient)
 {
-    private readonly HttpClient _httpClient = httpClient;
-
     public async Task<IEnumerable<CompanyUpdate>> GetCompanyUpdatesAsync()
     {
-        var updates = await _httpClient.GetFromJsonAsync<IEnumerable<CompanyUpdate>>("/company-updates");
+        var updates = await httpClient.GetFromJsonAsync<IEnumerable<CompanyUpdate>>("/company-updates");
         return updates ?? [];
     }
 
     public async Task<CompanyUpdate?> GetCompanyUpdateAsync(int id)
     {
-        return await _httpClient.GetFromJsonAsync<CompanyUpdate>($"/company-updates/{id}");
+        return await httpClient.GetFromJsonAsync<CompanyUpdate>($"/company-updates/{id}");
     }
 
     public async Task<IEnumerable<Employee>> GetEmployeesAsync()
     {
-        var employees = await _httpClient.GetFromJsonAsync<IEnumerable<Employee>>("/employees");
+        var employees = await httpClient.GetFromJsonAsync<IEnumerable<Employee>>("/employees");
         return employees ?? [];
     }
 
     public async Task<Employee?> GetEmployeeAsync(int id)
     {
-        return await _httpClient.GetFromJsonAsync<Employee>($"/employees/{id}");
+        return await httpClient.GetFromJsonAsync<Employee>($"/employees/{id}");
     }
 
     public async Task<IEnumerable<Policy>> GetPoliciesAsync()
     {
-        var policies = await _httpClient.GetFromJsonAsync<IEnumerable<Policy>>("/policies");
+        var policies = await httpClient.GetFromJsonAsync<IEnumerable<Policy>>("/policies");
         return policies ?? [];
     }
 
     public async Task<Policy?> GetPolicyAsync(int id)
     {
-        return await _httpClient.GetFromJsonAsync<Policy>($"/policies/{id}");
+        return await httpClient.GetFromJsonAsync<Policy>($"/policies/{id}");
     }
 
     public async Task<IEnumerable<Accreditation>> GetAccreditationsAsync()
     {
-        var accreditations = await _httpClient.GetFromJsonAsync<IEnumerable<Accreditation>>("/accreditations");
+        var accreditations = await httpClient.GetFromJsonAsync<IEnumerable<Accreditation>>("/accreditations");
         return accreditations ?? [];
     }
 
     public async Task<Accreditation?> GetAccreditationAsync(int id)
     {
-        return await _httpClient.GetFromJsonAsync<Accreditation>($"/accreditations/{id}");
+        return await httpClient.GetFromJsonAsync<Accreditation>($"/accreditations/{id}");
     }
 }

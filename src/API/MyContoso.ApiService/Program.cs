@@ -70,6 +70,7 @@ public static class Mocks
             "We're excited to have you join our team. This is a sample company update to demonstrate the feed functionality.",
             DateTime.Now.AddDays(-5),
             "Jane Smith",
+            "Chief Executive Officer",
             Random.Next(0,45),
             Random.Next(0,100),
             Random.Next(0,100) % 3 == 0),
@@ -79,6 +80,7 @@ public static class Mocks
             "We're pleased to announce strong Q4 results with 25% growth year over year. Thank you all for your hard work!",
             DateTime.Now.AddDays(-3),
             "John Doe",
+            "Senior Account Manager",
             Random.Next(0,45),
             Random.Next(0,100),
             Random.Next(0,100) % 3 == 0),
@@ -88,6 +90,7 @@ public static class Mocks
             "Our new office in Seattle will be opening next month. Stay tuned for more details about the grand opening celebration.",
             DateTime.Now.AddDays(-1), 
             "Sarah Johnson",
+            "Head of People and Culture",
             Random.Next(0,45),
             Random.Next(0,100),
             Random.Next(0,100) % 3 == 0),
@@ -96,7 +99,8 @@ public static class Mocks
             "Holiday Schedule",
             "Please note the upcoming holiday schedule. The office will be closed December 24-26 and December 31-January 1.",
             DateTime.Now.AddHours(-6),
-            "HR Team",
+            "Sarah Johnson",
+            "Head of People and Culture",
             Random.Next(0,45),
             Random.Next(0,100),
             Random.Next(0,100) % 3 == 0)
@@ -104,18 +108,102 @@ public static class Mocks
 
     public static readonly List<Employee> Employees =
     [
-        new Employee(1, "John Doe", "Software Engineer", "Engineering",
-            "Experienced full-stack developer with a passion for clean code.", "Valid"),
-        new Employee(2, "Jane Smith", "Product Manager", "Product",
-            "Strategic product leader focused on customer outcomes.", "Valid"),
-        new Employee(3, "Sarah Johnson", "UX Designer", "Design",
-            "Creative designer with expertise in user research and interaction design.", "Valid"),
-        new Employee(4, "Michael Brown", "DevOps Engineer", "Engineering",
-            "Infrastructure expert specializing in cloud architecture and automation.", "Pending"),
-        new Employee(5, "Emily Davis", "Marketing Manager", "Marketing",
-            "Data-driven marketer with experience in B2B and B2C campaigns.", "Valid"),
-        new Employee(6, "David Wilson", "Sales Director", "Sales",
-            "Results-oriented sales leader with a track record of exceeding targets.", "Valid")
+        new Employee(
+            1,
+            "John Doe",
+            "Software Engineer",
+            "Engineering",
+            "Experienced full-stack developer with a passion for clean code.",
+            [
+                new Accreditation(5, "Software Engineer II", "Qualified to maintain software products", "Valid", DateTime.Now.AddMonths(5))
+                
+            ],
+            new ContactInfo(
+                "john.doe@contoso.com",
+                "+61 (0)2 9456 3209",
+                "1 Contoso Plaza, Sydney, NSW, 2000, Australia",
+                DateTime.Now.AddDays(-3).AddMonths(6).AddYears(-27)
+                )),
+        new Employee(
+            2, 
+            "Jane Smith", 
+            "Product Manager",
+            "Product",
+            "Strategic product leader focused on customer outcomes.",
+            [
+                new Accreditation(5, "Software Engineer II", "Qualified to maintain software products", "Valid", DateTime.Now.AddMonths(5))
+                
+            ],
+            new ContactInfo(
+                "john.doe@contoso.com",
+                "+61 (0)2 9456 3209",
+                "1 Contoso Plaza, Sydney, NSW, 2000, Australia",
+                DateTime.Now.AddDays(-3).AddMonths(6).AddYears(-27)
+            )),
+        new Employee(
+            3,
+            "Sarah Johnson",
+            "UX Designer",
+            "Design",
+            "Creative designer with expertise in user research and interaction design.",
+            [
+                new Accreditation(5, "Software Engineer II", "Qualified to maintain software products", "Valid", DateTime.Now.AddMonths(5))
+                
+            ],
+            new ContactInfo(
+                "john.doe@contoso.com",
+                "+61 (0)2 9456 3209",
+                "1 Contoso Plaza, Sydney, NSW, 2000, Australia",
+                DateTime.Now.AddDays(-3).AddMonths(6).AddYears(-27)
+            )),
+        new Employee(
+            4,
+            "Michael Brown",
+            "DevOps Engineer",
+            "Engineering",
+            "Infrastructure expert specializing in cloud architecture and automation.",
+            [
+                new Accreditation(5, "Software Engineer II", "Qualified to maintain software products", "Valid", DateTime.Now.AddMonths(5))
+                
+            ],
+            new ContactInfo(
+                "john.doe@contoso.com",
+                "+61 (0)2 9456 3209",
+                "1 Contoso Plaza, Sydney, NSW, 2000, Australia",
+                DateTime.Now.AddDays(-3).AddMonths(6).AddYears(-27)
+            )),
+        new Employee(
+            5,
+            "Emily Davis",
+            "Marketing Manager",
+            "Marketing",
+            "Data-driven marketer with experience in B2B and B2C campaigns.",
+            [
+                new Accreditation(5, "Software Engineer II", "Qualified to maintain software products", "Valid", DateTime.Now.AddMonths(5))
+                
+            ],
+            new ContactInfo(
+                "john.doe@contoso.com",
+                "+61 (0)2 9456 3209",
+                "1 Contoso Plaza, Sydney, NSW, 2000, Australia",
+                DateTime.Now.AddDays(-3).AddMonths(6).AddYears(-27)
+            )),
+        new Employee(
+            6, 
+            "David Wilson",
+            "Sales Director",
+            "Sales",
+            "Results-oriented sales leader with a track record of exceeding targets.",
+            [
+                new Accreditation(5, "Software Engineer II", "Qualified to maintain software products", "Valid", DateTime.Now.AddMonths(5))
+                
+            ],
+            new ContactInfo(
+                "john.doe@contoso.com",
+                "+61 (0)2 9456 3209",
+                "1 Contoso Plaza, Sydney, NSW, 2000, Australia",
+                DateTime.Now.AddDays(-3).AddMonths(6).AddYears(-27)
+            ))
     ];
 
     public static readonly List<Policy> Policies =

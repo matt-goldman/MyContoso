@@ -6,6 +6,7 @@ public record CompanyUpdate(
     string Body,
     DateTime PublishedDate,
     string Author,
+    string AuthorRole,
     int Likes,
     int Comments,
     bool IsLiked

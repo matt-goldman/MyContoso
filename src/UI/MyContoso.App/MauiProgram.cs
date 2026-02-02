@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui;
+using FlagstoneUI.Core;
 //using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MyContoso.App.Services;
@@ -22,6 +23,7 @@ namespace MyContoso.App
                     fonts.AddFont("icofont.ttf", "IcoFont");
                 })
                 .UseMauiCommunityToolkit()
+                .UseFlagstoneUI()
                 .UseLucide();
 
 #if DEBUG

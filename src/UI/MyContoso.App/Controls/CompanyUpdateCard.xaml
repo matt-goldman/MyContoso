@@ -8,7 +8,8 @@
              xmlns:shared="clr-namespace:Shared;assembly=Shared"
              x:DataType="shared:CompanyUpdate"
              x:Class="MyContoso.App.Controls.CompanyUpdateCard">
-    <fs:FsCard Style="{DynamicResource ElevatedCard}">
+    <fs:FsCard Style="{DynamicResource ElevatedCard}"
+               Elevation="2">
         <fs:FsCard.GestureRecognizers>
             <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CompanyFeedViewModel}}, Path=ViewUpdateCommand}"
                                 CommandParameter="{Binding .}" />
@@ -42,15 +43,19 @@
                            FontAttributes="Bold"
                            FontFamily="{OnPlatform iOS='OpenSansBold'}"
                            LineBreakMode="TailTruncation" />
+                    <Label Text="{Binding AuthorRole}"
+                           TextColor="{DynamicResource Color.OnSurfaceVariant}"
+                           FontSize="Small" />
                     <Label Text="{Binding PublishedDate, StringFormat='{0:MMM dd, yyyy}'}"
                            TextColor="{DynamicResource Color.OnSurfaceVariant}"
-                           FontSize="12" />
+                           FontSize="Micro" />
                 </VerticalStackLayout>
             </Grid>
             
             <!-- Content -->
             <VerticalStackLayout Spacing="8"
                                  Margin="0,40,0,10">
+                <!-- TODO: Add semibold --> 
                 <Label Text="{Binding Title}"
                        TextColor="{DynamicResource Color.OnSurface}"
                        FontSize="18"
@@ -72,12 +77,13 @@
                      Margin="0,4,0,0" />
             
             <FlexLayout Direction="Row"
-                        JustifyContent="SpaceAround"
-                        Padding="0"
+                        JustifyContent="SpaceBetween"
+                        Padding="10,0"
                         Margin="0">
                 <Border StrokeShape="RoundRectangle 15"
                         Margin="0"
                         Padding="4"
+                        MinimumWidthRequest="80"
                         Stroke="Transparent"
                         BackgroundColor="{Binding IsLiked, Converter={StaticResource LikedToColorConverter}}">
                     <HorizontalStackLayout Spacing="4"
@@ -87,12 +93,10 @@
                                      Color="{Binding IsLiked, Converter={StaticResource IsLikedToTextColor}}"
                                      Margin="0"
                                      Padding="0"
-                                     HorizontalOptions="Center"
-                                     Size="16"/>
+                                     HorizontalOptions="Center"/>
                         <fs:FsButton Text="{Binding Likes}"
                                      Style="{DynamicResource TextButton}"
                                      TextColor="{Binding IsLiked, Converter={StaticResource IsLikedToTextColor}}"
-                                     FontSize="16"
                                      Padding="0"
                                      HeightRequest="20"
                                      HorizontalOptions="Center"/>    
@@ -103,14 +107,13 @@
                                        Padding="0"
                                        HorizontalOptions="Center">
                     <lucide:Icon Name="{DynamicResource MessageCircle}"
-                                 Color="{AppThemeBinding Light={StaticResource Color.Primary},
-                                                                                  Dark={StaticResource Color.Primary.Dark}}"
+                                 Color="Black"
                                  Margin="0"
-                                 HorizontalOptions="Center"
-                                 Size="16"/>
+                                 HorizontalOptions="Center"/>
                     <fs:FsButton Text="{Binding Comments}"
+                                 TextColor="Black"
                                  Style="{DynamicResource TextButton}"
-                                 FontSize="16"
+                                 
                                  HeightRequest="20"
                                  Padding="0"
                                  HorizontalOptions="Center"
@@ -121,14 +124,12 @@
                                        Padding="0"
                                        HorizontalOptions="Center">
                     <lucide:Icon Name="{DynamicResource Share2}"
-                                 Color="{AppThemeBinding Light={StaticResource Color.Primary},
-                                                                                  Dark={StaticResource Color.Primary.Dark}}"
+                                 Color="Black"
                                  Margin="0"
-                                 Size="16"
                                  HorizontalOptions="Center"/>
                     <fs:FsButton Text="Share"
                                  Style="{DynamicResource TextButton}"
-                                 FontSize="16"
+                                 TextColor="Black"
                                  HeightRequest="20"
                                  Padding="0"
                                  Margin="0"

@@ -5,6 +5,7 @@
              xmlns:vm="clr-namespace:MyContoso.App.ViewModels"
              xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:shared="clr-namespace:Shared;assembly=Shared"
+             xmlns:lucide="clr-namespace:Plugin.Maui.Lucide.Controls;assembly=Plugin.Maui.Lucide"
              x:Class="MyContoso.App.Pages.EmployeeListPage"
              x:DataType="vm:EmployeeListViewModel"
              BackgroundColor="{DynamicResource Color.Background}">
@@ -33,6 +34,7 @@
                         Placeholder="Search by name, role, or department..."
                         Text="{Binding SearchText}"
                         Style="{DynamicResource OutlinedEntry}"
+                        CornerRadius="10"
                         HeightRequest="44" />
             <fs:FsButton Grid.Column="1"
                          Text="{DynamicResource ListFilter}"
@@ -40,6 +42,7 @@
                          Style="{DynamicResource OutlinedButton}"
                          WidthRequest="44"
                          HeightRequest="44"
+                         CornerRadius="10"
                          Padding="0" />
         </Grid>
         
@@ -64,14 +67,19 @@
                 
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="shared:Employee">
-                        <Grid Padding="16,6">
-                            <fs:FsCard Style="{DynamicResource ElevatedCard}">
+                        <Grid Padding="0"
+                              Margin="0">
+                            <fs:FsCard Style="{DynamicResource ElevatedCard}"
+                                       Elevation="1"
+                                       Padding="15,10">
                                 <fs:FsCard.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:EmployeeListViewModel}}, Path=ViewEmployeeCommand}"
                                                         CommandParameter="{Binding .}" />
                                 </fs:FsCard.GestureRecognizers>
                                 
-                                <Grid ColumnDefinitions="48,*,Auto" ColumnSpacing="12">
+                                <Grid ColumnDefinitions="48,*,48"
+                                      ColumnSpacing="8"
+                                      Margin="10,25">
                                     <!-- Avatar -->
                                     <mct:AvatarView Grid.Column="0"
                                                      WidthRequest="48"
@@ -85,48 +93,57 @@
                                                      FontSize="16"
                                                      FontAttributes="Bold"
                                                      HorizontalOptions="Center"
-                                                     VerticalOptions="Center"/>
+                                                     VerticalOptions="Start"/>
                                     
                                     <!-- Employee Info -->
                                     <VerticalStackLayout Grid.Column="1" 
                                                         VerticalOptions="Center"
                                                         Spacing="2">
                                         <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
-                                            <Label Grid.Column="0"
-                                                   Text="{Binding Name}"
-                                                   TextColor="{DynamicResource Color.OnSurface}"
-                                                   FontSize="16"
-                                                   FontAttributes="Bold"
-                                                   LineBreakMode="TailTruncation" />
-                                            
-                                            <!-- Department Badge -->
-                                            <Border Grid.Column="1"
-                                                    Padding="8,2"
-                                                    BackgroundColor="{DynamicResource Color.SecondaryContainer}"
-                                                    StrokeThickness="0">
-                                                <Border.StrokeShape>
-                                                    <RoundRectangle CornerRadius="10" />
-                                                </Border.StrokeShape>
-                                                <Label Text="{Binding Department}"
-                                                       TextColor="{DynamicResource Color.OnSecondaryContainer}"
-                                                       FontSize="10"
-                                                       HorizontalOptions="Center" />
-                                            </Border>
+                                            <VerticalStackLayout Grid.Column="0">
+                                                <Label Text="{Binding Name}"
+                                                       TextColor="{DynamicResource Color.OnSurface}"
+                                                       FontAttributes="Bold"
+                                                       FontFamily="{OnPlatform iOS='OpenSansBold'}"
+                                                       LineBreakMode="TailTruncation" />
+                                                
+                                                <Label Text="{Binding Role}"
+                                                       TextColor="{DynamicResource Color.OnSurface}"
+                                                       LineBreakMode="TailTruncation" />
+                                                
+                                                <HorizontalStackLayout Margin="0,5,0,0"
+                                                                       Spacing="3">
+                                                    <lucide:Icon Name="{DynamicResource Mail}"
+                                                                 Size="10"
+                                                                 VerticalOptions="Center"/>
+                                                    <Label Text="{Binding ContactInfo.Email}"
+                                                           TextColor="{DynamicResource Color.OnSurface}"
+                                                           FontSize="Small"
+                                                           LineBreakMode="TailTruncation"
+                                                           VerticalOptions="Center"
+                                                           VerticalTextAlignment="Center"/>
+                                                </HorizontalStackLayout>
+                                            </VerticalStackLayout>
                                         </Grid>
-                                        
-                                        <Label Text="{Binding Role}"
-                                               TextColor="{DynamicResource Color.OnSurfaceVariant}"
-                                               FontSize="14"
-                                               LineBreakMode="TailTruncation" />
                                     </VerticalStackLayout>
                                     
-                                    <!-- Chevron -->
-                                    <Label Grid.Column="2"
-                                           Text="{DynamicResource ChevronRight}"
-                                           FontFamily="lucide"
-                                           TextColor="{DynamicResource Color.OnSurfaceVariant}"
-                                           FontSize="20"
-                                           VerticalOptions="Center" />
+                                    <!-- Department Badge -->
+                                    <Border Grid.Column="1"
+                                            Grid.ColumnSpan="2"
+                                            Padding="8,2"
+                                            MaximumHeightRequest="25"
+                                            VerticalOptions="Start"
+                                            HorizontalOptions="End"
+                                            BackgroundColor="{DynamicResource Color.Secondary}"
+                                            StrokeThickness="0">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="10" />
+                                        </Border.StrokeShape>
+                                        <Label Text="{Binding Department}"
+                                               TextColor="{DynamicResource Color.OnSecondary}"
+                                               FontSize="10"
+                                               HorizontalOptions="Center" />
+                                    </Border>
                                 </Grid>
                             </fs:FsCard>
                         </Grid>

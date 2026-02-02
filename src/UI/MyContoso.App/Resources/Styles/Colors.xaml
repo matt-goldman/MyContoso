@@ -10,7 +10,7 @@
     -->
 
     <!-- Primary: Purple/Violet brand color -->
-    <Color x:Key="Color.Primary">#1447e6</Color>
+    <Color x:Key="Color.Primary">#1477ee</Color>
     <Color x:Key="Color.OnPrimary">#FFFFFF</Color>
     <Color x:Key="Color.PrimaryContainer">#EDE9FE</Color>
     <Color x:Key="Color.OnPrimaryContainer">#4C1D95</Color>
@@ -62,9 +62,13 @@
     <Color x:Key="Color.OutlineVariant">#E5E7EB</Color>
     <Color x:Key="Color.Outline.Dark">#4B5563</Color>
     <Color x:Key="Color.OutlineVariant.Dark">#374151</Color>
+    
+    <!-- 10% Opacity variants -->
+    <Color x:Key="Color.Primary.10Pc">#101477ee</Color>
+    <Color x:Key="Color.Secondary.10Pc">#1014B8A6</Color>
 
     <!-- Legacy colors for backward compatibility -->
-    <Color x:Key="Primary">#1447e6</Color>
+    <Color x:Key="Primary">#1477ee</Color>
     <Color x:Key="PrimaryDark">#A78BFA</Color>
     <Color x:Key="PrimaryDarkText">#1F2937</Color>
     <Color x:Key="Secondary">#14B8A6</Color>
@@ -101,6 +105,8 @@
     
     <!-- other named colors -->
     <Color x:Key="Magenta">#ff00ff</Color>
+    
+    <Color x:Key="PageBackground">#f7fbfc</Color>
     
     <!-- TitleView gradient -->
     <LinearGradientBrush x:Key="PrimaryToSecondary" StartPoint="0,0.5" EndPoint="1,0.5">

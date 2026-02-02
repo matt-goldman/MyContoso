@@ -115,7 +115,12 @@ public static class Mocks
             "Engineering",
             "Experienced full-stack developer with a passion for clean code.",
             [
-                new Accreditation(5, "Software Engineer II", "Qualified to maintain software products", "Valid", DateTime.Now.AddMonths(5))
+                new Accreditation(
+                    5,"Software Engineer II",
+                    "Qualified to maintain software products",
+                    "Valid",
+                    "Internal",
+                    DateTime.Now.AddMonths(5))
                 
             ],
             new ContactInfo(
@@ -131,7 +136,13 @@ public static class Mocks
             "Product",
             "Strategic product leader focused on customer outcomes.",
             [
-                new Accreditation(5, "Software Engineer II", "Qualified to maintain software products", "Valid", DateTime.Now.AddMonths(5))
+                new Accreditation(
+                    5,
+                    "Software Engineer II",
+                    "Qualified to maintain software products",
+                    "Valid",
+                    "Internal",
+                    DateTime.Now.AddMonths(5))
                 
             ],
             new ContactInfo(
@@ -147,7 +158,13 @@ public static class Mocks
             "Design",
             "Creative designer with expertise in user research and interaction design.",
             [
-                new Accreditation(5, "Software Engineer II", "Qualified to maintain software products", "Valid", DateTime.Now.AddMonths(5))
+                new Accreditation(
+                    5,
+                    "Software Engineer II",
+                    "Qualified to maintain software products",
+                    "Valid",
+                    "Internal",
+                    DateTime.Now.AddMonths(5))
                 
             ],
             new ContactInfo(
@@ -163,7 +180,13 @@ public static class Mocks
             "Engineering",
             "Infrastructure expert specializing in cloud architecture and automation.",
             [
-                new Accreditation(5, "Software Engineer II", "Qualified to maintain software products", "Valid", DateTime.Now.AddMonths(5))
+                new Accreditation(
+                    5,
+                    "Software Engineer II",
+                    "Qualified to maintain software products",
+                    "Valid",
+                    "Internal",
+                    DateTime.Now.AddMonths(5))
                 
             ],
             new ContactInfo(
@@ -179,7 +202,13 @@ public static class Mocks
             "Marketing",
             "Data-driven marketer with experience in B2B and B2C campaigns.",
             [
-                new Accreditation(5, "Software Engineer II", "Qualified to maintain software products", "Valid", DateTime.Now.AddMonths(5))
+                new Accreditation(
+                    5,
+                    "Software Engineer II",
+                    "Qualified to maintain software products",
+                    "Valid",
+                    "Internal",
+                    DateTime.Now.AddMonths(5))
                 
             ],
             new ContactInfo(
@@ -195,7 +224,13 @@ public static class Mocks
             "Sales",
             "Results-oriented sales leader with a track record of exceeding targets.",
             [
-                new Accreditation(5, "Software Engineer II", "Qualified to maintain software products", "Valid", DateTime.Now.AddMonths(5))
+                new Accreditation(
+                    5,
+                    "Software Engineer II",
+                    "Qualified to maintain software products",
+                    "Valid",
+                    "Internal",
+                    DateTime.Now.AddMonths(5))
                 
             ],
             new ContactInfo(
@@ -248,21 +283,25 @@ public static class Mocks
             "Health and Safety Certificate", 
             "Employees with this accreditation are permitted to work from any Contoso site, as well as their home address upon agreement. Ensure you keep this up to date.",
             "Overdue",
+            "Internal",
             DateTime.Now.AddDays(-3)),
         new (2,
             "Accounting Level 1",
             "Required for all staff wishing to work in Contoso's Finance department.",
             "Pending",
+            "Internal",
             DateTime.Today),
         new (3,
             "People Leadership",
             "This accreditation signifies that an employee has met the requirements to hold a management level position at Contoso.",
             "Valid",
+            "Internal",
             DateTime.Today.AddMonths(6)),
         new (4,
             "Bomb Disposal",
             "Advanced qualification for Contoso security staff that qualifies employees to act and disarm explosives.",
             "Valid",
+            "External",
             DateTime.Today.AddMonths(9))
         
     ];

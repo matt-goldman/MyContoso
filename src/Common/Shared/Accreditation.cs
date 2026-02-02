@@ -5,5 +5,6 @@ public record Accreditation(
     string Name,
     string Description,
     string Status,
+    string Category,
     DateTime? ExpiryDate
 );

@@ -26,24 +26,28 @@ public class AccreditationStatusColorConverter : IValueConverter
             // Icon foreground colors
             ("Valid", "" or null) => ValidPrimary,
             ("Expired", "" or null) => ExpiredPrimary,
+            ("Overdue", "" or null) => ExpiredPrimary,
             ("Pending", "" or null) => PendingPrimary,
             (_, "" or null) => Colors.Gray,
             
             // Background colors (for icon container)
             ("Valid", "Background") => ValidBackground,
             ("Expired", "Background") => ExpiredBackground,
+            ("Overdue", "Background") => ExpiredBackground,
             ("Pending", "Background") => PendingBackground,
             (_, "Background") => Color.FromArgb("#F3F4F6"),
             
             // Badge background colors
             ("Valid", "Badge") => ValidPrimary,
             ("Expired", "Badge") => ExpiredPrimary,
+            ("Overdue", "Badge") => ExpiredPrimary,
             ("Pending", "Badge") => PendingBackground,
             (_, "Badge") => Color.FromArgb("#E5E7EB"),
             
             // Badge text colors
             ("Valid", "BadgeText") => Colors.White,
             ("Expired", "BadgeText") => Colors.White,
+            ("Overdue", "BadgeText") => Colors.White,
             ("Pending", "BadgeText") => Color.FromArgb("#134E4A"),
             (_, "BadgeText") => Color.FromArgb("#6B7280"),
             

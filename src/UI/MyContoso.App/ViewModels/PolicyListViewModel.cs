@@ -28,7 +28,7 @@ public partial class PolicyListViewModel(ApiClient apiClient) : ObservableObject
     public ObservableCollection<PolicyGroup> Policies { get; } = [];
 
     [RelayCommand]
-    public async Task LoadPoliciesAsync()
+    private async Task LoadPolicies()
     {
         if (IsLoading)
             return;
@@ -56,7 +56,7 @@ public partial class PolicyListViewModel(ApiClient apiClient) : ObservableObject
     }
 
     [RelayCommand]
-    public async Task RefreshAsync()
+    private async Task Refresh()
     {
         try
         {
@@ -81,7 +81,7 @@ public partial class PolicyListViewModel(ApiClient apiClient) : ObservableObject
     }
 
     [RelayCommand]
-    public async Task ViewPolicyAsync(Policy policy)
+    private async Task ViewPolicy(Policy policy)
     {
         await Shell.Current.GoToAsync($"policy?id={policy.PolicyId}");
     }

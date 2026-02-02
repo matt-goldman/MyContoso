@@ -5,5 +5,7 @@ public record Policy(
     string Title,
     string Category,
     DateTime LastUpdated,
+    string UpdatedBy,
+    string Description,
     string Content
 );

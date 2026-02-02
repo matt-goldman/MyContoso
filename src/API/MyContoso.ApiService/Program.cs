@@ -44,7 +44,7 @@ app.MapGet("/employees/{id}", (int id) =>
 .WithName("GetEmployee");
 
 // Policies endpoints
-app.MapGet("/policies", () => Mocks.Updates)
+app.MapGet("/policies", () => Mocks.Policies)
 .WithName("GetPolicies");
 
 app.MapGet("/policies/{id}", (int id) => Mocks.Policies.FirstOrDefault(p => p.PolicyId == id))
@@ -208,10 +208,38 @@ public static class Mocks
 
     public static readonly List<Policy> Policies =
     [
-        new Policy(1, "Code of Conduct", "Ethics", DateTime.Now.AddMonths(-6), "All employees are expected to maintain the highest standards of professional and ethical conduct..."),
-        new Policy(2, "Remote Work Policy", "Workplace", DateTime.Now.AddMonths(-2), "Employees may work remotely up to 3 days per week with manager approval..."),
-        new Policy(3, "Data Protection", "Security", DateTime.Now.AddMonths(-4), "All company and customer data must be handled in accordance with applicable regulations..."),
-        new Policy(4, "Leave Policy", "HR", DateTime.Now.AddMonths(-8), "Employees accrue 15 days of paid time off annually, prorated for partial years...")
+        new Policy(
+            1,
+            "Code of Conduct",
+            "Ethics",
+            DateTime.Now.AddMonths(-6),
+            "Joan Smith",
+            "The latest code of conduct is now available for all staff. There are mandatory changes that all employees need to become familiar with.",
+            "All employees are expected to maintain the highest standards of professional and ethical conduct..."
+            ),
+        new Policy(
+            2,
+            "Remote Work Policy",
+            "Workplace",
+            DateTime.Now.AddMonths(-2),
+            "Michale Brown",
+            "Contoso has a new remote work policy. Familiarise yourself with the new rules to learn whether you are eligible.",
+            ""),
+        new Policy(
+            3,
+            "Data Protection",
+            "Security",
+            DateTime.Now.AddMonths(-4),
+            "Christine Lawson",
+            "All company and customer data must be handled in accordance with applicable regulations. New controls and guidelines are now in effect",
+            ""),
+        new Policy(4,
+            "Leave Policy",
+            "HR",
+            DateTime.Now.AddMonths(-8),
+            "Jordon Collier",
+            "Understand your rights and entitlements, and obligations, with regard to leave.",
+            "")
     ];
 
     public static readonly List<Accreditation> Accreditations =

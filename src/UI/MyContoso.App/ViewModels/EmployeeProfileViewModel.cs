@@ -15,6 +15,12 @@ public partial class EmployeeProfileViewModel(ApiClient apiClient) : ObservableO
 
     [ObservableProperty]
     private bool isLoading;
+    
+    [ObservableProperty]
+    private int activeAccreditations;
+    
+    [ObservableProperty]
+    private int expiringAccreditations;
 
     partial void OnEmployeeIdChanged(int value)
     {
@@ -30,6 +36,13 @@ public partial class EmployeeProfileViewModel(ApiClient apiClient) : ObservableO
         {
             IsLoading = true;
             Employee = await apiClient.GetEmployeeAsync(EmployeeId);
+
+            foreach (var accreditation in Employee?.Accreditations??[])
+            {
+                if (accreditation.Status == "Valid") ActiveAccreditations++;
+
+                if (accreditation.ExpiryDate < DateTime.Now.AddMonths(6)) ExpiringAccreditations++;
+            }
         }
         finally
         {

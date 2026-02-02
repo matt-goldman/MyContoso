@@ -64,6 +64,7 @@
                         
                         <Grid ColumnDefinitions="*,*"
                               ColumnSpacing="10"
+                              MinimumHeightRequest="30"
                               WidthRequest="300">
                             <fs:FsButton HorizontalOptions="Fill"
                                          BackgroundColor="{DynamicResource Color.Primary}"
@@ -201,21 +202,27 @@
                 
                 <fs:FsCard Style="{DynamicResource ElevatedCard}"
                            Elevation="1">
-                    <VerticalStackLayout Spacing="{DynamicResource Space.12}">
-                        <Label Text="Accreditation Status"
-                               TextColor="{DynamicResource Color.OnSurface}"
-                               FontSize="{DynamicResource FontSize.TitleMedium}"
-                               FontAttributes="Bold" />
-                        
+                    <VerticalStackLayout Spacing="{DynamicResource Space.12}"
+                                         Padding="10,20">
+                        <FlexLayout Direction="Row"
+                                    JustifyContent="SpaceBetween">
+                            <HorizontalStackLayout Spacing="5">
+                                <lucide:Icon Name="{DynamicResource Award}"
+                                             Color="{DynamicResource Color.Primary}" />
+                                <Label Text="Accreditations"
+                                       TextColor="{DynamicResource Color.OnSurface}"
+                                       FontSize="{DynamicResource FontSize.TitleMedium}"
+                                       FontAttributes="Bold"
+                                       FontFamily="{OnPlatform iOS='OpenSansBold'}"/>
+                            </HorizontalStackLayout>
+                            <Label Text="View All"/>
+                        </FlexLayout>
                         <HorizontalStackLayout Spacing="{DynamicResource Space.8}">
-                            <Label Text="{DynamicResource BadgeCheck}"
-                                   FontFamily="lucide"
-                                   TextColor="{Binding Employee.AccreditationStatus, Converter={StaticResource AccreditationColorConverter}}"
-                                   FontSize="20"
+                            <Label Text="{Binding ActiveAccreditations, StringFormat='{0} Active,'}"
+                                   TextColor="{StaticResource Gray600}"
                                    VerticalOptions="Center" />
-                            <Label Text="{Binding Employee.AccreditationStatus}"
-                                   TextColor="{DynamicResource Color.OnSurface}"
-                                   FontSize="{DynamicResource FontSize.BodyLarge}"
+                            <Label Text="{Binding ExpiringAccreditations, StringFormat='{0} expiring soon'}"
+                                   TextColor="{StaticResource Gray600}"
                                    VerticalOptions="Center" />
                         </HorizontalStackLayout>
                     </VerticalStackLayout>

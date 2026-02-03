@@ -83,7 +83,7 @@
                                          TextColor="{DynamicResource Gray900}"
                                          ImageSource="{FontImageSource FontFamily='lucide', Glyph={DynamicResource Share2}, Color={DynamicResource Gray900}}"
                                          ContentLayout="Left"
-                                         MaximumHeightRequest="30"
+                                         MaximumHeightRequest="35"
                                          Text="Share"/>
                             
                             <fs:FsButton Grid.Column="1"
@@ -93,7 +93,7 @@
                                          TextColor="{DynamicResource Gray900}"
                                          ImageSource="{FontImageSource FontFamily='lucide', Glyph={DynamicResource Bookmark}, Color={DynamicResource Gray900}}"
                                          ContentLayout="Left"
-                                         MaximumHeightRequest="30"
+                                         MaximumHeightRequest="35"
                                          Text="Save"/>
                         </Grid>
                     </VerticalStackLayout>

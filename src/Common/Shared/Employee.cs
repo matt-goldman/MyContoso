@@ -7,8 +7,8 @@ public record Employee(
     string Department,
     string ProfileSummary,
     List<Accreditation> Accreditations,
-    ContactInfo ContactInfo
-    // TODO: add an AvatarUrl property and populate using a people API
+    ContactInfo ContactInfo,
+    string? AvatarUrl
 );
 
 public record ContactInfo(

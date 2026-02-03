@@ -72,7 +72,7 @@
                                          TextColor="White"
                                          ImageSource="{FontImageSource FontFamily='lucide', Glyph={DynamicResource MessageCircle}, Size=14}"
                                          ContentLayout="Left"
-                                         MaximumHeightRequest="30"
+                                         MaximumHeightRequest="35"
                                          Text="Message"/>
                             
                             <fs:FsButton Grid.Column="1"
@@ -82,7 +82,7 @@
                                          TextColor="{DynamicResource Gray900}"
                                          ImageSource="{FontImageSource FontFamily='lucide', Glyph={DynamicResource Mail}, Color={DynamicResource Gray900}}"
                                          ContentLayout="Left"
-                                         MaximumHeightRequest="30"
+                                         MaximumHeightRequest="35"
                                          Text="Email"/>
                         </Grid>
                         

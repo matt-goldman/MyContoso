@@ -26,6 +26,7 @@
             <converters:InitialsConverter x:Key="InitialsConverter" />
             <converters:IsLikedToBackgroundColorConverter x:Key="LikedToColorConverter" />
             <converters:IsLikedToTextColorConverter x:Key="IsLikedToTextColor" />
+            <converters:AccreditationStatusIconConverter x:Key="AccreditationIconConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

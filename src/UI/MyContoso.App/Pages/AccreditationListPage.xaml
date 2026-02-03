@@ -142,7 +142,7 @@
                                             MaximumHeightRequest="40"
                                             VerticalOptions="Start"
                                             BackgroundColor="{Binding Status, Converter={StaticResource AccreditationColorConverter}, ConverterParameter=Background}">
-                                    <lucide:Icon Name="{DynamicResource Award}"
+                                    <lucide:Icon Name="{Binding Status, Converter={StaticResource AccreditationIconConverter}}"
                                                  WidthRequest="40"
                                                  HeightRequest="40"
                                                  Padding="0"

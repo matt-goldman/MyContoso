@@ -18,11 +18,17 @@ public partial class AccreditationDetailViewModel(ApiClient apiClient) : Observa
     private int accreditationId;
 
     [ObservableProperty]
-    private string daysUntilExpiry = string.Empty;
+    private string expiryComment = string.Empty;
 
     [ObservableProperty]
     private bool isExpiringSoon;
-
+    
+    [ObservableProperty]
+    private bool isExpired;
+    
+    [ObservableProperty]
+    private bool isShareable;
+    
     partial void OnAccreditationIdChanged(int value)
     {
         _ = LoadAccreditationAsync();
@@ -38,32 +44,27 @@ public partial class AccreditationDetailViewModel(ApiClient apiClient) : Observa
         {
             IsLoading = true;
             Accreditation = await apiClient.GetAccreditationAsync(AccreditationId);
+            
+            IsShareable = Accreditation?.Status is not "Expired" and not "Overdue";
 
             if (Accreditation?.ExpiryDate.HasValue == true)
             {
-                var days = (Accreditation.ExpiryDate.Value - DateTime.Now).Days;
-                IsExpiringSoon = days <= 60 && Accreditation.Status == "Valid";
+                var daysUntilExpiry = (Accreditation.ExpiryDate.Value - DateTime.Now).Days;
+                IsExpiringSoon = daysUntilExpiry <= 60 || Accreditation.Status is "Expired" or "Overdue";
+                
+                IsExpired = daysUntilExpiry < 0 || Accreditation.Status is "Expired" or "Overdue";
 
-                if (days < 0)
+                ExpiryComment = daysUntilExpiry switch
                 {
-                    DaysUntilExpiry = $"Expired {Math.Abs(days)} days ago";
-                }
-                else if (days == 0)
-                {
-                    DaysUntilExpiry = "Expires today";
-                }
-                else if (days == 1)
-                {
-                    DaysUntilExpiry = "Expires tomorrow";
-                }
-                else
-                {
-                    DaysUntilExpiry = $"Expires in {days} days";
-                }
+                    < 0 => $"Expired {Math.Abs(daysUntilExpiry)} days ago",
+                    0 => "Expires today",
+                    1 => "Expires tomorrow",
+                    _ => $"Expires in {daysUntilExpiry} days"
+                };
             }
             else
             {
-                DaysUntilExpiry = "No expiry date";
+                ExpiryComment = "No expiry date";
                 IsExpiringSoon = false;
             }
         }

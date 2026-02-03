@@ -3,12 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:fs="clr-namespace:FlagstoneUI.Core.Controls;assembly=FlagstoneUI.Core"
              xmlns:vm="clr-namespace:MyContoso.App.ViewModels"
+             xmlns:lucide="clr-namespace:Plugin.Maui.Lucide.Controls;assembly=Plugin.Maui.Lucide"
+             xmlns:li="clr-namespace:Plugin.Maui.Lucide;assembly=Plugin.Maui.Lucide"
              x:Class="MyContoso.App.Pages.AccreditationDetailPage"
              x:DataType="vm:AccreditationDetailViewModel"
              BackgroundColor="{DynamicResource Color.Background}">
 
     <ScrollView>
-        <VerticalStackLayout Padding="16" Spacing="16">
+        <VerticalStackLayout Padding="16,0" Spacing="2">
             <!-- Main Card -->
             <fs:FsCard Style="{DynamicResource ElevatedCard}"
                        Elevation="1">
@@ -21,12 +23,11 @@
                             Padding="0"
                             BackgroundColor="{Binding Accreditation.Status, Converter={StaticResource AccreditationColorConverter}, ConverterParameter=Background}"
                             Stroke="Transparent">
-                        <Label Text="{DynamicResource Award}"
-                               FontFamily="lucide"
-                               TextColor="{Binding Accreditation.Status, Converter={StaticResource AccreditationColorConverter}}"
-                               FontSize="28"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center" />
+                        <lucide:Icon Name="{Binding Accreditation.Status, Converter={StaticResource AccreditationIconConverter}}"
+                                     Size="32"
+                                     Color="{Binding Accreditation.Status, Converter={StaticResource AccreditationColorConverter}}"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="Center" />
                     </Border>
                     
                     <!-- Status Badge -->
@@ -67,8 +68,7 @@
                             VerticalOptions="Center"
                             HorizontalOptions="Start"
                             Padding="5,2">
-                        <Label TextColor="{StaticResource Gray600}"
-                               Text="{Binding Accreditation.Category, StringFormat='{0} Accreditation'}"
+                        <Label Text="{Binding Accreditation.Category, StringFormat='{0} Accreditation'}"
                                FontSize="10"/>
                     </Border>
                 </VerticalStackLayout>
@@ -78,7 +78,9 @@
             <fs:FsCard Style="{DynamicResource ElevatedCard}"
                        Elevation="1"
                        IsVisible="{Binding Accreditation.ExpiryDate, Converter={StaticResource IsNotNullConverter}}">
-                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                <Grid ColumnDefinitions="Auto,*"
+                      ColumnSpacing="12"
+                      Padding="16">
                     <Border Grid.Column="0"
                            WidthRequest="40"
                            HeightRequest="40"
@@ -102,7 +104,7 @@
                                TextColor="{DynamicResource Color.OnSurface}"
                                FontSize="16"
                                FontAttributes="Bold" />
-                        <Label Text="{Binding DaysUntilExpiry}"
+                        <Label Text="{Binding ExpiryComment}"
                                TextColor="{DynamicResource Color.OnSurfaceVariant}"
                                FontSize="12" />
                     </VerticalStackLayout>
@@ -112,35 +114,67 @@
             <!-- Warning Card for Expiring Soon -->
             <fs:FsCard BackgroundColor="{DynamicResource Color.SecondaryContainer}"
                        IsVisible="{Binding IsExpiringSoon}">
-                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
-                    <Label Grid.Column="0"
-                           Text="{DynamicResource AlertCircle}"
-                           FontFamily="lucide"
-                           TextColor="{DynamicResource Color.Secondary}"
-                           FontSize="20"
-                           VerticalOptions="Start"
-                           Margin="0,2,0,0" />
+                <fs:FsCard.Triggers>
+                    <DataTrigger TargetType="fs:FsCard" Binding="{Binding IsExpired}" Value="true">
+                        <Setter Property="BackgroundColor" Value="#FEE2E2" />
+                    </DataTrigger>
+                </fs:FsCard.Triggers>
+                <Grid ColumnDefinitions="Auto,*"
+                      ColumnSpacing="12"
+                      Padding="16">
+                    <lucide:Icon Name="{x:Static li:Icons.CircleAlert}"
+                                 Grid.Column="0"
+                                 VerticalOptions="Start"
+                                 Margin="0,2,0,0"
+                                 Size="20"
+                                 Color="{DynamicResource Color.OnSecondaryContainer}">
+                        <lucide:Icon.Triggers>
+                            <DataTrigger TargetType="lucide:Icon" Binding="{Binding IsExpired}" Value="True">
+                                <Setter Property="Color" Value="#EF4444" />
+                            </DataTrigger>
+                        </lucide:Icon.Triggers>
+                    </lucide:Icon>
                     <VerticalStackLayout Grid.Column="1" Spacing="4">
                         <Label Text="Renewal Reminder"
                                TextColor="{DynamicResource Color.OnSecondaryContainer}"
                                FontSize="14"
-                               FontAttributes="Bold" />
+                               FontAttributes="Bold">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding IsExpired}" Value="true">
+                                    <Setter Property="TextColor" Value="#EF4444" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
                         <Label Text="This accreditation is expiring soon. Please contact HR or the issuing organization to begin the renewal process."
                                TextColor="{DynamicResource Color.OnSecondaryContainer}"
                                FontSize="12"
-                               LineHeight="1.3" />
+                               LineHeight="1.3">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding IsExpired}" Value="True">
+                                    <Setter Property="Text" Value="This accreditation has expired. Please contact HR or the issuing organization to begin the renewal process." />
+                                    <Setter Property="TextColor" Value="#EF4444" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
                     </VerticalStackLayout>
                 </Grid>
             </fs:FsCard>
 
             <!-- Action Buttons -->
-            <VerticalStackLayout Spacing="12">
+            <VerticalStackLayout Spacing="12"
+                                 Padding="16">
                 <fs:FsButton Text="Renew Accreditation"
-                             Style="{DynamicResource OutlinedButton}"
-                             IsVisible="{Binding IsExpiringSoon}" />
+                             CornerRadius="12"
+                             Background="{DynamicResource Color.Primary}"
+                             IsVisible="{Binding IsExpiringSoon}"
+                             ImageSource="{FontImageSource FontFamily=lucide, Glyph={DynamicResource Repeat2}}"/>
 
-                <fs:FsButton Text="View Certificate"
-                             Style="{DynamicResource OutlinedButton}" />
+                <fs:FsButton Text="Share Credential"
+                             CornerRadius="12"
+                             Style="{DynamicResource OutlinedButton}"
+                             TextColor="Gray"
+                             IsVisible="{Binding IsShareable}"
+                             ImageSource="{FontImageSource FontFamily=lucide, Glyph={DynamicResource Share2}, Color=Gray}"/>
             </VerticalStackLayout>
         </VerticalStackLayout>
     </ScrollView>

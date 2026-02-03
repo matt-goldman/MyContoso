@@ -62,74 +62,89 @@ public static class Mocks
 {
     private static readonly Random Random = new Random();
 
-    public static readonly List<CompanyUpdate> Updates =
-    [
-        new CompanyUpdate(
-            1,
-            "Welcome to Q1 2026!",
-            "Happy New Year, Contoso family! As we kick off another exciting year, I want to take a moment to reflect on our incredible achievements in 2025 and share our vision for the months ahead. We grew our customer base by 40%, launched three new product lines, and expanded into two new markets. None of this would have been possible without each and every one of you. Let's make 2026 even better!",
-            DateTime.Now.AddDays(-12),
-            "Margaret Chen",
-            "Chief Executive Officer",
-            Random.Next(50, 120),
-            Random.Next(15, 45),
-            false),
-        new CompanyUpdate(
-            2,
-            "Engineering All-Hands: Microservices Migration Update",
-            "Great news from the Platform team! We've successfully completed Phase 2 of our microservices migration, achieving a 35% improvement in API response times and 99.97% uptime last quarter. Special shoutout to the DevOps crew who worked tirelessly over the holiday break to ensure zero customer impact. Phase 3 planning kicks off next week—watch your inboxes for meeting invites.",
-            DateTime.Now.AddDays(-8),
-            "Rajesh Patel",
-            "VP of Engineering",
-            Random.Next(30, 80),
-            Random.Next(20, 60),
-            true),
-        new CompanyUpdate(
-            3,
-            "New Sydney Office Grand Opening - You're Invited!",
-            "Mark your calendars! Our brand new Sydney headquarters at Barangaroo will officially open on February 28th. The new space features collaborative work zones, a rooftop garden, state-of-the-art AV facilities, and yes—a barista bar serving complimentary coffee. All Sydney-based employees will receive their new access cards next week. RSVP for the opening celebration by February 14th.",
-            DateTime.Now.AddDays(-5),
-            "Lisa Thompson",
-            "Head of People & Culture",
-            Random.Next(80, 150),
-            Random.Next(30, 70),
-            false),
-        new CompanyUpdate(
-            4,
-            "Customer Success Story: Meridian Healthcare",
-            "Thrilled to share that our partnership with Meridian Healthcare has resulted in a 60% reduction in their patient scheduling errors and $2.3M in operational savings! This case study will be featured in next month's industry report. Congratulations to the entire Customer Success team, especially account lead David Okonkwo, for making this happen.",
-            DateTime.Now.AddDays(-3),
-            "Sarah Mitchell",
-            "Chief Customer Officer",
-            Random.Next(40, 90),
-            Random.Next(10, 35),
-            true),
-        new CompanyUpdate(
-            5,
-            "Reminder: Annual Compliance Training Due Feb 28",
-            "Just a friendly reminder that all employees must complete their annual compliance training modules by February 28th. This includes Data Privacy Essentials, Workplace Safety, and Anti-Harassment training. You can access all modules through the Learning Hub. Managers: please ensure your teams are on track—completion rates are currently at 67% company-wide.",
-            DateTime.Now.AddDays(-1),
-            "Jennifer Walsh",
-            "Chief Compliance Officer",
-            Random.Next(15, 40),
-            Random.Next(5, 20),
-            false),
-        new CompanyUpdate(
-            6,
-            "Introducing Our New Employee Wellness Program",
-            "Your wellbeing matters to us! Starting March 1st, all full-time employees will have access to our enhanced wellness benefits including: free gym membership at partner locations, mental health support through Headspace, quarterly wellness stipends of $150, and flexible 'recharge' days. Check the HR portal for full details and enrollment.",
-            DateTime.Now.AddHours(-6),
-            "Lisa Thompson",
-            "Head of People & Culture",
-            Random.Next(100, 200),
-            Random.Next(25, 55),
-            false)
-    ];
-
     public static readonly List<Employee> Employees =
     [
         new Employee(
             1,
+            "Margaret Chen",
+            "Chief Executive Officer",
+            "Executive",
+            "Visionary leader with 20+ years of experience in technology and enterprise software. Previously served as COO at a Fortune 500 company. Known for transforming company culture and driving sustainable growth. Board member of several industry associations and advocate for women in technology.",
+            [
+                new Accreditation(3, "People Leadership", "Certified to hold management positions", "Valid", "Internal", DateTime.Now.AddMonths(12))
+            ],
+            new ContactInfo(
+                "margaret.chen@contoso.com",
+                "+61 2 9456 3100",
+                "Level 15, 100 Barangaroo Ave, Sydney NSW 2000",
+                new DateTime(1972, 4, 18)),
+            "https://i.pravatar.cc/300?u=margaret.chen"),
+        new Employee(
+            2,
+            "Rajesh Patel",
+            "VP of Engineering",
+            "Engineering",
+            "Engineering executive with deep expertise in distributed systems and platform architecture. Built and scaled engineering teams from 20 to 200+ across multiple continents. PhD in Computer Science from Stanford. Passionate about engineering excellence and developer experience.",
+            [
+                new Accreditation(9, "Kubernetes Administrator (CKA)", "Certified Kubernetes cluster administrator", "Valid", "External", DateTime.Now.AddMonths(18)),
+                new Accreditation(3, "People Leadership", "Certified to hold management positions", "Valid", "Internal", DateTime.Now.AddMonths(10))
+            ],
+            new ContactInfo(
+                "rajesh.patel@contoso.com",
+                "+61 2 9456 3101",
+                "Level 15, 100 Barangaroo Ave, Sydney NSW 2000",
+                new DateTime(1978, 9, 5)),
+            "https://i.pravatar.cc/300?u=rajesh.patel"),
+        new Employee(
+            3,
+            "Lisa Thompson",
+            "Head of People & Culture",
+            "People & Culture",
+            "HR executive focused on building world-class employee experiences. Expert in organizational design, talent strategy, and culture transformation. Led successful integrations of 3 acquisitions. Certified executive coach and frequent speaker on future of work topics.",
+            [
+                new Accreditation(18, "SHRM Senior Certified Professional", "Advanced HR certification", "Valid", "External", DateTime.Now.AddMonths(20)),
+                new Accreditation(3, "People Leadership", "Certified to hold management positions", "Valid", "Internal", DateTime.Now.AddMonths(12))
+            ],
+            new ContactInfo(
+                "lisa.thompson@contoso.com",
+                "+61 2 9456 3102",
+                "Level 15, 100 Barangaroo Ave, Sydney NSW 2000",
+                new DateTime(1980, 1, 22)),
+            "https://i.pravatar.cc/300?u=lisa.thompson"),
+        new Employee(
+            4,
+            "Sarah Mitchell",
+            "Chief Customer Officer",
+            "Customer Success",
+            "Customer-obsessed executive with 15 years building and scaling customer success organizations. Pioneered Contoso's customer health scoring methodology. Former management consultant specializing in customer experience transformation.",
+            [
+                new Accreditation(17, "Customer Success Certified", "Gainsight customer success certification", "Valid", "External", DateTime.Now.AddMonths(14)),
+                new Accreditation(3, "People Leadership", "Certified to hold management positions", "Valid", "Internal", DateTime.Now.AddMonths(12))
+            ],
+            new ContactInfo(
+                "sarah.mitchell@contoso.com",
+                "+61 2 9456 3103",
+                "Level 15, 100 Barangaroo Ave, Sydney NSW 2000",
+                new DateTime(1981, 7, 30)),
+            "https://i.pravatar.cc/300?u=sarah.mitchell"),
+        new Employee(
+            5,
+            "Jennifer Walsh",
+            "Chief Compliance Officer",
+            "Legal & Compliance",
+            "Legal and compliance executive ensuring Contoso meets all regulatory requirements across jurisdictions. Former federal prosecutor with expertise in data privacy and corporate governance. Established Contoso's ethics program and whistleblower protections.",
+            [
+                new Accreditation(19, "Certified Compliance & Ethics Professional", "CCEP certification", "Valid", "External", DateTime.Now.AddMonths(22)),
+                new Accreditation(3, "People Leadership", "Certified to hold management positions", "Valid", "Internal", DateTime.Now.AddMonths(12))
+            ],
+            new ContactInfo(
+                "jennifer.walsh@contoso.com",
+                "+61 2 9456 3104",
+                "Level 15, 100 Barangaroo Ave, Sydney NSW 2000",
+                new DateTime(1976, 11, 14)),
+            "https://i.pravatar.cc/300?u=jennifer.walsh"),
+        new Employee(
+            6,
             "John Nakamura",
             "Senior Software Engineer",
             "Engineering",
@@ -145,7 +160,7 @@ public static class Mocks
                 new DateTime(1991, 3, 15)),
             "https://i.pravatar.cc/300?u=john.nakamura"),
         new Employee(
-            2,
+            7,
             "Priya Sharma",
             "Product Manager",
             "Product",
@@ -161,7 +176,7 @@ public static class Mocks
                 new DateTime(1989, 7, 22)),
             "https://i.pravatar.cc/300?u=priya.sharma"),
         new Employee(
-            3,
+            8,
             "Marcus O'Brien",
             "Lead UX Designer",
             "Design",
@@ -177,7 +192,7 @@ public static class Mocks
                 new DateTime(1985, 11, 8)),
             "https://i.pravatar.cc/300?u=marcus.obrien"),
         new Employee(
-            4,
+            9,
             "Elena Kowalski",
             "DevOps Team Lead",
             "Engineering",
@@ -194,7 +209,7 @@ public static class Mocks
                 new DateTime(1988, 4, 30)),
             "https://i.pravatar.cc/300?u=elena.kowalski"),
         new Employee(
-            5,
+            10,
             "David Okonkwo",
             "Senior Account Manager",
             "Sales",
@@ -210,7 +225,7 @@ public static class Mocks
                 new DateTime(1984, 9, 3)),
             "https://i.pravatar.cc/300?u=david.okonkwo"),
         new Employee(
-            6,
+            11,
             "Sophie Chen",
             "Marketing Director",
             "Marketing",
@@ -227,7 +242,7 @@ public static class Mocks
                 new DateTime(1986, 12, 17)),
             "https://i.pravatar.cc/300?u=sophie.chen"),
         new Employee(
-            7,
+            12,
             "James Thornton",
             "Finance Manager",
             "Finance",
@@ -244,7 +259,7 @@ public static class Mocks
                 new DateTime(1982, 5, 28)),
             "https://i.pravatar.cc/300?u=james.thornton"),
         new Employee(
-            8,
+            13,
             "Aisha Rahman",
             "Security Engineer",
             "Engineering",
@@ -261,7 +276,7 @@ public static class Mocks
                 new DateTime(1993, 8, 11)),
             "https://i.pravatar.cc/300?u=aisha.rahman"),
         new Employee(
-            9,
+            14,
             "Thomas Andersson",
             "Customer Success Manager",
             "Customer Success",
@@ -277,7 +292,7 @@ public static class Mocks
                 new DateTime(1990, 2, 14)),
             "https://i.pravatar.cc/300?u=thomas.andersson"),
         new Employee(
-            10,
+            15,
             "Michelle Torres",
             "HR Business Partner",
             "People & Culture",
@@ -292,6 +307,67 @@ public static class Mocks
                 "Level 11, 100 Barangaroo Ave, Sydney NSW 2000",
                 new DateTime(1987, 6, 25)),
             "https://i.pravatar.cc/300?u=michelle.torres")
+    ];
+
+    // Helper to get employee by name for Updates
+    private static Employee GetEmployee(string name) => Employees.First(e => e.Name == name);
+
+    public static readonly List<CompanyUpdate> Updates =
+    [
+        new CompanyUpdate(
+            1,
+            "Welcome to Q1 2026!",
+            "Happy New Year, Contoso family! As we kick off another exciting year, I want to take a moment to reflect on our incredible achievements in 2025 and share our vision for the months ahead. We grew our customer base by 40%, launched three new product lines, and expanded into two new markets. None of this would have been possible without each and every one of you. Let's make 2026 even better!",
+            DateTime.Now.AddDays(-12),
+            GetEmployee("Margaret Chen"),
+            Random.Next(50, 120),
+            Random.Next(15, 45),
+            false),
+        new CompanyUpdate(
+            2,
+            "Engineering All-Hands: Microservices Migration Update",
+            "Great news from the Platform team! We've successfully completed Phase 2 of our microservices migration, achieving a 35% improvement in API response times and 99.97% uptime last quarter. Special shoutout to the DevOps crew who worked tirelessly over the holiday break to ensure zero customer impact. Phase 3 planning kicks off next week—watch your inboxes for meeting invites.",
+            DateTime.Now.AddDays(-8),
+            GetEmployee("Rajesh Patel"),
+            Random.Next(30, 80),
+            Random.Next(20, 60),
+            true),
+        new CompanyUpdate(
+            3,
+            "New Sydney Office Grand Opening - You're Invited!",
+            "Mark your calendars! Our brand new Sydney headquarters at Barangaroo will officially open on February 28th. The new space features collaborative work zones, a rooftop garden, state-of-the-art AV facilities, and yes—a barista bar serving complimentary coffee. All Sydney-based employees will receive their new access cards next week. RSVP for the opening celebration by February 14th.",
+            DateTime.Now.AddDays(-5),
+            GetEmployee("Lisa Thompson"),
+            Random.Next(80, 150),
+            Random.Next(30, 70),
+            false),
+        new CompanyUpdate(
+            4,
+            "Customer Success Story: Meridian Healthcare",
+            "Thrilled to share that our partnership with Meridian Healthcare has resulted in a 60% reduction in their patient scheduling errors and $2.3M in operational savings! This case study will be featured in next month's industry report. Congratulations to the entire Customer Success team, especially account lead David Okonkwo, for making this happen.",
+            DateTime.Now.AddDays(-3),
+            GetEmployee("Sarah Mitchell"),
+            Random.Next(40, 90),
+            Random.Next(10, 35),
+            true),
+        new CompanyUpdate(
+            5,
+            "Reminder: Annual Compliance Training Due Feb 28",
+            "Just a friendly reminder that all employees must complete their annual compliance training modules by February 28th. This includes Data Privacy Essentials, Workplace Safety, and Anti-Harassment training. You can access all modules through the Learning Hub. Managers: please ensure your teams are on track—completion rates are currently at 67% company-wide.",
+            DateTime.Now.AddDays(-1),
+            GetEmployee("Jennifer Walsh"),
+            Random.Next(15, 40),
+            Random.Next(5, 20),
+            false),
+        new CompanyUpdate(
+            6,
+            "Introducing Our New Employee Wellness Program",
+            "Your wellbeing matters to us! Starting March 1st, all full-time employees will have access to our enhanced wellness benefits including: free gym membership at partner locations, mental health support through Headspace, quarterly wellness stipends of $150, and flexible 'recharge' days. Check the HR portal for full details and enrollment.",
+            DateTime.Now.AddHours(-6),
+            GetEmployee("Lisa Thompson"),
+            Random.Next(100, 200),
+            Random.Next(25, 55),
+            false)
     ];
 
     public static readonly List<Policy> Policies =

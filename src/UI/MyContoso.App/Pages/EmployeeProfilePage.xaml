@@ -23,18 +23,20 @@
                            Elevation="1">
                     <FlexLayout Direction="Column"
                                 AlignItems="Center"
-                                JustifyContent="SpaceAround"
+                                JustifyContent="SpaceBetween"
                                 VerticalOptions="Fill"
-                                HeightRequest="350">
+                                MinimumHeightRequest="350">
                         
                         <mct:AvatarView Text="{Binding Employee.Name, Converter={StaticResource InitialsConverter}}"
+                                        ImageSource="{Binding Employee.AvatarUrl}"
                                         BorderColor="{DynamicResource Color.Secondary}"
                                         BorderWidth="3"
                                         WidthRequest="100"
                                         CornerRadius="50"
-                                        HeightRequest="100"/>
+                                        HeightRequest="100"
+                                        Margin="0,0,10,0"/>
                         
-                        <VerticalStackLayout>
+                        <VerticalStackLayout Margin="0,0,10,0">
                             <Label Text="{Binding Employee.Name}"
                                    TextColor="{DynamicResource Color.OnSurface}"
                                    HorizontalOptions="Center"
@@ -51,6 +53,7 @@
                         
                         <!-- Department Badge -->
                         <Border Padding="8,2"
+                                Margin="0,0,10,0"
                                 MaximumHeightRequest="24"
                                 StrokeShape="RoundRectangle 12"
                                 VerticalOptions="Start"
@@ -64,6 +67,7 @@
                         
                         <Grid ColumnDefinitions="*,*"
                               ColumnSpacing="10"
+                              Margin="0,0,10,0"
                               MinimumHeightRequest="30"
                               WidthRequest="300">
                             <fs:FsButton HorizontalOptions="Fill"
@@ -89,6 +93,7 @@
                         <BoxView HorizontalOptions="Fill"
                                  HeightRequest="1"
                                  WidthRequest="300"
+                                 Margin="0,0,10,0"
                                  Opacity="0.5"
                                  BackgroundColor="{DynamicResource Gray300}"/>
                         

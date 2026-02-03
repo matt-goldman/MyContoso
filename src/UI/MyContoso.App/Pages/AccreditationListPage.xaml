@@ -126,7 +126,7 @@
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="shared:Accreditation">
-                        <Grid Padding="16,0">
+                        <Grid Padding="2,0">
                             <fs:FsCard Style="{DynamicResource ElevatedCard}"
                                        Elevation="1">
                                 <fs:FsCard.GestureRecognizers>

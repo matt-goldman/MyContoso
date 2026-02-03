@@ -37,7 +37,7 @@
                         CornerRadius="10"
                         HeightRequest="44" />
             <fs:FsButton Grid.Column="1"
-                         Text="{DynamicResource ListFilter}"
+                         Text="{DynamicResource Funnel}"
                          FontFamily="lucide"
                          Style="{DynamicResource OutlinedButton}"
                          WidthRequest="44"
@@ -89,6 +89,7 @@
                                                      BackgroundColor="{DynamicResource Color.Primary}"
                                                      BorderColor="{DynamicResource Color.PrimaryContainer}"
                                                      Text="{Binding Name, Converter={StaticResource InitialsConverter}}"
+                                                     ImageSource="{Binding AvatarUrl}"
                                                      TextColor="{DynamicResource Color.OnPrimary}"
                                                      FontSize="16"
                                                      FontAttributes="Bold"
@@ -115,7 +116,8 @@
                                                                        Spacing="3">
                                                     <lucide:Icon Name="{DynamicResource Mail}"
                                                                  Size="10"
-                                                                 VerticalOptions="Center"/>
+                                                                 VerticalOptions="End"
+                                                                 Margin="0,0,3,4"/>
                                                     <Label Text="{Binding ContactInfo.Email}"
                                                            TextColor="{DynamicResource Color.OnSurface}"
                                                            FontSize="Small"

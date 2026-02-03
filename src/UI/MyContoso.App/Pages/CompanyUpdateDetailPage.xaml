@@ -25,7 +25,7 @@
                        FontSize="{DynamicResource FontSize.BodyMedium}">
                     <Label.Text>
                         <MultiBinding StringFormat="By {0} • {1:MMMM dd, yyyy}">
-                            <Binding Path="Update.Author" />
+                            <Binding Path="Update.Author.Name" />
                             <Binding Path="Update.PublishedDate" />
                         </MultiBinding>
                     </Label.Text>

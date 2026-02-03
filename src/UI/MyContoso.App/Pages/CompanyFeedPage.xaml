@@ -39,7 +39,7 @@
                         <Label Text="No updates available"
                                TextColor="{DynamicResource Color.OnSurface}"
                                FontSize="16"
-                               HorizontalOptions="Center" />
+                               HorizontalOptions="Center" />    
                     </VerticalStackLayout>
                 </CollectionView.EmptyView>
                 

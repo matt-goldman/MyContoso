@@ -66,6 +66,7 @@
 		<PackageReference Include="FlagstoneUI.Core" Version="0.0.1" />
 		<PackageReference Include="FlagstoneUI.Integrations.MCT" Version="0.0.1" />
 		<PackageReference Include="FlagstoneUI.Themes.Material" Version="0.0.1" />
+		<PackageReference Include="Indiko.Maui.Controls.Markdown" Version="1.5.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.30" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.2" />
 		<PackageReference Include="Plugin.Maui.Lucide" Version="1.0.1" />

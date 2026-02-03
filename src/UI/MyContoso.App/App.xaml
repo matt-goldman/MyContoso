@@ -1,15 +1,32 @@
-﻿<?xml version = "1.0" encoding = "UTF-8" ?>
-<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:MyContoso.App"
-             x:Class="MyContoso.App.App">
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Application
+    x:Class="MyContoso.App.App"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MyContoso.App"
+    xmlns:lucide="clr-namespace:Plugin.Maui.Lucide.Resources.Styles;assembly=Plugin.Maui.Lucide"
+    xmlns:material="clr-namespace:FlagstoneUI.Themes.Material;assembly=FlagstoneUI.Themes.Material"
+    xmlns:converters="clr-namespace:MyContoso.App.Converters">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
-                <ResourceDictionary Source="Resources/Styles/Icons.xaml" />
+                    
+                <lucide:Icons />
+                
+                <material:Theme />
+                <!-- TODO: Re-assert colors AFTER material theme, until we generate a complete theme -->
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            
+            <!-- Converters -->
+            <converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+            <converters:AccreditationStatusColorConverter x:Key="AccreditationColorConverter" />
+            <converters:InitialsConverter x:Key="InitialsConverter" />
+            <converters:IsLikedToBackgroundColorConverter x:Key="LikedToColorConverter" />
+            <converters:IsLikedToTextColorConverter x:Key="IsLikedToTextColor" />
+            <converters:AccreditationStatusIconConverter x:Key="AccreditationIconConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

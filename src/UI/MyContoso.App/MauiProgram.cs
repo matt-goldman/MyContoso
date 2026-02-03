@@ -1,7 +1,11 @@
 ﻿using CommunityToolkit.Maui;
-using Microsoft.Extensions.Hosting;
+using FlagstoneUI.Core;
+//using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MyContoso.App.Services;
+using MyContoso.App.ViewModels;
+using MyContoso.App.Pages;
+using Plugin.Maui.Lucide;
 
 namespace MyContoso.App
 {
@@ -18,19 +22,41 @@ namespace MyContoso.App
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                     fonts.AddFont("icofont.ttf", "IcoFont");
                 })
-                .UseMauiCommunityToolkit();
+                .UseMauiCommunityToolkit()
+                .UseFlagstoneUI()
+                .UseLucide();
 
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
             // Add service defaults
-            builder.AddServiceDefaults();
+            //builder.AddServiceDefaults();
 
             // configure HTTP client with service discovery
             builder.Services.AddHttpClient<ApiClient>(client =>
             {
-                client.BaseAddress = new Uri("https+http://webapi");
+                client.BaseAddress = new Uri("http://localhost:5506");//"https+http://webapi");
             });
+
+            // Register ViewModels
+            builder.Services.AddSingleton<CompanyFeedViewModel>();
+            builder.Services.AddTransient<CompanyUpdateDetailViewModel>();
+            builder.Services.AddTransient<EmployeeListViewModel>();
+            builder.Services.AddTransient<EmployeeProfileViewModel>();
+            builder.Services.AddTransient<PolicyListViewModel>();
+            builder.Services.AddTransient<PolicyDetailViewModel>();
+            builder.Services.AddTransient<AccreditationListViewModel>();
+            builder.Services.AddTransient<AccreditationDetailViewModel>();
+
+            // Register Views
+            builder.Services.AddSingleton<CompanyFeedPage>();
+            builder.Services.AddTransient<CompanyUpdateDetailPage>();
+            builder.Services.AddTransient<EmployeeListPage>();
+            builder.Services.AddTransient<EmployeeProfilePage>();
+            builder.Services.AddTransient<PolicyListPage>();
+            builder.Services.AddTransient<PolicyDetailPage>();
+            builder.Services.AddTransient<AccreditationListPage>();
+            builder.Services.AddTransient<AccreditationDetailPage>();
 
             return builder.Build();
         }

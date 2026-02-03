@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MyContoso.App.ViewModels"
+             xmlns:shared="clr-namespace:Shared;assembly=Shared"
+             xmlns:controls="clr-namespace:MyContoso.App.Controls"
+             x:Class="MyContoso.App.Pages.CompanyFeedPage"
+             x:DataType="vm:CompanyFeedViewModel"
+             BackgroundColor="{DynamicResource Color.Background}">
+    
+    <ScrollView>
+    <Grid RowDefinitions="Auto,*">
+        <!-- Page Header -->
+        <VerticalStackLayout Grid.Row="0"
+                            Padding="16,16,16,8"
+                            Spacing="10"
+                            BackgroundColor="{DynamicResource Color.Background}">
+            <Label Text="Company Feed"
+                   TextColor="{DynamicResource Color.OnBackground}"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   FontFamily="{OnPlatform iOS='OpenSansBold'}"/>
+            <Label Text="Stay connected with the latest updates and conversations"
+                   TextColor="{DynamicResource Color.OnSurfaceVariant}"
+                   FontSize="Header"
+                   Margin="0,4,0,0" />
+        </VerticalStackLayout>
+        
+        <RefreshView Grid.Row="1"
+                     IsRefreshing="{Binding IsRefreshing}"
+                     Command="{Binding RefreshCommand}">
+            <CollectionView ItemsSource="{Binding Updates}"
+                           SelectionMode="None"
+                           ItemsUpdatingScrollMode="KeepScrollOffset">
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       Spacing="16">
+                        <Label Text="No updates available"
+                               TextColor="{DynamicResource Color.OnSurface}"
+                               FontSize="16"
+                               HorizontalOptions="Center" />    
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
+                
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="shared:CompanyUpdate">
+                        <controls:CompanyUpdateCard />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+        
+        <ActivityIndicator Grid.Row="1"
+                         IsRunning="{Binding IsLoading}"
+                         IsVisible="{Binding IsLoading}"
+                         Color="{DynamicResource Color.Primary}"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center" />
+    </Grid>
+    </ScrollView>
+</ContentPage>

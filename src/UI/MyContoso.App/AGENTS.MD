@@ -1,3 +1,195 @@
+# How to use this file
+
+This file is a combination of three separate guides:
+
+* **.NET MAUI Coding Expert Agent:** This contains guidance provided by the .NET MAUI team for coding agents. It provides the fundamental rules of using the controls and layouts in .NET MAUI and should be considered the authoritative _baseline_ for building .NET MAUI apps. The remaining top-level guides in this file build on top of this. Note that the other guides may specify things which override the general guidelines; this is expected and is perfectly fine, _except_ in cases where they contradict "NEVER" rules specified by the baseline. Nothing may contradict the "NEVER Violate" rules.
+* **Flagstone UI Guide:** This is a usage guide for Flagstone UI. Flagstone UI is not a component library, it is a theming tool that surfaces common design properties into the .NET MAUI layer that would otherwise only be accessible via platform code. Use this guide to understand how to visually style the app.
+* **Opinionated Architecture:** This contains patterns and scenarios that should be applied to the app. Generally (but not exclusively), it defines patterns that scale and survive contact with real-world apps and teams that are not usually seen in demo apps or documentation.
+
+All three would be used as reference points for teams working on this app, including humans and coding agents. They apply as general principles to the whole lifecycle of the product.
+
+# .NET MAUI Coding Expert Agent
+
+You are an expert .NET MAUI developer specializing in high-quality, performant, and maintainable cross-platform applications with particular expertise in .NET MAUI controls.
+
+## Critical Rules (NEVER Violate)
+
+- **NEVER use ListView** - obsolete, will be deleted. Use CollectionView
+- **NEVER use TableView** - obsolete. Use Grid/VerticalStackLayout layouts
+- **NEVER use AndExpand** layout options - obsolete
+- **NEVER use BackgroundColor** - always use `Background` property
+- **NEVER place ScrollView/CollectionView inside StackLayout** - breaks scrolling/virtualization
+- **NEVER reference images as SVG** - always use PNG (SVG only for generation)
+- **NEVER mix Shell with NavigationPage/TabbedPage/FlyoutPage**
+- **NEVER use renderers** - use handlers instead
+
+## Control Reference
+
+### Status Indicators
+| Control | Purpose | Key Properties |
+|---------|---------|----------------|
+| ActivityIndicator | Indeterminate busy state | `IsRunning`, `Color` |
+| ProgressBar | Known progress (0.0-1.0) | `Progress`, `ProgressColor` |
+
+### Layout Controls
+| Control | Purpose | Notes |
+|---------|---------|-------|
+| **Border** | Container with border | **Prefer over Frame** |
+| ContentView | Reusable custom controls | Encapsulates UI components |
+| ScrollView | Scrollable content | Single child; **never in StackLayout** |
+| Frame | Legacy container | Only for shadows |
+
+### Shapes
+BoxView, Ellipse, Line, Path, Polygon, Polyline, Rectangle, RoundRectangle - all support `Fill`, `Stroke`, `StrokeThickness`.
+
+### Input Controls
+| Control | Purpose |
+|---------|---------|
+| Button/ImageButton | Clickable actions |
+| CheckBox/Switch | Boolean selection |
+| RadioButton | Mutually exclusive options |
+| Entry | Single-line text |
+| Editor | Multi-line text (`AutoSize="TextChanges"`) |
+| Picker | Drop-down selection |
+| DatePicker/TimePicker | Date/time selection |
+| Slider/Stepper | Numeric value selection |
+| SearchBar | Search input with icon |
+
+### List & Data Display
+| Control | When to Use |
+|---------|-------------|
+| **CollectionView** | Lists >20 items (virtualized); **never in StackLayout** |
+| BindableLayout | Small lists ≤20 items (no virtualization) |
+| CarouselView + IndicatorView | Galleries, onboarding, image sliders |
+
+### Interactive Controls
+- **RefreshView**: Pull-to-refresh wrapper
+- **SwipeView**: Swipe gestures for contextual actions
+
+### Display Controls
+- **Image**: Use PNG references (even for SVG sources)
+- **Label**: Text with formatting, spans, hyperlinks
+- **WebView**: Web content/HTML
+- **GraphicsView**: Custom drawing via ICanvas
+- **Map**: Interactive maps with pins
+
+## Best Practices
+
+### Layouts
+```xml
+<!-- DO: Use Grid for complex layouts -->
+<Grid RowDefinitions="Auto,*" ColumnDefinitions="*,*">
+
+<!-- DO: Use Border instead of Frame -->
+<Border Stroke="Black" StrokeThickness="1" StrokeShape="RoundRectangle 10">
+
+<!-- DO: Use specific stack layouts -->
+<VerticalStackLayout> <!-- Not <StackLayout Orientation="Vertical"> -->
+```
+
+### Compiled Bindings (Critical for Performance)
+```xml
+<!-- Always use x:DataType for 8-20x performance improvement -->
+<ContentPage x:DataType="vm:MainViewModel">
+    <Label Text="{Binding Name}" />
+</ContentPage>
+```
+
+```csharp
+// DO: Expression-based bindings (type-safe, compiled)
+label.SetBinding(Label.TextProperty, static (PersonViewModel vm) => vm.FullName?.FirstName);
+
+// DON'T: String-based bindings (runtime errors, no IntelliSense)
+label.SetBinding(Label.TextProperty, "FullName.FirstName");
+```
+
+### Binding Modes
+- `OneTime` - data won't change
+- `OneWay` - default, read-only
+- `TwoWay` - only when needed (editable)
+- Don't bind static values - set directly
+
+### Handler Customization
+```csharp
+// In MauiProgram.cs ConfigureMauiHandlers
+Microsoft.Maui.Handlers.ButtonHandler.Mapper.AppendToMapping("Custom", (handler, view) =>
+{
+#if ANDROID
+    handler.PlatformView.SetBackgroundColor(Android.Graphics.Color.HotPink);
+#elif IOS
+    handler.PlatformView.BackgroundColor = UIKit.UIColor.SystemPink;
+#endif
+});
+```
+
+### Shell Navigation (Recommended)
+```csharp
+Routing.RegisterRoute("details", typeof(DetailPage));
+await Shell.Current.GoToAsync("details?id=123");
+```
+- Set `MainPage` once at startup
+- Don't nest tabs
+
+### Platform Code
+```csharp
+#if ANDROID
+#elif IOS
+#elif WINDOWS
+#elif MACCATALYST
+#endif
+```
+- Prefer `BindableObject.Dispatcher` or inject `IDispatcher` via DI for UI updates from background threads; use `MainThread.BeginInvokeOnMainThread()` as a fallback
+
+### Performance
+1. Use compiled bindings (`x:DataType`)
+2. Use Grid > StackLayout, CollectionView > ListView, Border > Frame
+
+### Security
+```csharp
+await SecureStorage.SetAsync("oauth_token", token);
+string token = await SecureStorage.GetAsync("oauth_token");
+```
+- Never commit secrets
+- Validate inputs
+- Use HTTPS
+
+### Resources
+- `Resources/Images/` - images (PNG, JPG, SVG→PNG)
+- `Resources/Fonts/` - custom fonts
+- `Resources/Raw/` - raw assets
+- Reference images as PNG: `<Image Source="logo.png" />` (not .svg)
+- Use appropriate sizes to avoid memory bloat
+
+## Common Pitfalls
+1. Mixing Shell with NavigationPage/TabbedPage/FlyoutPage
+2. Changing MainPage frequently
+3. Nesting tabs
+4. Gesture recognizers on parent and child (use `InputTransparent = true`)
+5. Using renderers instead of handlers
+6. Memory leaks from unsubscribed events
+7. Deeply nested layouts (flatten hierarchy)
+8. Testing only on emulators - test on actual devices
+9. Some Xamarin.Forms APIs not yet in MAUI - check GitHub issues
+
+## Reference Documentation
+- [Controls](https://learn.microsoft.com/dotnet/maui/user-interface/controls/)
+- [XAML](https://learn.microsoft.com/dotnet/maui/xaml/)
+- [Data Binding](https://learn.microsoft.com/dotnet/maui/fundamentals/data-binding/)
+- [Shell Navigation](https://learn.microsoft.com/dotnet/maui/fundamentals/shell/)
+- [Handlers](https://learn.microsoft.com/dotnet/maui/user-interface/handlers/)
+- [Performance](https://learn.microsoft.com/dotnet/maui/deployment/performance)
+
+## Your Role
+
+1. **Recommend best practices** - proper control selection
+2. **Warn about obsolete patterns** - ListView, TableView, AndExpand, BackgroundColor
+3. **Prevent layout mistakes** - no ScrollView/CollectionView in StackLayout
+4. **Suggest performance optimizations** - compiled bindings, proper controls
+5. **Provide working XAML examples** with modern patterns
+6. **Consider cross-platform implications**
+
+---
+
 # FlagstoneUI Agent Guide
 
 > **For AI coding assistants and developers**: This guide helps you generate quality FlagstoneUI code by explaining the architecture, patterns, and best practices.
@@ -512,22 +704,33 @@ FlagstoneUI provides optional integration with MCT validators via the `Flagstone
     Padding="{DynamicResource Space.24}" />
 ```
 
-### ❌ DON'T: Override Token Values in Component Styles
+### ❌ DON'T: Use Hardcoded Values in Styles
 
 ```xml
-<!-- ❌ WRONG: Hardcoded values in application styles break theming -->
+<!-- ❌ WRONG: Hardcoded values bypass the token system -->
 <Style TargetType="fs:FsButton">
     <Setter Property="BackgroundColor" Value="#FF0000" />
+    <Setter Property="CornerRadius" Value="8" />
 </Style>
 
-<!-- ✅ CORRECT: Use theme style variants or semantic tokens -->
+<!-- ✅ CORRECT: Always reference tokens in styles -->
 <Style x:Key="DangerButton" TargetType="fs:FsButton">
     <Setter Property="BackgroundColor" Value="{DynamicResource Color.Error}" />
     <Setter Property="TextColor" Value="{DynamicResource Color.OnError}" />
+    <Setter Property="CornerRadius" Value="{DynamicResource Radius.Button.Medium}" />
 </Style>
 ```
 
-**Note**: Base themes (like Material theme) set token values and define base styles. This anti-pattern applies to application-level styles that consumers create.
+**Key Principle**: Apps are expected to create custom themes and styles—this is a core part of FlagstoneUI's design. The anti-pattern is using hardcoded values (`#FF0000`, `8`) instead of token references (`{DynamicResource Color.Error}`).
+
+**What IS encouraged:**
+- Creating custom styles that use the token system from scratch or extend/override base themes
+- Defining new token values in your theme's ResourceDictionary
+- Adding style variants that don't exist in the base theme
+
+**What to avoid:**
+- Hardcoded colors, sizes, or spacing in Style setters
+- Bypassing the token system with literal values
 
 ### ❌ DON'T: Use Magic Numbers for Sizing
 
@@ -607,7 +810,7 @@ FlagstoneUI provides optional integration with MCT validators via the `Flagstone
 </fs:FsCard>
 ```
 
-**Note**: You can create custom controls and containers using standard MAUI controls. The key is to use design tokens instead of hardcoded values so your custom controls respect the theme.
+**Note**: You can create custom controls and containers using standard .NET MAUI controls. The key is to use design tokens instead of hardcoded values so your custom controls respect the theme.
 
 ## Advanced Patterns
 
@@ -924,191 +1127,297 @@ Per ADR009, FlagstoneUI may add:
 
 ---
 
-**Last Updated**: January 2026  
-**Version**: 0.0.1-preview (POC phase)  
-**Status**: Experimental, evolving toward MVP
+# Opinionated Architecture
 
----
-name: MAUI Expert
-description: Support development of .NET MAUI cross-platform apps with controls, XAML, handlers, and performance best practices.
----
+## Purpose
 
-# .NET MAUI Coding Expert Agent
+This document codifies the architectural rules and guardrails for the **MyContoso** mobile app.
 
-You are an expert .NET MAUI developer specializing in high-quality, performant, and maintainable cross-platform applications with particular expertise in .NET MAUI controls.
+It exists to:
 
-## Critical Rules (NEVER Violate)
+* Reduce cognitive load during development
+* Eliminate entire classes of predictable runtime bugs
+* Make architectural intent explicit and enforceable
+* Enable parallel work without ambiguity
 
-- **NEVER use ListView** - obsolete, will be deleted. Use CollectionView
-- **NEVER use TableView** - obsolete. Use Grid/VerticalStackLayout layouts
-- **NEVER use AndExpand** layout options - obsolete
-- **NEVER use BackgroundColor** - always use `Background` property
-- **NEVER place ScrollView/CollectionView inside StackLayout** - breaks scrolling/virtualization
-- **NEVER reference images as SVG** - always use PNG (SVG only for generation)
-- **NEVER mix Shell with NavigationPage/TabbedPage/FlyoutPage**
-- **NEVER use renderers** - use handlers instead
+These rules are **deliberately opinionated**. They are not intended to be universally correct; they are intended to be *locally safe*.
 
-## Control Reference
+The rules apply only to the mobile app, except where patterns intersect with the full stack (for example shared DTOs).
 
-### Status Indicators
-| Control | Purpose | Key Properties |
-|---------|---------|----------------|
-| ActivityIndicator | Indeterminate busy state | `IsRunning`, `Color` |
-| ProgressBar | Known progress (0.0-1.0) | `Progress`, `ProgressColor` |
+## Core Principles
 
-### Layout Controls
-| Control | Purpose | Notes |
-|---------|---------|-------|
-| **Border** | Container with border | **Prefer over Frame** |
-| ContentView | Reusable custom controls | Encapsulates UI components |
-| ScrollView | Scrollable content | Single child; **never in StackLayout** |
-| Frame | Legacy container | Only for shadows |
+### 1. Single Authoritative Source of Truth
 
-### Shapes
-BoxView, Ellipse, Line, Path, Polygon, Polyline, Rectangle, RoundRectangle - all support `Fill`, `Stroke`, `StrokeThickness`.
+Every piece of state must have **one clear owner**.
 
-### Input Controls
-| Control | Purpose |
-|---------|---------|
-| Button/ImageButton | Clickable actions |
-| CheckBox/Switch | Boolean selection |
-| RadioButton | Mutually exclusive options |
-| Entry | Single-line text |
-| Editor | Multi-line text (`AutoSize="TextChanges"`) |
-| Picker | Drop-down selection |
-| DatePicker/TimePicker | Date/time selection |
-| Slider/Stepper | Numeric value selection |
-| SearchBar | Search input with icon |
+If you cannot immediately answer *"where does this truth live?"*, the design is incomplete.
 
-### List & Data Display
-| Control | When to Use |
-|---------|-------------|
-| **CollectionView** | Lists >20 items (virtualized); **never in StackLayout** |
-| BindableLayout | Small lists ≤20 items (no virtualization) |
-| CarouselView + IndicatorView | Galleries, onboarding, image sliders |
+### 2. Illegal States Should Be Unrepresentable (Where Cheap)
 
-### Interactive Controls
-- **RefreshView**: Pull-to-refresh wrapper
-- **SwipeView**: Swipe gestures for contextual actions
+If a mistake can be prevented structurally at low cost, it should be.
 
-### Display Controls
-- **Image**: Use PNG references (even for SVG sources)
-- **Label**: Text with formatting, spans, hyperlinks
-- **WebView**: Web content/HTML
-- **GraphicsView**: Custom drawing via ICanvas
-- **Map**: Interactive maps with pins
+We prefer:
 
-## Best Practices
+* Structural guardrails
+* Compile-time guarantees
+* Lifetime-based correctness
 
-### Layouts
-```xml
-<!-- DO: Use Grid for complex layouts -->
-<Grid RowDefinitions="Auto,*" ColumnDefinitions="*,*">
+Over:
 
-<!-- DO: Use Border instead of Frame -->
-<Border Stroke="Black" StrokeThickness="1" StrokeShape="RoundRectangle 10">
+* Discipline
+* Conventions
+* Runtime checks
 
-<!-- DO: Use specific stack layouts -->
-<VerticalStackLayout> <!-- Not <StackLayout Orientation="Vertical"> -->
-```
+### 3. Concrete Before Abstract
 
-### Compiled Bindings (Critical for Performance)
-```xml
-<!-- Always use x:DataType for 8-20x performance improvement -->
-<ContentPage x:DataType="vm:MainViewModel">
-    <Label Text="{Binding Name}" />
-</ContentPage>
-```
+Architectural abstractions must be justified by concrete failure modes.
+
+We do not introduce patterns preemptively.
+We introduce them *in response to demonstrated problems*.
+
+## Layer Responsibilities
+
+### Model (Domain)
+
+The **Model** represents the domain and owns truth.
+
+Includes:
+
+* Domain entities
+* Domain services
+* State-owning services
+
+Rules:
+
+* All **publishers** live here
+* State may be mutable or immutable
+* No dependency on UI concepts
+
+### ViewModel
+
+The **ViewModel** adapts domain state for presentation.
+
+Includes:
+
+* Commands
+* Presentation state
+* Subscriptions to domain publishers
+
+Rules:
+
+* All **subscribers** live here
+* Must not publish domain events
+* Must not own authoritative domain state\
+
+### View (UI)
+
+The **View** owns visual behaviour.
+
+Includes:
+
+* Layout
+* Styling
+* Visual State Manager
+* Animations
+
+Rules:
+
+* No domain logic
+* No subscriptions
+* Responds to ViewModel state only
+
+## Dependency Flow
+
+Allowed:
+
+* View → ViewModel
+* ViewModel → Model
+
+Disallowed:
+
+* Model → ViewModel
+* ViewModel → View
+* Horizontal dependencies
+
+Diagonal dependencies (ViewModel → Domain Service) are allowed **by design**, but must be explicit.
+
+## Messaging and Events
+
+### Rule: No Message Buses
+
+The app must **not** use:
+
+* MessagingCenter
+* EventAggregator-style global buses
+* CommunityToolkit Messenger
+
+Reason:
+
+* Subscribing to messages removes ownership
+* Dependencies become invisible
+* Correctness becomes a runtime concern
+
+### Rule: Subscribe to Publishers, Not Channels
+
+Allowed communication mechanisms:
+
+* .NET events
+* Reactive Extensions (IObservable)
+
+Constraints:
+
+* Publishers live in the Model
+* Subscribers live in ViewModels
+* Subscriptions must be explicit and disposable
+
+## Navigation
+
+### Navigation Is a System
+
+Navigation is not incidental glue code.
+
+Rules:
+
+* Routes must be defined centrally
+* Magic strings are discouraged
+* Navigation parameters must be explicit
+* Routes MUST be declared in module-level `Routes` classes
+* Pages MUST NOT reference route strings directly
+
+The navigation system must make it difficult to:
+
+* Navigate to unregistered routes
+* Navigate with invalid parameters
+
+## Page Lifetime Rules
+
+Page lifetime is a **correctness decision**, not a performance tweak.
+
+Pages and corresponding ViewModels must be registered with the same lifetime.
+
+### Singleton Pages
+
+Use when:
+
+* State is shared
+* Content is long-lived
+* Reinitialisation is expensive
+
+Example:
+
+* Company feed
+
+### Transient Pages
+
+Use when:
+
+* State is parameterised
+* Content is short-lived
+* State leakage would be harmful
+
+Example:
+
+* Employee profile
+
+Transient lifetimes are preferred when they reduce the blast radius of mistakes.
+
+## State Management
+
+### No Global State God Objects
+
+State must be:
+
+* Owned
+* Scoped
+* Discoverable
+
+Cross-cutting visibility does **not** justify global ownership.
+
+### State Propagation
+
+State changes must be propagated via:
+
+* Explicit events, or
+* Explicit observables
+
+Never via broadcast or implicit discovery.
+
+## Modules
+
+### Modular Structure
+
+Apps exceeding five pages must be modularised.
+
+Each module is organised by **domain concept**, not technical role.
+
+Standard module layout:
+
+* Pages/
+* ViewModels/
+* Models/
+* Services/
+* Routes.cs
+* DependencyInjection.cs
+
+### Module Registration
+
+Modules should be **atomic**, allowing for easy migration in and out of .NET MAUI class libraries (should this be required at a later stage).
+
+Modules own their own pages/views, state, services, routes, and dependency registration.
+
+Modules should define extension methods for registering their pages, ViewModels, Services and Routes. These can then be chained to `MauiAppBuilder` for consumption in the app.
+
+Every module MUST expose a single public extension method:
 
 ```csharp
-// DO: Expression-based bindings (type-safe, compiled)
-label.SetBinding(Label.TextProperty, static (PersonViewModel vm) => vm.FullName?.FirstName);
-
-// DON'T: String-based bindings (runtime errors, no IntelliSense)
-label.SetBinding(Label.TextProperty, "FullName.FirstName");
+Add{ModuleName}Module(this MauiAppBuilder builder)
 ```
 
-### Binding Modes
-- `OneTime` - data won't change
-- `OneWay` - default, read-only
-- `TwoWay` - only when needed (editable)
-- Don't bind static values - set directly
+The application startup MUST NOT register services directly.
 
-### Handler Customization
-```csharp
-// In MauiProgram.cs ConfigureMauiHandlers
-Microsoft.Maui.Handlers.ButtonHandler.Mapper.AppendToMapping("Custom", (handler, view) =>
-{
-#if ANDROID
-    handler.PlatformView.SetBackgroundColor(Android.Graphics.Color.HotPink);
-#elif IOS
-    handler.PlatformView.BackgroundColor = UIKit.UIColor.SystemPink;
-#endif
-});
-```
+### Module Boundaries
 
-### Shell Navigation (Recommended)
-```csharp
-Routing.RegisterRoute("details", typeof(DetailPage));
-await Shell.Current.GoToAsync("details?id=123");
-```
-- Set `MainPage` once at startup
-- Don't nest tabs
+Rules:
 
-### Platform Code
-```csharp
-#if ANDROID
-#elif IOS
-#elif WINDOWS
-#elif MACCATALYST
-#endif
-```
-- Prefer `BindableObject.Dispatcher` or inject `IDispatcher` via DI for UI updates from background threads; use `MainThread.BeginInvokeOnMainThread()` as a fallback
+* Modules must not depend on each other
+* Internal implementation must remain internal
+* Explicit sharing requires a PublicAPI surface
 
-### Performance
-1. Use compiled bindings (`x:DataType`)
-2. Use Grid > StackLayout, CollectionView > ListView, Border > Frame
+## WET vs DRY
 
-### Security
-```csharp
-await SecureStorage.SetAsync("oauth_token", token);
-string token = await SecureStorage.GetAsync("oauth_token");
-```
-- Never commit secrets
-- Validate inputs
-- Use HTTPS
+### Early Development
 
-### Resources
-- `Resources/Images/` - images (PNG, JPG, SVG→PNG)
-- `Resources/Fonts/` - custom fonts
-- `Resources/Raw/` - raw assets
-- Reference images as PNG: `<Image Source="logo.png" />` (not .svg)
-- Use appropriate sizes to avoid memory bloat
+Being WET is acceptable when:
 
-## Common Pitfalls
-1. Mixing Shell with NavigationPage/TabbedPage/FlyoutPage
-2. Changing MainPage frequently
-3. Nesting tabs
-4. Gesture recognizers on parent and child (use `InputTransparent = true`)
-5. Using renderers instead of handlers
-6. Memory leaks from unsubscribed events
-7. Deeply nested layouts (flatten hierarchy)
-8. Testing only on emulators - test on actual devices
-9. Some Xamarin.Forms APIs not yet in MAUI - check GitHub issues
+* UI and backend evolve independently
+* Models are provisional
 
-## Reference Documentation
-- [Controls](https://learn.microsoft.com/dotnet/maui/user-interface/controls/)
-- [XAML](https://learn.microsoft.com/dotnet/maui/xaml/)
-- [Data Binding](https://learn.microsoft.com/dotnet/maui/fundamentals/data-binding/)
-- [Shell Navigation](https://learn.microsoft.com/dotnet/maui/fundamentals/shell/)
-- [Handlers](https://learn.microsoft.com/dotnet/maui/user-interface/handlers/)
-- [Performance](https://learn.microsoft.com/dotnet/maui/deployment/performance)
+Early UI models are considered **disposable**.
 
-## Your Role
+### Stabilisation Phase
 
-1. **Recommend best practices** - proper control selection
-2. **Warn about obsolete patterns** - ListView, TableView, AndExpand, BackgroundColor
-3. **Prevent layout mistakes** - no ScrollView/CollectionView in StackLayout
-4. **Suggest performance optimizations** - compiled bindings, proper controls
-5. **Provide working XAML examples** with modern patterns
-6. **Consider cross-platform implications**
+Once domain contracts stabilise:
+
+* Shared DTOs are introduced
+* Duplication is removed deliberately
+* Ownership is clarified
+
+DRY is about **behaviour**, not classes.
+
+## Non-Goals
+
+This architecture explicitly does **not** attempt to solve:
+
+* Authentication
+* Authorisation
+* Persistence
+* Offline sync
+* Performance tuning
+
+These concerns are intentionally out of scope.
+
+## Closing Note
+
+These rules exist to make the *wrong thing hard*, not to make the *right thing clever*.
+
+If a rule feels restrictive, that friction is intentional.

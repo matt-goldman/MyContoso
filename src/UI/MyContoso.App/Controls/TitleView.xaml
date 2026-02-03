@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:lucide="clr-namespace:Plugin.Maui.Lucide.Controls;assembly=Plugin.Maui.Lucide"
+             xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="MyContoso.App.Controls.TitleView">
+    <FlexLayout Direction="Row"
+                JustifyContent="SpaceBetween"
+                HeightRequest="50">
+        <HorizontalStackLayout Spacing="10"
+                               Margin="0,0,10,0">
+            <Border StrokeShape="Ellipse"
+                    HeightRequest="30"
+                    WidthRequest="30"
+                    StrokeThickness="0"
+                    VerticalOptions="Center"
+                    Background="{StaticResource PrimaryToSecondary}">
+                <Label TextColor="White"
+                       FontAttributes="Bold"
+                       FontFamily="{OnPlatform iOS='OpenSansBold'}"
+                       Text="M"
+                       VerticalOptions="Center"
+                       VerticalTextAlignment="Center"
+                       HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       FontSize="Large"/>
+            </Border>
+            <!-- TODO: Can we have text with gradient? -->
+            <Label TextColor="{StaticResource Color.Primary}"
+                   FontAttributes="Bold"
+                   FontFamily="{OnPlatform iOS='OpenSansBold'}"
+                   Text="MyContoso"
+                   FontSize="Large"
+                   VerticalOptions="Center"
+                   VerticalTextAlignment="Center" />
+        </HorizontalStackLayout>
+        
+        <HorizontalStackLayout Spacing="10">
+            <lucide:Icon Name="{DynamicResource Search}"
+                         Margin="0,0,15,0"
+                         Size="18"/>
+            
+            <lucide:Icon Name="{DynamicResource Bell}"
+                         Size="18"/>
+
+            <mct:AvatarView Text="JT"
+                            FontSize="12"
+                            HeightRequest="30"
+                            WidthRequest="30"
+                            TextColor="White"
+                            Background="{StaticResource Color.Primary}"/>
+        </HorizontalStackLayout>
+    </FlexLayout>
+</ContentView>

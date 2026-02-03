@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <!-- Opt out of parent CPM to allow local package versioning -->
+    <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+</Project>

@@ -2,12 +2,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:fs="clr-namespace:FlagstoneUI.Core.Controls;assembly=FlagstoneUI.Core"
-             xmlns:vm="clr-namespace:MyContoso.App.ViewModels"
              xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:shared="clr-namespace:Shared;assembly=Shared"
              xmlns:lucide="clr-namespace:Plugin.Maui.Lucide.Controls;assembly=Plugin.Maui.Lucide"
-             x:Class="MyContoso.App.Pages.EmployeeListPage"
-             x:DataType="vm:EmployeeListViewModel"
+             xmlns:viewModels="clr-namespace:MyContoso.App.Features.Employees.ViewModels"
+             x:Class="MyContoso.App.Features.Employees.Pages.EmployeeListPage"
+             x:DataType="viewModels:EmployeeListViewModel"
              BackgroundColor="{DynamicResource Color.Background}">
     
     <Grid RowDefinitions="Auto,Auto,*">
@@ -73,7 +73,7 @@
                                        Elevation="1"
                                        Padding="15,10">
                                 <fs:FsCard.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:EmployeeListViewModel}}, Path=ViewEmployeeCommand}"
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:EmployeeListViewModel}}, Path=ViewEmployeeCommand}"
                                                         CommandParameter="{Binding .}" />
                                 </fs:FsCard.GestureRecognizers>
                                 

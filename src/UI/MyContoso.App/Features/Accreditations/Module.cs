@@ -9,14 +9,14 @@ public static class AccreditationsModule
     {
         // Pages
         builder.Services.AddSingleton<AccreditationListPage>();
-        builder.Services.AddSingleton<AccreditationDetailPage>();
+        builder.Services.AddTransient<AccreditationDetailPage>();
         
         // ViewModels
         builder.Services.AddSingleton<AccreditationListViewModel>();
-        builder.Services.AddSingleton<AccreditationDetailViewModel>();
+        builder.Services.AddTransient<AccreditationDetailViewModel>();
 
         // Services
-        
+        builder.Services.AddSingleton<Services.AccreditationService>();
         
         return builder;
     }

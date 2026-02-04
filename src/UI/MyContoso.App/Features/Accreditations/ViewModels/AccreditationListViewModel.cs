@@ -1,12 +1,12 @@
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using MyContoso.App.Services;
+using MyContoso.App.Features.Accreditations.Services;
 using Shared;
 
 namespace MyContoso.App.Features.Accreditations.ViewModels;
 
-public partial class AccreditationListViewModel(ApiClient apiClient) : ObservableObject
+public partial class AccreditationListViewModel(AccreditationService service) : ObservableObject
 {
     [ObservableProperty]
     private bool isLoading;
@@ -39,7 +39,7 @@ public partial class AccreditationListViewModel(ApiClient apiClient) : Observabl
             IsLoading = true;
             Accreditations.Clear();
 
-            var accreditations = await apiClient.GetAccreditationsAsync();
+            var accreditations = await service.GetAccreditationsAsync();
             var accreditationList = accreditations.ToList();
 
             // Update counts
@@ -68,7 +68,7 @@ public partial class AccreditationListViewModel(ApiClient apiClient) : Observabl
             IsRefreshing = true;
             Accreditations.Clear();
 
-            var accreditations = await apiClient.GetAccreditationsAsync();
+            var accreditations = await service.GetAccreditationsAsync();
             var accreditationList = accreditations.ToList();
 
             // Update counts

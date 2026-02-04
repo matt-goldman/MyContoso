@@ -3,7 +3,7 @@ using Shared;
 
 namespace MyContoso.App.Services;
 
-public class ApiClient(HttpClient httpClient)
+public class ApiClient(HttpClient httpClient) : IApiClient
 {
     public async Task<IEnumerable<CompanyUpdate>> GetCompanyUpdatesAsync()
     {

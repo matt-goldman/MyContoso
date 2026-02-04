@@ -1,10 +1,10 @@
+using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MyContoso.App.Services;
 using Shared;
-using System.Collections.ObjectModel;
 
-namespace MyContoso.App.ViewModels;
+namespace MyContoso.App.Features.Employees.ViewModels;
 
 public partial class EmployeeListViewModel(ApiClient apiClient) : ObservableObject
 {

@@ -5,7 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:MyContoso.App.Controls"
     xmlns:views="clr-namespace:MyContoso.App.Pages"
-    xmlns:accr="clr-namespace:MyContoso.App.Features.Accreditations.Pages">
+    xmlns:accr="clr-namespace:MyContoso.App.Features.Accreditations.Pages"
+    xmlns:pages="clr-namespace:MyContoso.App.Features.Employees.Pages">
     <Shell.TitleView>
         <controls:TitleView />
     </Shell.TitleView>
@@ -20,7 +21,7 @@
         <ShellContent
             Title="People"
             Icon="{FontImageSource FontFamily='lucide', Glyph={DynamicResource Users}}"
-            ContentTemplate="{DataTemplate views:EmployeeListPage}"
+            ContentTemplate="{DataTemplate pages:EmployeeListPage}"
             Route="employees" />
 
         <ShellContent

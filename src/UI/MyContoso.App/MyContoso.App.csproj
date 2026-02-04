@@ -84,8 +84,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Features\Accreditations\Services\" />
-	  <Folder Include="Features\Employees\" />
 	  <Folder Include="Features\Handbook\" />
 	  <Folder Include="Features\Updates\" />
 	</ItemGroup>

@@ -1,6 +1,6 @@
-using MyContoso.App.ViewModels;
+using MyContoso.App.Features.Employees.ViewModels;
 
-namespace MyContoso.App.Pages;
+namespace MyContoso.App.Features.Employees.Pages;
 
 public partial class EmployeeListPage : ContentPage
 {
@@ -14,7 +14,7 @@ public partial class EmployeeListPage : ContentPage
     {
         base.OnAppearing();
 
-        if (BindingContext is EmployeeListViewModel vm && vm.Employees.Count == 0)
+        if (BindingContext is EmployeeListViewModel { Employees.Count: 0 } vm)
         {
             await vm.LoadEmployeesCommand.ExecuteAsync(null);
         }

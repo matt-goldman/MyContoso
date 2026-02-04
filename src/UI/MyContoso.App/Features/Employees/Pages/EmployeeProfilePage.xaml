@@ -2,12 +2,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:fs="clr-namespace:FlagstoneUI.Core.Controls;assembly=FlagstoneUI.Core"
-             xmlns:vm="clr-namespace:MyContoso.App.ViewModels"
              xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:li="clr-namespace:Plugin.Maui.Lucide;assembly=Plugin.Maui.Lucide"
              xmlns:lucide="clr-namespace:Plugin.Maui.Lucide.Controls;assembly=Plugin.Maui.Lucide"
-             x:Class="MyContoso.App.Pages.EmployeeProfilePage"
-             x:DataType="vm:EmployeeProfileViewModel"
+             xmlns:viewModels="clr-namespace:MyContoso.App.Features.Employees.ViewModels"
+             x:Class="MyContoso.App.Features.Employees.Pages.EmployeeProfilePage"
+             x:DataType="viewModels:EmployeeProfileViewModel"
              Title="Employee Profile">
     <ContentPage.Resources>
         <mct:InvertedBoolConverter x:Key="InverseBool" />

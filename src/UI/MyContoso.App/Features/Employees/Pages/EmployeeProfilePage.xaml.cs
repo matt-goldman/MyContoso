@@ -1,6 +1,7 @@
-using MyContoso.App.ViewModels;
 
-namespace MyContoso.App.Pages;
+using MyContoso.App.Features.Employees.ViewModels;
+
+namespace MyContoso.App.Features.Employees.Pages;
 
 public partial class EmployeeProfilePage : ContentPage
 {

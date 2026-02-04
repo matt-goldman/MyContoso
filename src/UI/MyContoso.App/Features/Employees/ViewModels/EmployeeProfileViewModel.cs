@@ -2,7 +2,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using MyContoso.App.Services;
 using Shared;
 
-namespace MyContoso.App.ViewModels;
+namespace MyContoso.App.Features.Employees.ViewModels;
 
 [QueryProperty(nameof(EmployeeId), "id")]
 public partial class EmployeeProfileViewModel(ApiClient apiClient) : ObservableObject

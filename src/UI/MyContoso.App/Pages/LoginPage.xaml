@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:lucide="clr-namespace:Plugin.Maui.Lucide.Controls;assembly=Plugin.Maui.Lucide"
+             xmlns:li="clr-namespace:Plugin.Maui.Lucide;assembly=Plugin.Maui.Lucide"
+             xmlns:fs="clr-namespace:FlagstoneUI.Core.Controls;assembly=FlagstoneUI.Core"
+             xmlns:vm="clr-namespace:MyContoso.App.ViewModels"
+             x:DataType="vm:LoginViewModel"
+             x:Class="MyContoso.App.Pages.LoginPage">
+    <Grid>
+           <VerticalStackLayout VerticalOptions="Center"
+                                HorizontalOptions="Center"
+                                Spacing="20">
+               <Border Background="{DynamicResource Color.Primary}"
+                       StrokeThickness="0"
+                       WidthRequest="80"
+                       HeightRequest="80"
+                       StrokeShape="RoundRectangle 20">
+                   <lucide:Icon Name="{x:Static li:Icons.Building2}"
+                                Color="White"
+                                Size="30"/>
+               </Border>
+               
+               <VerticalStackLayout HorizontalOptions="Center"
+                                    Spacing="3">
+                   <Label FontSize="Title"
+                          FontAttributes="Bold"
+                          FontFamily="{OnPlatform iOS='OpenSansBold'}"
+                          Text="MyContoso" />
+                   
+                   <Label TextColor="Gray"
+                          Text="Connect with your team"/>
+               </VerticalStackLayout>
+               
+               <fs:FsCard Style="{DynamicResource ElevatedCard}"
+                          Elevation="1">
+                      <VerticalStackLayout Spacing="10"
+                                           Padding="10">
+                          <Label Text="Welcome back"
+                                 FontAttributes="Bold"
+                                 FontSize="Large"
+                                 FontFamily="{OnPlatform iOS='OpenSansBold'}" />
+                           <Label TextColor="Gray"
+                                  FontSize="Small"
+                                  Text="Enter your credentials to access your account"/>
+                          
+                          <VerticalStackLayout Spacing="4">
+                              <Label Text="Email"
+                                     Margin="0,0,0,4"/>
+                              <fs:FsEntry Style="{DynamicResource OutlinedEntry}"
+                                          Padding="0"
+                                          Margin="0"
+                                          CornerRadius="15"
+                                          HeightRequest="40"
+                                          Placeholder="Enter your email"/>
+                              
+                                 <Label Text="Password" />
+                              <fs:FsEntry Style="{DynamicResource OutlinedEntry}"
+                                          Padding="0"
+                                          Margin="0"
+                                          CornerRadius="15"
+                                          HeightRequest="40"
+                                          Placeholder="Enter your password"
+                                          IsPassword="True"/>
+                              
+                                 <fs:FsButton Style="{DynamicResource PrimaryButton}"
+                                              CornerRadius="20"
+                                              Margin="0,10,0,0"
+                                              Command="{Binding LoginCommand}"
+                                              Text="Sign in"/>
+                          </VerticalStackLayout>
+                          
+                          <fs:FsButton Style="{DynamicResource TextButton}"
+                                       Text="Forgot your password?"/>
+                      </VerticalStackLayout>
+               </fs:FsCard>
+               
+               <Label TextColor="Gray"
+                      HorizontalOptions="Center"
+                      HorizontalTextAlignment="Center"
+                      Text="By signing in, you agree to our Terms of Service and Privacy Policy."/>
+           </VerticalStackLayout>
+           
+           <ActivityIndicator HorizontalOptions="Center"
+                              VerticalOptions="Center"
+                              Color="{DynamicResource Color.Primary}"
+                              IsRunning="True"
+                              IsVisible="{Binding IsLoading}"/>
+       </Grid>
+</ContentPage>

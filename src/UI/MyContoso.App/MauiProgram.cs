@@ -39,24 +39,26 @@ namespace MyContoso.App
             });
 
             // Register ViewModels
+            builder.Services.AddSingleton<LoginViewModel>();
             builder.Services.AddSingleton<CompanyFeedViewModel>();
-            builder.Services.AddTransient<CompanyUpdateDetailViewModel>();
-            builder.Services.AddTransient<EmployeeListViewModel>();
-            builder.Services.AddTransient<EmployeeProfileViewModel>();
-            builder.Services.AddTransient<PolicyListViewModel>();
-            builder.Services.AddTransient<PolicyDetailViewModel>();
-            builder.Services.AddTransient<AccreditationListViewModel>();
-            builder.Services.AddTransient<AccreditationDetailViewModel>();
+            builder.Services.AddSingleton<CompanyUpdateDetailViewModel>();
+            builder.Services.AddSingleton<EmployeeListViewModel>();
+            builder.Services.AddSingleton<EmployeeProfileViewModel>();
+            builder.Services.AddSingleton<PolicyListViewModel>();
+            builder.Services.AddSingleton<PolicyDetailViewModel>();
+            builder.Services.AddSingleton<AccreditationListViewModel>();
+            builder.Services.AddSingleton<AccreditationDetailViewModel>();
 
             // Register Views
+            builder.Services.AddSingleton<LoginPage>();
             builder.Services.AddSingleton<CompanyFeedPage>();
-            builder.Services.AddTransient<CompanyUpdateDetailPage>();
-            builder.Services.AddTransient<EmployeeListPage>();
-            builder.Services.AddTransient<EmployeeProfilePage>();
-            builder.Services.AddTransient<PolicyListPage>();
-            builder.Services.AddTransient<PolicyDetailPage>();
-            builder.Services.AddTransient<AccreditationListPage>();
-            builder.Services.AddTransient<AccreditationDetailPage>();
+            builder.Services.AddSingleton<CompanyUpdateDetailPage>();
+            builder.Services.AddSingleton<EmployeeListPage>();
+            builder.Services.AddSingleton<EmployeeProfilePage>();
+            builder.Services.AddSingleton<PolicyListPage>();
+            builder.Services.AddSingleton<PolicyDetailPage>();
+            builder.Services.AddSingleton<AccreditationListPage>();
+            builder.Services.AddSingleton<AccreditationDetailPage>();
 
             return builder.Build();
         }

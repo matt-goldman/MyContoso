@@ -12,7 +12,7 @@
     <TabBar>
         <ShellContent
             Title="Feed"
-            Icon="{FontImageSource FontFamily='lucide', Glyph={DynamicResource Rss}}"
+            Icon="{FontImageSource FontFamily='lucide', Glyph={DynamicResource House}}"
             ContentTemplate="{DataTemplate views:CompanyFeedPage}"
             Route="feed" />
 

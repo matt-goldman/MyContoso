@@ -25,7 +25,6 @@
                        HorizontalTextAlignment="Center"
                        FontSize="Large"/>
             </Border>
-            <!-- TODO: Can we have text with gradient? -->
             <Label TextColor="{StaticResource Color.Primary}"
                    FontAttributes="Bold"
                    FontFamily="{OnPlatform iOS='OpenSansBold'}"
@@ -43,7 +42,7 @@
             <lucide:Icon Name="{DynamicResource Bell}"
                          Size="18"/>
 
-            <mct:AvatarView Text="JT"
+            <mct:AvatarView x:Name="Avatar"
                             FontSize="12"
                             HeightRequest="30"
                             WidthRequest="30"

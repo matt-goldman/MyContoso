@@ -11,6 +11,19 @@ public class InitialsConverter : IValueConverter
     {
         if (value is not string name || string.IsNullOrWhiteSpace(name))
             return "?";
+        
+        return GetInitials(name);
+    }
+
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+    
+    public static string GetInitials(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+            return "?";
 
         var parts = name.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
@@ -20,10 +33,5 @@ public class InitialsConverter : IValueConverter
             1 => parts[0][..Math.Min(2, parts[0].Length)].ToUpperInvariant(),
             _ => $"{char.ToUpperInvariant(parts[0][0])}{char.ToUpperInvariant(parts[^1][0])}"
         };
-    }
-
-    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
     }
 }

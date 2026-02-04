@@ -52,7 +52,8 @@
                                           Margin="0"
                                           CornerRadius="15"
                                           HeightRequest="40"
-                                          Placeholder="Enter your email"/>
+                                          Placeholder="Enter your email"
+                                          Keyboard="Email"/>
                               
                                  <Label Text="Password" />
                               <fs:FsEntry Style="{DynamicResource OutlinedEntry}"

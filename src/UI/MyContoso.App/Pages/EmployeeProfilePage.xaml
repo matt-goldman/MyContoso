@@ -9,7 +9,9 @@
              x:Class="MyContoso.App.Pages.EmployeeProfilePage"
              x:DataType="vm:EmployeeProfileViewModel"
              Title="Employee Profile">
-    
+    <ContentPage.Resources>
+        <mct:InvertedBoolConverter x:Key="InverseBool" />
+    </ContentPage.Resources>
     <ScrollView>
         <VerticalStackLayout>
             <ActivityIndicator IsRunning="{Binding IsLoading}"
@@ -69,6 +71,7 @@
                               ColumnSpacing="10"
                               Margin="0,0,10,0"
                               MinimumHeightRequest="30"
+                              IsVisible="{Binding IsMyProfile, Converter={StaticResource InverseBool}}"
                               WidthRequest="300">
                             <fs:FsButton HorizontalOptions="Fill"
                                          BackgroundColor="{DynamicResource Color.Primary}"
@@ -89,6 +92,18 @@
                                          MaximumHeightRequest="35"
                                          Text="Email"/>
                         </Grid>
+                        
+                        <fs:FsButton HorizontalOptions="Fill"
+                                     BackgroundColor="{DynamicResource Color.Primary}"
+                                     CornerRadius="12"
+                                     TextColor="White"
+                                     ImageSource="{FontImageSource FontFamily='lucide', Glyph={DynamicResource SquarePen}, Size=14}"
+                                     ContentLayout="Left"
+                                     MaximumHeightRequest="30"
+                                     WidthRequest="200"
+                                     Margin="0,5,10,0"
+                                     Text="Edit Profile"
+                                     IsVisible="{Binding IsMyProfile}"/>
                         
                         <BoxView HorizontalOptions="Fill"
                                  HeightRequest="1"
@@ -165,13 +180,15 @@
                                     StrokeShape="RoundRectangle 12"
                                     MaximumHeightRequest="40"
                                     StrokeThickness="0"
-                                    BackgroundColor="{DynamicResource Color.Secondary.10Pc}">
+                                    BackgroundColor="{DynamicResource Color.Secondary.10Pc}"
+                                    IsVisible="{Binding IsMyProfile}">
                                 <lucide:Icon Name="{x:Static li:Icons.MapPin}"
                                              Color="{DynamicResource Color.Secondary}" />
                             </Border>
                             
                             <VerticalStackLayout Grid.Column="1"
-                                                 Grid.Row="2">
+                                                 Grid.Row="2"
+                                                 IsVisible="{Binding IsMyProfile}">
                                 <Label TextColor="{StaticResource Gray600}"
                                        FontSize="Small"
                                        Text="Address" />
@@ -186,13 +203,15 @@
                                     StrokeShape="RoundRectangle 12"
                                     MaximumHeightRequest="40"
                                     StrokeThickness="0"
-                                    BackgroundColor="{DynamicResource Color.Primary.10Pc}">
+                                    BackgroundColor="{DynamicResource Color.Primary.10Pc}"
+                                    IsVisible="{Binding IsMyProfile}">
                                 <lucide:Icon Name="{DynamicResource Calendar}"
                                              Color="{DynamicResource Color.Primary}" />
                             </Border>
                             
                             <VerticalStackLayout Grid.Column="1"
-                                                 Grid.Row="3">
+                                                 Grid.Row="3"
+                                                 IsVisible="{Binding IsMyProfile}">
                                 <Label TextColor="{StaticResource Gray600}"
                                        FontSize="Small"
                                        Text="Date of Birth" />

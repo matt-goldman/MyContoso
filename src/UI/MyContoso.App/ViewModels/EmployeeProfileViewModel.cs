@@ -21,6 +21,9 @@ public partial class EmployeeProfileViewModel(ApiClient apiClient) : ObservableO
     
     [ObservableProperty]
     private int expiringAccreditations;
+    
+    [ObservableProperty]
+    private bool isMyProfile = false;
 
     partial void OnEmployeeIdChanged(int value)
     {
@@ -42,6 +45,11 @@ public partial class EmployeeProfileViewModel(ApiClient apiClient) : ObservableO
                 if (accreditation.Status == "Valid") ActiveAccreditations++;
 
                 if (accreditation.ExpiryDate < DateTime.Now.AddMonths(6)) ExpiringAccreditations++;
+            }
+
+            if (!IsMyProfile)
+            {
+                IsMyProfile = App.CurrentUser?.EmployeeId == EmployeeId;
             }
         }
         finally

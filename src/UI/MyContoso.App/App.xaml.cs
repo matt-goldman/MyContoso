@@ -1,4 +1,6 @@
-﻿using MyContoso.App.Pages;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using MyContoso.App.Messages;
+using MyContoso.App.Pages;
 using Shared;
 
 namespace MyContoso.App
@@ -6,21 +8,18 @@ namespace MyContoso.App
     public partial class App : Application
     {
         private readonly LoginPage loginPage;
-        
-        private static Employee? _currentUser;
 
         public static Employee? CurrentUser
         {
-            get => _currentUser;
+            get;
             set
             {
-                if (_currentUser == value) return;
-                _currentUser = value;
-                CurrentUserChanged?.Invoke(Current, EventArgs.Empty);
+                if (field == value) return;
+                field = value;
+                WeakReferenceMessenger.Default.Send(new LoggedInUserChangedMessage(field!));
             }
         }
-        public static event EventHandler? CurrentUserChanged;
-        
+
         public App(LoginPage loginPage)
         {
             this.loginPage = loginPage;

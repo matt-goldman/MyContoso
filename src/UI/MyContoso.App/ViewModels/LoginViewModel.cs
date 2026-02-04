@@ -4,7 +4,7 @@ using MyContoso.App.Services;
 
 namespace MyContoso.App.ViewModels;
 
-public partial class LoginViewModel(IApiClient client) : ObservableObject
+public partial class LoginViewModel(EmployeeService employeeService) : ObservableObject
 {
     [ObservableProperty]
     private bool isLoading;
@@ -17,7 +17,7 @@ public partial class LoginViewModel(IApiClient client) : ObservableObject
         IsLoading = true;
 
         // simulate logging in - fetch employees from the API, pick one at random, set as current user
-        var employees = await client.GetEmployeesAsync();
+        var employees = await employeeService.GetEmployeesAsync();
 
         var employeeList = employees?.ToList();
         if (employeeList == null || employeeList.Count == 0)

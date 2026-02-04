@@ -14,7 +14,7 @@ public class PolicyGroup(string category, IEnumerable<Policy> policies) : Observ
     public string Category { get; } = category;
 }
 
-public partial class PolicyListViewModel(IApiClient apiClient) : ObservableObject
+public partial class PolicyListViewModel(PolicyService policyService) : ObservableObject
 {
     [ObservableProperty]
     private bool isLoading;
@@ -38,7 +38,7 @@ public partial class PolicyListViewModel(IApiClient apiClient) : ObservableObjec
             IsLoading = true;
             Policies.Clear();
 
-            var policies = await apiClient.GetPoliciesAsync();
+            var policies = await policyService.GetPoliciesAsync();
             var grouped = policies
                 .GroupBy(p => p.Category)
                 .OrderBy(g => g.Key)
@@ -63,7 +63,7 @@ public partial class PolicyListViewModel(IApiClient apiClient) : ObservableObjec
             IsRefreshing = true;
             Policies.Clear();
 
-            var policies = await apiClient.GetPoliciesAsync();
+            var policies = await policyService.GetPoliciesAsync();
             var grouped = policies
                 .GroupBy(p => p.Category)
                 .OrderBy(g => g.Key)

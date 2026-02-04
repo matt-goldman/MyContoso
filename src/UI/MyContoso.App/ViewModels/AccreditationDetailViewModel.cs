@@ -6,7 +6,7 @@ using MyContoso.App.Services;
 namespace MyContoso.App.ViewModels;
 
 [QueryProperty(nameof(AccreditationId), "id")]
-public partial class AccreditationDetailViewModel(IApiClient apiClient) : ObservableObject
+public partial class AccreditationDetailViewModel(AccreditationService accreditationService) : ObservableObject
 {
     [ObservableProperty]
     private bool isLoading;
@@ -43,7 +43,7 @@ public partial class AccreditationDetailViewModel(IApiClient apiClient) : Observ
         try
         {
             IsLoading = true;
-            Accreditation = await apiClient.GetAccreditationAsync(AccreditationId);
+            Accreditation = await accreditationService.GetAccreditationAsync(AccreditationId);
 
             IsShareable = Accreditation?.Status is not "Expired" and not "Overdue";
 

@@ -5,7 +5,7 @@ using MyContoso.App.Services;
 namespace MyContoso.App.ViewModels;
 
 [QueryProperty(nameof(EmployeeId), "id")]
-public partial class EmployeeProfileViewModel(IApiClient apiClient) : ObservableObject
+public partial class EmployeeProfileViewModel(EmployeeService employeeService) : ObservableObject
 {
     [ObservableProperty]
     private int employeeId;
@@ -38,7 +38,7 @@ public partial class EmployeeProfileViewModel(IApiClient apiClient) : Observable
         try
         {
             IsLoading = true;
-            Employee = await apiClient.GetEmployeeAsync(EmployeeId);
+            Employee = await employeeService.GetEmployeeAsync(EmployeeId);
 
             foreach (var accreditation in Employee?.Accreditations??[])
             {

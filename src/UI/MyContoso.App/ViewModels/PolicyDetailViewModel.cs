@@ -5,7 +5,7 @@ using MyContoso.App.Services;
 namespace MyContoso.App.ViewModels;
 
 [QueryProperty(nameof(PolicyId), "id")]
-public partial class PolicyDetailViewModel(IApiClient apiClient) : ObservableObject
+public partial class PolicyDetailViewModel(PolicyService policyService) : ObservableObject
 {
     [ObservableProperty]
     private int policyId;
@@ -29,7 +29,7 @@ public partial class PolicyDetailViewModel(IApiClient apiClient) : ObservableObj
         try
         {
             IsLoading = true;
-            Policy = await apiClient.GetPolicyAsync(PolicyId);
+            Policy = await policyService.GetPolicyAsync(PolicyId);
         }
         finally
         {

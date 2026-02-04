@@ -5,7 +5,7 @@ using MyContoso.App.Services;
 namespace MyContoso.App.ViewModels;
 
 [QueryProperty(nameof(UpdateId), "id")]
-public partial class CompanyUpdateDetailViewModel(IApiClient apiClient) : ObservableObject
+public partial class CompanyUpdateDetailViewModel(UpdatesService updatesService) : ObservableObject
 {
     [ObservableProperty]
     private int updateId;
@@ -29,7 +29,7 @@ public partial class CompanyUpdateDetailViewModel(IApiClient apiClient) : Observ
         try
         {
             IsLoading = true;
-            Update = await apiClient.GetCompanyUpdateAsync(UpdateId);
+            Update = await updatesService.GetUpdateAsync(UpdateId);
         }
         finally
         {

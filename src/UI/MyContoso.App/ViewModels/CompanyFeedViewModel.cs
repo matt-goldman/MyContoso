@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 
 namespace MyContoso.App.ViewModels;
 
-public partial class CompanyFeedViewModel(IApiClient apiClient) : ObservableObject
+public partial class CompanyFeedViewModel(UpdatesService updatesService) : ObservableObject
 {
     [ObservableProperty]
     private bool isLoading;
@@ -27,7 +27,7 @@ public partial class CompanyFeedViewModel(IApiClient apiClient) : ObservableObje
             IsLoading = true;
             Updates.Clear();
 
-            var updates = await apiClient.GetCompanyUpdatesAsync();
+            var updates = await updatesService.GetUpdatesAsync();
             foreach (var update in updates.OrderByDescending(u => u.PublishedDate))
             {
                 Updates.Add(update);
@@ -47,7 +47,7 @@ public partial class CompanyFeedViewModel(IApiClient apiClient) : ObservableObje
             IsRefreshing = true;
             Updates.Clear();
 
-            var updates = await apiClient.GetCompanyUpdatesAsync();
+            var updates = await updatesService.GetUpdatesAsync();
             foreach (var update in updates.OrderByDescending(u => u.PublishedDate))
             {
                 Updates.Add(update);

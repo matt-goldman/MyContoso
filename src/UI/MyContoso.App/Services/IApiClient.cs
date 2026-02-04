@@ -1,4 +1,4 @@
-using MyContoso.App.Models;
+using MyContoso.App.ApiModels;
 
 namespace MyContoso.App.Services;
 

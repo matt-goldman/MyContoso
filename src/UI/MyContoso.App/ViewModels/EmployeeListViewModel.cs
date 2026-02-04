@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 
 namespace MyContoso.App.ViewModels;
 
-public partial class EmployeeListViewModel(IApiClient apiClient) : ObservableObject
+public partial class EmployeeListViewModel(EmployeeService employeeService) : ObservableObject
 {
     [ObservableProperty]
     private bool isLoading;
@@ -30,7 +30,7 @@ public partial class EmployeeListViewModel(IApiClient apiClient) : ObservableObj
             IsLoading = true;
             Employees.Clear();
 
-            var employees = await apiClient.GetEmployeesAsync();
+            var employees = await employeeService.GetEmployeesAsync();
             foreach (var employee in employees.OrderBy(e => e.Name))
             {
                 Employees.Add(employee);
@@ -50,7 +50,7 @@ public partial class EmployeeListViewModel(IApiClient apiClient) : ObservableObj
             IsRefreshing = true;
             Employees.Clear();
 
-            var employees = await apiClient.GetEmployeesAsync();
+            var employees = await employeeService.GetEmployeesAsync();
             foreach (var employee in employees.OrderBy(e => e.Name))
             {
                 Employees.Add(employee);

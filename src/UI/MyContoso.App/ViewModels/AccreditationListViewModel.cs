@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 
 namespace MyContoso.App.ViewModels;
 
-public partial class AccreditationListViewModel(IApiClient apiClient) : ObservableObject
+public partial class AccreditationListViewModel(AccreditationService accreditationService) : ObservableObject
 {
     [ObservableProperty]
     private bool isLoading;
@@ -39,7 +39,7 @@ public partial class AccreditationListViewModel(IApiClient apiClient) : Observab
             IsLoading = true;
             Accreditations.Clear();
 
-            var accreditations = await apiClient.GetAccreditationsAsync();
+            var accreditations = await accreditationService.GetAccreditationsAsync();
             var accreditationList = accreditations.ToList();
 
             // Update counts
@@ -68,7 +68,7 @@ public partial class AccreditationListViewModel(IApiClient apiClient) : Observab
             IsRefreshing = true;
             Accreditations.Clear();
 
-            var accreditations = await apiClient.GetAccreditationsAsync();
+            var accreditations = await accreditationService.GetAccreditationsAsync();
             var accreditationList = accreditations.ToList();
 
             // Update counts

@@ -27,8 +27,14 @@ namespace MyContoso.App
     		builder.Logging.AddDebug();
 #endif
 
-            // Register API client
-            builder.Services.AddSingleton<IApiClient, MockApiClient>();
+            // Register HttpClient and API client
+            builder.Services.AddHttpClient<IApiClient, ApiClient>(client => client.BaseAddress = new Uri("http://localhost:5506"));
+
+            // Register domain services
+            builder.Services.AddSingleton<EmployeeService>();
+            builder.Services.AddSingleton<UpdatesService>();
+            builder.Services.AddSingleton<PolicyService>();
+            builder.Services.AddSingleton<AccreditationService>();
 
             // Register ViewModels
             builder.Services.AddSingleton<LoginViewModel>();

@@ -58,14 +58,20 @@
 
 	<ItemGroup>
 	  <MauiXaml Remove="Resources\Fonts\Icons.xaml" />
+	  <MauiXaml Update="Features\Accreditations\Pages\AccreditationDetailPage.xaml">
+	    <SubType>Designer</SubType>
+	  </MauiXaml>
+	  <MauiXaml Update="Features\Accreditations\Pages\AccreditationListPage.xaml">
+	    <SubType>Designer</SubType>
+	  </MauiXaml>
 	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="13.0.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-		<PackageReference Include="FlagstoneUI.Core" Version="0.0.1" />
-		<PackageReference Include="FlagstoneUI.Integrations.MCT" Version="0.0.1" />
-		<PackageReference Include="FlagstoneUI.Themes.Material" Version="0.0.1" />
+		<PackageReference Include="FlagstoneUI.Core" Version="0.0.1-preview1" />
+		<PackageReference Include="FlagstoneUI.Integrations.MCT" Version="0.0.1-preview1" />
+		<PackageReference Include="FlagstoneUI.Themes.Material" Version="0.0.1-preview1" />
 		<PackageReference Include="Indiko.Maui.Controls.Markdown" Version="1.5.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.30" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.2" />
@@ -75,6 +81,24 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\..\Aspire\MyContoso.MauiServiceDefaults\MyContoso.MauiServiceDefaults.csproj" />
 	  <ProjectReference Include="..\..\Common\Shared\Shared.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Features\Accreditations\Services\" />
+	  <Folder Include="Features\Employees\" />
+	  <Folder Include="Features\Handbook\" />
+	  <Folder Include="Features\Updates\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Features\Accreditations\Pages\AccreditationDetailPage.xaml.cs">
+	    <DependentUpon>AccreditationDetailPage.xaml</DependentUpon>
+	    <SubType>Code</SubType>
+	  </Compile>
+	  <Compile Update="Features\Accreditations\Pages\AccreditationListPage.xaml.cs">
+	    <DependentUpon>AccreditationListPage.xaml</DependentUpon>
+	    <SubType>Code</SubType>
+	  </Compile>
 	</ItemGroup>
 
 </Project>

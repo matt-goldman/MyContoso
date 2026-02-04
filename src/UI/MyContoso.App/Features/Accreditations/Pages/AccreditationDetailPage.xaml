@@ -5,8 +5,9 @@
              xmlns:vm="clr-namespace:MyContoso.App.ViewModels"
              xmlns:lucide="clr-namespace:Plugin.Maui.Lucide.Controls;assembly=Plugin.Maui.Lucide"
              xmlns:li="clr-namespace:Plugin.Maui.Lucide;assembly=Plugin.Maui.Lucide"
-             x:Class="MyContoso.App.Pages.AccreditationDetailPage"
-             x:DataType="vm:AccreditationDetailViewModel"
+             xmlns:viewModels="clr-namespace:MyContoso.App.Features.Accreditations.ViewModels"
+             x:Class="MyContoso.App.Features.Accreditations.Pages.AccreditationDetailPage"
+             x:DataType="viewModels:AccreditationDetailViewModel"
              BackgroundColor="{DynamicResource Color.Background}">
 
     <ScrollView>

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<controls:ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:fs="clr-namespace:FlagstoneUI.Core.Controls;assembly=FlagstoneUI.Core"
-             xmlns:vm="clr-namespace:MyContoso.App.ViewModels"
              xmlns:shared="clr-namespace:Shared;assembly=Shared"
              xmlns:lucide="clr-namespace:Plugin.Maui.Lucide.Controls;assembly=Plugin.Maui.Lucide"
-             x:Class="MyContoso.App.Pages.AccreditationListPage"
+             xmlns:vm="clr-namespace:MyContoso.App.Features.Accreditations.ViewModels"
+             xmlns:controls="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls"
+             x:Class="MyContoso.App.Features.Accreditations.Pages.AccreditationListPage"
              x:DataType="vm:AccreditationListViewModel"
              BackgroundColor="{DynamicResource Color.Background}">
 
@@ -109,8 +110,7 @@
                      IsRefreshing="{Binding IsRefreshing}"
                      Command="{Binding RefreshCommand}">
             <CollectionView ItemsSource="{Binding Accreditations}"
-                           SelectionMode="None"
-                           ItemsUpdatingScrollMode="KeepScrollOffset">
+                           SelectionMode="None">
                 <CollectionView.EmptyView>
                     <VerticalStackLayout HorizontalOptions="Center"
                                        VerticalOptions="Center"
@@ -208,35 +208,6 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </RefreshView>
-
-        <!-- ~1~ Info Card @1@ -->
-        <!-- <Grid Grid.Row="3" -->
-        <!--       VerticalOptions="End" -->
-        <!--       Padding="16,0,16,16" -->
-        <!--       IsVisible="{Binding Accreditations.Count}"> -->
-        <!--     <fs:FsCard BackgroundColor="{DynamicResource Color.Primary.10Pc}" -->
-        <!--                Border="{DynamicResource Color.Primary}"> -->
-        <!--         <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12"> -->
-        <!--             <Label Grid.Column="0" -->
-        <!--                    Text="{DynamicResource Award}" -->
-        <!--                    FontFamily="lucide" -->
-        <!--                    TextColor="{DynamicResource Color.Primary}" -->
-        <!--                    FontSize="20" -->
-        <!--                    VerticalOptions="Start" -->
-        <!--                    Margin="0,2,0,0" /> -->
-        <!--             <VerticalStackLayout Grid.Column="1" Spacing="4"> -->
-        <!--                 <Label Text="Keep Your Credentials Current" -->
-        <!--                        TextColor="{DynamicResource Color.OnPrimaryContainer}" -->
-        <!--                        FontFamily="{OnPlatform iOS='OpenSansBold'}" -->
-        <!--                        FontAttributes="Bold" /> -->
-        <!--                 <Label Text="Remember to renew your accreditations before they expire to maintain your professional standing." -->
-        <!--                        TextColor="{DynamicResource Color.OnPrimaryContainer}" -->
-        <!--                        FontSize="12" -->
-        <!--                        LineHeight="1.3" /> -->
-        <!--             </VerticalStackLayout> -->
-        <!--         </Grid> -->
-        <!--     </fs:FsCard> -->
-        <!-- </Grid> -->
 
         <ActivityIndicator Grid.Row="3"
                          IsRunning="{Binding IsLoading}"

@@ -1,6 +1,6 @@
-using MyContoso.App.ViewModels;
+using MyContoso.App.Features.Accreditations.ViewModels;
 
-namespace MyContoso.App.Pages;
+namespace MyContoso.App.Features.Accreditations.Pages;
 
 public partial class AccreditationListPage : ContentPage
 {

@@ -3,7 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using MyContoso.App.Services;
 using Shared;
 
-namespace MyContoso.App.ViewModels;
+namespace MyContoso.App.Features.Accreditations.ViewModels;
 
 [QueryProperty(nameof(AccreditationId), "id")]
 public partial class AccreditationDetailViewModel(ApiClient apiClient) : ObservableObject

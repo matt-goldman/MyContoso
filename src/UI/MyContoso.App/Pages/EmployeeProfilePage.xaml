@@ -20,7 +20,14 @@
                              HorizontalOptions="Center" />
             
             <VerticalStackLayout IsVisible="{Binding Employee, Converter={StaticResource IsNotNullConverter}}">
-                
+                <fs:BorderlessEntry Placeholder="Search employees"
+                                    Margin="16,16,16,0"
+                                    HeightRequest="40"
+                                    HorizontalOptions="Fill"
+                                    VerticalOptions="Center"
+                                    FontSize="Medium"
+                                    TextColor="{DynamicResource Color.OnSurfaceVariant}"
+                                    PlaceholderColor="{DynamicResource Gray500}" />
                 <fs:FsCard Style="{DynamicResource ElevatedCard}"
                            Elevation="1">
                     <FlexLayout Direction="Column"

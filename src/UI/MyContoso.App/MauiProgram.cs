@@ -1,12 +1,12 @@
 ﻿using CommunityToolkit.Maui;
-using FlagstoneUI.Core;
 //using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using MyContoso.App.Features.Accreditations;
+using MyContoso.App.Features.Accreditations.Pages;
 using MyContoso.App.Services;
 using MyContoso.App.ViewModels;
 using MyContoso.App.Pages;
 using Plugin.Maui.Lucide;
-
 namespace MyContoso.App
 {
     public static class MauiProgram
@@ -20,10 +20,8 @@ namespace MyContoso.App
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                    fonts.AddFont("icofont.ttf", "IcoFont");
                 })
                 .UseMauiCommunityToolkit()
-                .UseFlagstoneUI()
                 .UseLucide();
 
 #if DEBUG
@@ -37,6 +35,9 @@ namespace MyContoso.App
             {
                 client.BaseAddress = new Uri("http://localhost:5506");//"https+http://webapi");
             });
+            
+            builder
+                .AddAccreditationsModule();
 
             // Register ViewModels
             builder.Services.AddSingleton<LoginViewModel>();
@@ -46,8 +47,7 @@ namespace MyContoso.App
             builder.Services.AddSingleton<EmployeeProfileViewModel>();
             builder.Services.AddSingleton<PolicyListViewModel>();
             builder.Services.AddSingleton<PolicyDetailViewModel>();
-            builder.Services.AddSingleton<AccreditationListViewModel>();
-            builder.Services.AddSingleton<AccreditationDetailViewModel>();
+            
 
             // Register Views
             builder.Services.AddSingleton<LoginPage>();
@@ -57,8 +57,7 @@ namespace MyContoso.App
             builder.Services.AddSingleton<EmployeeProfilePage>();
             builder.Services.AddSingleton<PolicyListPage>();
             builder.Services.AddSingleton<PolicyDetailPage>();
-            builder.Services.AddSingleton<AccreditationListPage>();
-            builder.Services.AddSingleton<AccreditationDetailPage>();
+            
 
             return builder.Build();
         }

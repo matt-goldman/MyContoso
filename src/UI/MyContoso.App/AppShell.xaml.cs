@@ -1,4 +1,5 @@
 ﻿using MyContoso.App.Pages;
+using MyContoso.App.Features.Accreditations;
 
 namespace MyContoso.App
 {
@@ -15,7 +16,8 @@ namespace MyContoso.App
             Routing.RegisterRoute("companyupdate", typeof(CompanyUpdateDetailPage));
             Routing.RegisterRoute("employee", typeof(EmployeeProfilePage));
             Routing.RegisterRoute("policy", typeof(PolicyDetailPage));
-            Routing.RegisterRoute("accreditation", typeof(AccreditationDetailPage));
+            
+            AccreditationsModule.RegisterAccreditationRoutes();
         }
 
         protected override async void OnAppearing()

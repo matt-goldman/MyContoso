@@ -2,12 +2,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:MyContoso.App.ViewModels"
-             xmlns:shared="clr-namespace:Shared;assembly=Shared"
+             xmlns:models="clr-namespace:MyContoso.App.Models"
              xmlns:controls="clr-namespace:MyContoso.App.Controls"
              x:Class="MyContoso.App.Pages.CompanyFeedPage"
              x:DataType="vm:CompanyFeedViewModel"
              BackgroundColor="{DynamicResource Color.Background}">
-    
+
     <ScrollView>
     <Grid RowDefinitions="Auto,*">
         <!-- Page Header -->
@@ -25,7 +25,7 @@
                    FontSize="Header"
                    Margin="0,4,0,0" />
         </VerticalStackLayout>
-        
+
         <RefreshView Grid.Row="1"
                      IsRefreshing="{Binding IsRefreshing}"
                      Command="{Binding RefreshCommand}">
@@ -39,18 +39,18 @@
                         <Label Text="No updates available"
                                TextColor="{DynamicResource Color.OnSurface}"
                                FontSize="16"
-                               HorizontalOptions="Center" />    
+                               HorizontalOptions="Center" />
                     </VerticalStackLayout>
                 </CollectionView.EmptyView>
-                
+
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="shared:CompanyUpdate">
+                    <DataTemplate x:DataType="models:CompanyUpdate">
                         <controls:CompanyUpdateCard />
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </RefreshView>
-        
+
         <ActivityIndicator Grid.Row="1"
                          IsRunning="{Binding IsLoading}"
                          IsVisible="{Binding IsLoading}"

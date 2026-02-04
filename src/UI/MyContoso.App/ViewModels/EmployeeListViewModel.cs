@@ -1,12 +1,12 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using MyContoso.App.Models;
 using MyContoso.App.Services;
-using Shared;
 using System.Collections.ObjectModel;
 
 namespace MyContoso.App.ViewModels;
 
-public partial class EmployeeListViewModel(ApiClient apiClient) : ObservableObject
+public partial class EmployeeListViewModel(IApiClient apiClient) : ObservableObject
 {
     [ObservableProperty]
     private bool isLoading;

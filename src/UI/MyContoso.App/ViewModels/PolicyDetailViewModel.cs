@@ -1,11 +1,11 @@
 using CommunityToolkit.Mvvm.ComponentModel;
+using MyContoso.App.Models;
 using MyContoso.App.Services;
-using Shared;
 
 namespace MyContoso.App.ViewModels;
 
 [QueryProperty(nameof(PolicyId), "id")]
-public partial class PolicyDetailViewModel(ApiClient apiClient) : ObservableObject
+public partial class PolicyDetailViewModel(IApiClient apiClient) : ObservableObject
 {
     [ObservableProperty]
     private int policyId;

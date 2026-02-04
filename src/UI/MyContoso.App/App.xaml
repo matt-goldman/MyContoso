@@ -12,18 +12,17 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
-                    
+
                 <lucide:Icons />
-                
+
                 <material:Theme />
                 <!-- TODO: Re-assert colors AFTER material theme, until we generate a complete theme -->
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            
+
             <!-- Converters -->
             <converters:IsNotNullConverter x:Key="IsNotNullConverter" />
             <converters:AccreditationStatusColorConverter x:Key="AccreditationColorConverter" />
-            <converters:InitialsConverter x:Key="InitialsConverter" />
             <converters:IsLikedToBackgroundColorConverter x:Key="LikedToColorConverter" />
             <converters:IsLikedToTextColorConverter x:Key="IsLikedToTextColor" />
             <converters:AccreditationStatusIconConverter x:Key="AccreditationIconConverter" />

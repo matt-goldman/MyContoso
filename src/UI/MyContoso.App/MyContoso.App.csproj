@@ -74,7 +74,6 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\Aspire\MyContoso.MauiServiceDefaults\MyContoso.MauiServiceDefaults.csproj" />
-	  <ProjectReference Include="..\..\Common\Shared\Shared.csproj" />
 	</ItemGroup>
 
 </Project>

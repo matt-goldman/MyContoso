@@ -1,4 +1,4 @@
-namespace Shared;
+namespace MyContoso.App.Models;
 
 public record Policy(
     int PolicyId,

@@ -4,12 +4,12 @@
              xmlns:fs="clr-namespace:FlagstoneUI.Core.Controls;assembly=FlagstoneUI.Core"
              xmlns:vm="clr-namespace:MyContoso.App.ViewModels"
              xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             xmlns:shared="clr-namespace:Shared;assembly=Shared"
+             xmlns:models="clr-namespace:MyContoso.App.Models"
              xmlns:lucide="clr-namespace:Plugin.Maui.Lucide.Controls;assembly=Plugin.Maui.Lucide"
              x:Class="MyContoso.App.Pages.EmployeeListPage"
              x:DataType="vm:EmployeeListViewModel"
              BackgroundColor="{DynamicResource Color.Background}">
-    
+
     <Grid RowDefinitions="Auto,Auto,*">
         <!-- Page Header -->
         <VerticalStackLayout Grid.Row="0"
@@ -24,7 +24,7 @@
                    FontSize="14"
                    Margin="0,4,0,0" />
         </VerticalStackLayout>
-        
+
         <!-- Search Bar -->
         <Grid Grid.Row="1"
               Padding="16,8"
@@ -45,7 +45,7 @@
                          CornerRadius="10"
                          Padding="0" />
         </Grid>
-        
+
         <RefreshView Grid.Row="2"
                      IsRefreshing="{Binding IsRefreshing}"
                      Command="{Binding RefreshCommand}">
@@ -64,9 +64,9 @@
                                          Color="{DynamicResource Color.Primary}" />
                     </VerticalStackLayout>
                 </CollectionView.EmptyView>
-                
+
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="shared:Employee">
+                    <DataTemplate x:DataType="models:Employee">
                         <Grid Padding="0"
                               Margin="0">
                             <fs:FsCard Style="{DynamicResource ElevatedCard}"
@@ -76,7 +76,7 @@
                                     <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:EmployeeListViewModel}}, Path=ViewEmployeeCommand}"
                                                         CommandParameter="{Binding .}" />
                                 </fs:FsCard.GestureRecognizers>
-                                
+
                                 <Grid ColumnDefinitions="48,*,48"
                                       ColumnSpacing="8"
                                       Margin="10,25">
@@ -88,16 +88,16 @@
                                                      Padding="0"
                                                      BackgroundColor="{DynamicResource Color.Primary}"
                                                      BorderColor="{DynamicResource Color.PrimaryContainer}"
-                                                     Text="{Binding Name, Converter={StaticResource InitialsConverter}}"
+                                                     Text="{Binding Initials}"
                                                      ImageSource="{Binding AvatarUrl}"
                                                      TextColor="{DynamicResource Color.OnPrimary}"
                                                      FontSize="16"
                                                      FontAttributes="Bold"
                                                      HorizontalOptions="Center"
                                                      VerticalOptions="Start"/>
-                                    
+
                                     <!-- Employee Info -->
-                                    <VerticalStackLayout Grid.Column="1" 
+                                    <VerticalStackLayout Grid.Column="1"
                                                         VerticalOptions="Center"
                                                         Spacing="2">
                                         <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
@@ -107,18 +107,18 @@
                                                        FontAttributes="Bold"
                                                        FontFamily="{OnPlatform iOS='OpenSansBold'}"
                                                        LineBreakMode="TailTruncation" />
-                                                
+
                                                 <Label Text="{Binding Role}"
                                                        TextColor="{DynamicResource Color.OnSurface}"
                                                        LineBreakMode="TailTruncation" />
-                                                
+
                                                 <HorizontalStackLayout Margin="0,5,0,0"
                                                                        Spacing="3">
                                                     <lucide:Icon Name="{DynamicResource Mail}"
                                                                  Size="10"
                                                                  VerticalOptions="End"
                                                                  Margin="0,0,3,4"/>
-                                                    <Label Text="{Binding ContactInfo.Email}"
+                                                    <Label Text="{Binding Email}"
                                                            TextColor="{DynamicResource Color.OnSurface}"
                                                            FontSize="Small"
                                                            LineBreakMode="TailTruncation"
@@ -128,7 +128,7 @@
                                             </VerticalStackLayout>
                                         </Grid>
                                     </VerticalStackLayout>
-                                    
+
                                     <!-- Department Badge -->
                                     <Border Grid.Column="1"
                                             Grid.ColumnSpan="2"
@@ -153,7 +153,7 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </RefreshView>
-        
+
         <ActivityIndicator Grid.Row="2"
                          IsRunning="{Binding IsLoading}"
                          IsVisible="{Binding IsLoading}"

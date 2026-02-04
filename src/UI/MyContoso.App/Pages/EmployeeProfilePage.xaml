@@ -18,9 +18,9 @@
                              IsVisible="{Binding IsLoading}"
                              Color="{DynamicResource Color.Primary}"
                              HorizontalOptions="Center" />
-            
+
             <VerticalStackLayout IsVisible="{Binding Employee, Converter={StaticResource IsNotNullConverter}}">
-                
+
                 <fs:FsCard Style="{DynamicResource ElevatedCard}"
                            Elevation="1">
                     <FlexLayout Direction="Column"
@@ -28,8 +28,8 @@
                                 JustifyContent="SpaceBetween"
                                 VerticalOptions="Fill"
                                 MinimumHeightRequest="350">
-                        
-                        <mct:AvatarView Text="{Binding Employee.Name, Converter={StaticResource InitialsConverter}}"
+
+                        <mct:AvatarView Text="{Binding Employee.Initials}"
                                         ImageSource="{Binding Employee.AvatarUrl}"
                                         BorderColor="{DynamicResource Color.Secondary}"
                                         BorderWidth="3"
@@ -37,7 +37,7 @@
                                         CornerRadius="50"
                                         HeightRequest="100"
                                         Margin="0,0,10,0"/>
-                        
+
                         <VerticalStackLayout Margin="0,0,10,0">
                             <Label Text="{Binding Employee.Name}"
                                    TextColor="{DynamicResource Color.OnSurface}"
@@ -46,13 +46,13 @@
                                    FontSize="{DynamicResource FontSize.TitleMedium}"
                                    FontAttributes="Bold"
                                    FontFamily="{OnPlatform iOS='OpenSansBold'}"/>
-                            
+
                             <Label Text="{Binding Employee.Role}"
                                    TextColor="{DynamicResource Color.OnSurfaceVariant}"
                                    HorizontalOptions="Center"
                                    HorizontalTextAlignment="Center"/>
                         </VerticalStackLayout>
-                        
+
                         <!-- Department Badge -->
                         <Border Padding="8,2"
                                 Margin="0,0,10,0"
@@ -66,7 +66,7 @@
                                    TextColor="{DynamicResource Color.OnSecondary}"
                                    HorizontalOptions="Center" />
                         </Border>
-                        
+
                         <Grid ColumnDefinitions="*,*"
                               ColumnSpacing="10"
                               Margin="0,0,10,0"
@@ -81,7 +81,7 @@
                                          ContentLayout="Left"
                                          MaximumHeightRequest="35"
                                          Text="Message"/>
-                            
+
                             <fs:FsButton Grid.Column="1"
                                          HorizontalOptions="Fill"
                                          Style="{DynamicResource OutlinedButton}"
@@ -92,7 +92,7 @@
                                          MaximumHeightRequest="35"
                                          Text="Email"/>
                         </Grid>
-                        
+
                         <fs:FsButton HorizontalOptions="Fill"
                                      BackgroundColor="{DynamicResource Color.Primary}"
                                      CornerRadius="12"
@@ -104,21 +104,21 @@
                                      Margin="0,5,10,0"
                                      Text="Edit Profile"
                                      IsVisible="{Binding IsMyProfile}"/>
-                        
+
                         <BoxView HorizontalOptions="Fill"
                                  HeightRequest="1"
                                  WidthRequest="300"
                                  Margin="0,0,10,0"
                                  Opacity="0.5"
                                  BackgroundColor="{DynamicResource Gray300}"/>
-                        
+
                         <Label WidthRequest="300"
                                Text="{Binding Employee.ProfileSummary}"
                                FontSize="Small"
                                TextColor="{StaticResource Gray600}"/>
                     </FlexLayout>
                 </fs:FsCard>
-                
+
                 <fs:FsCard Style="{DynamicResource ElevatedCard}"
                            Elevation="1">
                     <VerticalStackLayout Spacing="20"
@@ -127,7 +127,7 @@
                                TextColor="{DynamicResource Color.OnSurface}"
                                FontSize="{DynamicResource FontSize.TitleMedium}"
                                FontAttributes="Bold" />
-                    
+
                         <Grid RowDefinitions="*,*,*,*"
                               ColumnDefinitions="40,*"
                               ColumnSpacing="15"
@@ -142,17 +142,17 @@
                                 <lucide:Icon Name="{DynamicResource Mail}"
                                              Color="{DynamicResource Color.Primary}" />
                             </Border>
-                            
+
                             <VerticalStackLayout Grid.Column="1"
                                                  Grid.Row="0">
                                 <Label TextColor="{StaticResource Gray600}"
                                        FontSize="Small"
                                        Text="Email" />
-                                
+
                                 <Label TextColor="{StaticResource Gray900}"
-                                       Text="{Binding Employee.ContactInfo.Email}" />
+                                       Text="{Binding Employee.Email}" />
                             </VerticalStackLayout>
-                            
+
                             <!-- Phone -->
                             <Border Grid.Column="0"
                                     Grid.Row="1"
@@ -163,17 +163,17 @@
                                 <lucide:Icon Name="{DynamicResource Phone}"
                                              Color="{DynamicResource Color.Secondary}" />
                             </Border>
-                            
+
                             <VerticalStackLayout Grid.Column="1"
                                                  Grid.Row="1">
                                 <Label TextColor="{StaticResource Gray600}"
                                        FontSize="Small"
                                        Text="Phone" />
-                                
+
                                 <Label TextColor="{StaticResource Gray900}"
-                                       Text="{Binding Employee.ContactInfo.Phone}" />
+                                       Text="{Binding Employee.Phone}" />
                             </VerticalStackLayout>
-                            
+
                             <!-- Address -->
                             <Border Grid.Column="0"
                                     Grid.Row="2"
@@ -185,18 +185,18 @@
                                 <lucide:Icon Name="{x:Static li:Icons.MapPin}"
                                              Color="{DynamicResource Color.Secondary}" />
                             </Border>
-                            
+
                             <VerticalStackLayout Grid.Column="1"
                                                  Grid.Row="2"
                                                  IsVisible="{Binding IsMyProfile}">
                                 <Label TextColor="{StaticResource Gray600}"
                                        FontSize="Small"
                                        Text="Address" />
-                                
+
                                 <Label TextColor="{StaticResource Gray900}"
-                                       Text="{Binding Employee.ContactInfo.Address}" />
+                                       Text="{Binding Employee.Address}" />
                             </VerticalStackLayout>
-                            
+
                             <!-- Date of birth -->
                             <Border Grid.Column="0"
                                     Grid.Row="3"
@@ -208,22 +208,22 @@
                                 <lucide:Icon Name="{DynamicResource Calendar}"
                                              Color="{DynamicResource Color.Primary}" />
                             </Border>
-                            
+
                             <VerticalStackLayout Grid.Column="1"
                                                  Grid.Row="3"
                                                  IsVisible="{Binding IsMyProfile}">
                                 <Label TextColor="{StaticResource Gray600}"
                                        FontSize="Small"
                                        Text="Date of Birth" />
-                                
+
                                 <Label TextColor="{StaticResource Gray900}"
-                                       Text="{Binding Employee.ContactInfo.DateOfBirth, StringFormat='{0:dd MMM yyyy}'}" />
+                                       Text="{Binding Employee.DateOfBirth, StringFormat='{0:dd MMM yyyy}'}" />
                             </VerticalStackLayout>
-                            
+
                         </Grid>
                     </VerticalStackLayout>
                 </fs:FsCard>
-                
+
                 <fs:FsCard Style="{DynamicResource ElevatedCard}"
                            Elevation="1">
                     <VerticalStackLayout Spacing="{DynamicResource Space.12}"

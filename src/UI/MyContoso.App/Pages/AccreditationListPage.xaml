@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:fs="clr-namespace:FlagstoneUI.Core.Controls;assembly=FlagstoneUI.Core"
              xmlns:vm="clr-namespace:MyContoso.App.ViewModels"
-             xmlns:shared="clr-namespace:Shared;assembly=Shared"
+             xmlns:models="clr-namespace:MyContoso.App.Models"
              xmlns:lucide="clr-namespace:Plugin.Maui.Lucide.Controls;assembly=Plugin.Maui.Lucide"
              x:Class="MyContoso.App.Pages.AccreditationListPage"
              x:DataType="vm:AccreditationListViewModel"
@@ -125,7 +125,7 @@
                 </CollectionView.EmptyView>
 
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="shared:Accreditation">
+                    <DataTemplate x:DataType="models:Accreditation">
                         <Grid Padding="2,0">
                             <fs:FsCard Style="{DynamicResource ElevatedCard}"
                                        Elevation="1">
@@ -183,7 +183,7 @@
                                         <Label Text="{Binding Description}"
                                                FontSize="Small"
                                                TextColor="{StaticResource Gray900}"/>
-                                        
+
                                         <HorizontalStackLayout Spacing="10">
                                             <Border StrokeThickness="1"
                                                     Stroke="{StaticResource Gray600}"

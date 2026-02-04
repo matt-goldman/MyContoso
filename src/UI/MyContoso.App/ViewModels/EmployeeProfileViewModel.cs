@@ -1,11 +1,11 @@
 using CommunityToolkit.Mvvm.ComponentModel;
+using MyContoso.App.Models;
 using MyContoso.App.Services;
-using Shared;
 
 namespace MyContoso.App.ViewModels;
 
 [QueryProperty(nameof(EmployeeId), "id")]
-public partial class EmployeeProfileViewModel(ApiClient apiClient) : ObservableObject
+public partial class EmployeeProfileViewModel(IApiClient apiClient) : ObservableObject
 {
     [ObservableProperty]
     private int employeeId;
@@ -15,13 +15,13 @@ public partial class EmployeeProfileViewModel(ApiClient apiClient) : ObservableO
 
     [ObservableProperty]
     private bool isLoading;
-    
+
     [ObservableProperty]
     private int activeAccreditations;
-    
+
     [ObservableProperty]
     private int expiringAccreditations;
-    
+
     [ObservableProperty]
     private bool isMyProfile = false;
 

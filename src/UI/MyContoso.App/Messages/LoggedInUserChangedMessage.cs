@@ -1,5 +1,5 @@
 using CommunityToolkit.Mvvm.Messaging.Messages;
-using Shared;
+using MyContoso.App.Models;
 
 namespace MyContoso.App.Messages;
 

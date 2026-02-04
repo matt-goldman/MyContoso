@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using MyContoso.App.Messages;
+using MyContoso.App.Models;
 using MyContoso.App.Pages;
-using Shared;
 
 namespace MyContoso.App
 {

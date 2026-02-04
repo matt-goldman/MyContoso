@@ -1,7 +1,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using MyContoso.App.Models;
 using MyContoso.App.Services;
-using Shared;
 using System.Collections.ObjectModel;
 
 namespace MyContoso.App.ViewModels;
@@ -14,7 +14,7 @@ public class PolicyGroup(string category, IEnumerable<Policy> policies) : Observ
     public string Category { get; } = category;
 }
 
-public partial class PolicyListViewModel(ApiClient apiClient) : ObservableObject
+public partial class PolicyListViewModel(IApiClient apiClient) : ObservableObject
 {
     [ObservableProperty]
     private bool isLoading;

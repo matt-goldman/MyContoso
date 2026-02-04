@@ -1,4 +1,4 @@
-namespace Shared;
+namespace MyContoso.ApiService.Models;
 
 public record Employee(
     int EmployeeId,
@@ -16,4 +16,4 @@ public record ContactInfo(
     string Phone,
     string Address,
     DateTime? DateOfBirth
-    );
+);

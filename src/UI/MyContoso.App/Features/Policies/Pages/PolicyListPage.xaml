@@ -5,6 +5,7 @@
              xmlns:shared="clr-namespace:Shared;assembly=Shared"
              xmlns:li="clr-namespace:Plugin.Maui.Lucide;assembly=Plugin.Maui.Lucide"
              xmlns:viewModels="clr-namespace:MyContoso.App.Features.Policies.ViewModels"
+             xmlns:models="clr-namespace:MyContoso.App.Features.Policies.Models"
              x:Class="MyContoso.App.Features.Policies.Pages.PolicyListPage"
              x:DataType="viewModels:PolicyListViewModel"
              Title="Policy"
@@ -69,7 +70,7 @@
                 
                 <!-- Group Header -->
                 <CollectionView.GroupHeaderTemplate>
-                    <DataTemplate x:DataType="viewModels:PolicyGroup">
+                    <DataTemplate x:DataType="models:PolicyGroup">
                         <Grid Padding="16,16,16,8">
                             <HorizontalStackLayout Spacing="8">
                                 <Label Text="{DynamicResource BookOpen}"

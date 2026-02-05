@@ -33,7 +33,7 @@ namespace MyContoso.App
             //builder.AddServiceDefaults();
 
             // configure HTTP client with service discovery
-            builder.Services.AddHttpClient<ApiClient>(client =>
+            builder.Services.AddHttpClient<IApiClient, ApiClient>(client =>
             {
                 client.BaseAddress = new Uri("http://localhost:5506");//"https+http://webapi");
             });

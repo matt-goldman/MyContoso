@@ -1,11 +1,11 @@
 using CommunityToolkit.Mvvm.ComponentModel;
-using MyContoso.App.Services;
+using MyContoso.App.Features.Employees.Services;
 using Shared;
 
 namespace MyContoso.App.Features.Employees.ViewModels;
 
 [QueryProperty(nameof(EmployeeId), "id")]
-public partial class EmployeeProfileViewModel(ApiClient apiClient) : ObservableObject
+public partial class EmployeeProfileViewModel(EmployeeService service) : ObservableObject
 {
     [ObservableProperty]
     private int employeeId;
@@ -38,7 +38,7 @@ public partial class EmployeeProfileViewModel(ApiClient apiClient) : ObservableO
         try
         {
             IsLoading = true;
-            Employee = await apiClient.GetEmployeeAsync(EmployeeId);
+            Employee = await service.GetEmployeeAsync(EmployeeId);
 
             foreach (var accreditation in Employee?.Accreditations??[])
             {

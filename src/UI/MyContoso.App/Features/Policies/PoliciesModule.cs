@@ -24,6 +24,6 @@ public static class PoliciesModule
     
     public static void RegisterPoliciesRoutes()
     {
-        Routing.RegisterRoute("Policies", typeof(PolicyDetailPage));
+        Routing.RegisterRoute("policy", typeof(PolicyDetailPage));
     }
 }

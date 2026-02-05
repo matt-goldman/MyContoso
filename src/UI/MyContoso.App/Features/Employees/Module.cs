@@ -24,6 +24,6 @@ public static class EmployeesModule
     
     public static void RegisterEmployeeRoutes()
     {
-        Routing.RegisterRoute("employeeProfile", typeof(EmployeeProfilePage));
+        Routing.RegisterRoute("employee", typeof(EmployeeProfilePage));
     }
 }

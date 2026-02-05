@@ -5,7 +5,7 @@ using Shared;
 namespace MyContoso.App.ViewModels;
 
 [QueryProperty(nameof(UpdateId), "id")]
-public partial class CompanyUpdateDetailViewModel(ApiClient apiClient) : ObservableObject
+public partial class CompanyUpdateDetailViewModel(IApiClient apiClient) : ObservableObject
 {
     [ObservableProperty]
     private int updateId;

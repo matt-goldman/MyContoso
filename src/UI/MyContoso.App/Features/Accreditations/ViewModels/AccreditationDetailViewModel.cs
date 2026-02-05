@@ -1,12 +1,12 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using MyContoso.App.Services;
+using MyContoso.App.Features.Accreditations.Services;
 using Shared;
 
 namespace MyContoso.App.Features.Accreditations.ViewModels;
 
 [QueryProperty(nameof(AccreditationId), "id")]
-public partial class AccreditationDetailViewModel(ApiClient apiClient) : ObservableObject
+public partial class AccreditationDetailViewModel(AccreditationService service) : ObservableObject
 {
     [ObservableProperty]
     private bool isLoading;
@@ -43,7 +43,7 @@ public partial class AccreditationDetailViewModel(ApiClient apiClient) : Observa
         try
         {
             IsLoading = true;
-            Accreditation = await apiClient.GetAccreditationAsync(AccreditationId);
+            Accreditation = await service.GetAccreditationAsync(AccreditationId);
             
             IsShareable = Accreditation?.Status is not "Expired" and not "Overdue";
 

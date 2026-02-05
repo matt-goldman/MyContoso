@@ -1,4 +1,4 @@
-using MyContoso.App.Features.Policies.ViewModels;
+using MyContoso.App.Features.Policies.Models;
 using MyContoso.App.Services;
 using Shared;
 

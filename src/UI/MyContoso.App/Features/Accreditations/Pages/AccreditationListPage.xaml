@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<controls:ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:fs="clr-namespace:FlagstoneUI.Core.Controls;assembly=FlagstoneUI.Core"
              xmlns:shared="clr-namespace:Shared;assembly=Shared"
              xmlns:lucide="clr-namespace:Plugin.Maui.Lucide.Controls;assembly=Plugin.Maui.Lucide"
              xmlns:vm="clr-namespace:MyContoso.App.Features.Accreditations.ViewModels"
-             xmlns:controls="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls"
              x:Class="MyContoso.App.Features.Accreditations.Pages.AccreditationListPage"
              x:DataType="vm:AccreditationListViewModel"
              BackgroundColor="{DynamicResource Color.Background}">

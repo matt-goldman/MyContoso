@@ -1,19 +1,11 @@
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using MyContoso.App.Features.Policies.Models;
 using MyContoso.App.Features.Policies.Services;
-using MyContoso.App.Services;
 using Shared;
 
 namespace MyContoso.App.Features.Policies.ViewModels;
-
-/// <summary>
-/// Grouping class for Policy by category
-/// </summary>
-public class PolicyGroup(string category, IEnumerable<Policy> policies) : ObservableCollection<Policy>(policies)
-{
-    public string Category { get; } = category;
-}
 
 public partial class PolicyListViewModel(PoliciesService service) : ObservableObject
 {
@@ -76,6 +68,6 @@ public partial class PolicyListViewModel(PoliciesService service) : ObservableOb
     [RelayCommand]
     private async Task ViewPolicy(Policy policy)
     {
-        await Shell.Current.GoToAsync($"PolicyId={policy.PolicyId}");
+        await Shell.Current.GoToAsync($"policy?Id={policy.PolicyId}");
     }
 }

@@ -1,4 +1,3 @@
-
 using MyContoso.App.Features.Policies.ViewModels;
 
 namespace MyContoso.App.Features.Policies.Pages;

@@ -4,7 +4,7 @@ using MyContoso.App.Services;
 
 namespace MyContoso.App.ViewModels;
 
-public partial class LoginViewModel(ApiClient client) : ObservableObject
+public partial class LoginViewModel(IApiClient client) : ObservableObject
 {
     [ObservableProperty]
     private bool isLoading;

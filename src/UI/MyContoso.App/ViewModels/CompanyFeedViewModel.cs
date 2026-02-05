@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 
 namespace MyContoso.App.ViewModels;
 
-public partial class CompanyFeedViewModel(ApiClient apiClient) : ObservableObject
+public partial class CompanyFeedViewModel(IApiClient apiClient) : ObservableObject
 {
     [ObservableProperty]
     private bool isLoading;

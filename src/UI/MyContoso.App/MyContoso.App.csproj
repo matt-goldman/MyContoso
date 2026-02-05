@@ -75,9 +75,9 @@
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="14.0.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-		<PackageReference Include="FlagstoneUI.Core" Version="0.0.3" />
-		<PackageReference Include="FlagstoneUI.Integrations.MCT" Version="0.0.3" />
-		<PackageReference Include="FlagstoneUI.Themes.Material" Version="0.0.3" />
+		<PackageReference Include="FlagstoneUI.Core" Version="2.0.0" />
+		<PackageReference Include="FlagstoneUI.Integrations.MCT" Version="2.0.0" />
+		<PackageReference Include="FlagstoneUI.Themes.Material" Version="2.0.0" />
 		<PackageReference Include="Indiko.Maui.Controls.Markdown" Version="1.5.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.31" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.2" />

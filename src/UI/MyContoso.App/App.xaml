@@ -22,10 +22,6 @@
 
             <!-- Converters -->
             <converters:IsNotNullConverter x:Key="IsNotNullConverter" />
-            <converters:AccreditationStatusColorConverter x:Key="AccreditationColorConverter" />
-            <converters:IsLikedToBackgroundColorConverter x:Key="LikedToColorConverter" />
-            <converters:IsLikedToTextColorConverter x:Key="IsLikedToTextColor" />
-            <converters:AccreditationStatusIconConverter x:Key="AccreditationIconConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

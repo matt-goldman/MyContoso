@@ -21,29 +21,29 @@
                             StrokeShape="RoundRectangle 12"
                             HorizontalOptions="Start"
                             Padding="0"
-                            BackgroundColor="{Binding Accreditation.Status, Converter={StaticResource AccreditationColorConverter}, ConverterParameter=Background}"
+                            BackgroundColor="{Binding Accreditation.StatusBackgroundColor}"
                             Stroke="Transparent">
-                        <lucide:Icon Name="{Binding Accreditation.Status, Converter={StaticResource AccreditationIconConverter}}"
+                        <lucide:Icon Name="{Binding Accreditation.StatusIcon}"
                                      Size="32"
-                                     Color="{Binding Accreditation.Status, Converter={StaticResource AccreditationColorConverter}}"
+                                     Color="{Binding Accreditation.StatusIconColor}"
                                      HorizontalOptions="Center"
                                      VerticalOptions="Center" />
                     </Border>
-                    
+
                     <!-- Status Badge -->
                     <Border Padding="12,4"
-                            BackgroundColor="{Binding Accreditation.Status, Converter={StaticResource AccreditationColorConverter}, ConverterParameter=Badge}"
+                            BackgroundColor="{Binding Accreditation.StatusBadgeColor}"
                             StrokeThickness="0"
                             HorizontalOptions="Start">
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="12" />
                         </Border.StrokeShape>
                         <Label Text="{Binding Accreditation.Status}"
-                               TextColor="{Binding Accreditation.Status, Converter={StaticResource AccreditationColorConverter}, ConverterParameter=BadgeText}"
+                               TextColor="{Binding Accreditation.StatusBadgeTextColor}"
                                FontSize="12"
                                FontAttributes="Bold" />
                     </Border>
-                            
+
                     <Label Text="{Binding Accreditation.Name}"
                            TextColor="{DynamicResource Color.OnSurface}"
                            FontSize="20"
@@ -57,11 +57,11 @@
                            TextColor="{DynamicResource Color.OnSurfaceVariant}"
                            FontSize="14"
                            LineHeight="1.4" />
-                    
+
                     <!-- Separator -->
                     <BoxView HeightRequest="1"
                              BackgroundColor="{DynamicResource Color.OutlineVariant}" />
-                    
+
                     <Border StrokeThickness="1"
                             Stroke="{StaticResource Gray400}"
                             StrokeShape="RoundRectangle 8"

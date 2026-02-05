@@ -141,12 +141,12 @@
                                             StrokeShape="RoundRectangle 12"
                                             MaximumHeightRequest="40"
                                             VerticalOptions="Start"
-                                            BackgroundColor="{Binding Status, Converter={StaticResource AccreditationColorConverter}, ConverterParameter=Background}">
-                                    <lucide:Icon Name="{Binding Status, Converter={StaticResource AccreditationIconConverter}}"
+                                            BackgroundColor="{Binding StatusBackgroundColor}">
+                                    <lucide:Icon Name="{Binding StatusIcon}"
                                                  WidthRequest="40"
                                                  HeightRequest="40"
                                                  Padding="0"
-                                                 Color="{Binding Status, Converter={StaticResource AccreditationColorConverter}}"
+                                                 Color="{Binding StatusIconColor}"
                                                  Size="20"
                                                  HorizontalOptions="Center"
                                                  VerticalOptions="Center"/>
@@ -168,13 +168,13 @@
                                             <!-- Status Badge -->
                                             <Border Grid.Column="1"
                                                     Padding="8,2"
-                                                    BackgroundColor="{Binding Status, Converter={StaticResource AccreditationColorConverter}, ConverterParameter=Badge}"
+                                                    BackgroundColor="{Binding StatusBadgeColor}"
                                                     StrokeThickness="0"
                                                     VerticalOptions="Center"
                                                     StrokeShape="RoundRectangle 10"
                                                     MaximumHeightRequest="20">
                                                 <Label Text="{Binding Status}"
-                                                       TextColor="{Binding Status, Converter={StaticResource AccreditationColorConverter}, ConverterParameter=BadgeText}"
+                                                       TextColor="{Binding StatusBadgeTextColor}"
                                                        FontSize="10"
                                                        HorizontalOptions="Center" />
                                             </Border>

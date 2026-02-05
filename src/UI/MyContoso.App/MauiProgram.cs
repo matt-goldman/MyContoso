@@ -25,6 +25,11 @@ namespace MyContoso.App
                 })
                 .UseMauiCommunityToolkit()
                 .UseLucide();
+            
+            builder.ConfigureMauiHandlers(handlers =>
+            {
+                handlers.AddHandler<Shell, TabBarIconShellHandler>();
+            });
 
 #if DEBUG
     		builder.Logging.AddDebug();

@@ -21,7 +21,7 @@
                    FontSize="24"
                    FontAttributes="Bold"
                    FontFamily="{OnPlatform iOS='OpenSansBold'}"/>
-            <Label Text="Company Policy, procedures, and guidelines for employees"
+            <Label Text="Company policies, procedures, and guidelines for employees"
                    TextColor="{DynamicResource Color.OnSurfaceVariant}"
                    FontSize="14"
                    Margin="0,4,0,0" />
@@ -33,7 +33,7 @@
               ColumnDefinitions="*,Auto"
               ColumnSpacing="8">
             <fs:FsEntry Grid.Column="0"
-                        Placeholder="Search Policy..."
+                        Placeholder="Search Policies..."
                         Text="{Binding SearchText}"
                         Style="{DynamicResource OutlinedEntry}"
                         HeightRequest="44"
@@ -51,7 +51,7 @@
         <RefreshView Grid.Row="2"
                      IsRefreshing="{Binding IsRefreshing}"
                      Command="{Binding RefreshCommand}">
-            <CollectionView ItemsSource="{Binding Policy}"
+            <CollectionView ItemsSource="{Binding Policies}"
                            SelectionMode="None"
                            ItemsUpdatingScrollMode="KeepScrollOffset"
                            IsGrouped="True">
@@ -59,7 +59,7 @@
                     <VerticalStackLayout HorizontalOptions="Center"
                                        VerticalOptions="Center"
                                        Spacing="16">
-                        <Label Text="No Policy available"
+                        <Label Text="No Policies available"
                                TextColor="{DynamicResource Color.OnSurface}"
                                FontSize="16"
                                HorizontalOptions="Center" />

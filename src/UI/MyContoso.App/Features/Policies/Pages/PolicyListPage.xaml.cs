@@ -16,7 +16,7 @@ public partial class PolicyListPage : ContentPage
 
         if (BindingContext is PolicyListViewModel vm && vm.Policies.Count == 0)
         {
-            await vm.LoadPolicyCommand.ExecuteAsync(null);
+            await vm.LoadPoliciesCommand.ExecuteAsync(null);
         }
     }
 }

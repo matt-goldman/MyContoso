@@ -4,8 +4,9 @@ using Shared;
 
 namespace MyContoso.App.Features.Policies.ViewModels;
 
+
 [QueryProperty(nameof(PolicyId), "id")]
-public partial class PolicyDetailViewModel(PoliciesService service) : ObservableObject
+public partial class PolicyDetailViewModel(PoliciesService policyService) : ObservableObject
 {
     [ObservableProperty]
     private int policyId;
@@ -18,10 +19,10 @@ public partial class PolicyDetailViewModel(PoliciesService service) : Observable
 
     partial void OnPolicyIdChanged(int value)
     {
-        _ = LoadPoliciesAsync();
+        _ = LoadPolicyAsync();
     }
 
-    private async Task LoadPoliciesAsync()
+    private async Task LoadPolicyAsync()
     {
         if (PolicyId <= 0)
             return;
@@ -29,7 +30,7 @@ public partial class PolicyDetailViewModel(PoliciesService service) : Observable
         try
         {
             IsLoading = true;
-            Policy = await service.GetPolicyAsync(PolicyId);
+            Policy = await policyService.GetPolicyAsync(PolicyId);
         }
         finally
         {

@@ -7,7 +7,8 @@ using Shared;
 
 namespace MyContoso.App.Features.Policies.ViewModels;
 
-public partial class PolicyListViewModel(PoliciesService service) : ObservableObject
+
+public partial class PolicyListViewModel(PoliciesService policyService) : ObservableObject
 {
     [ObservableProperty]
     private bool isLoading;
@@ -21,7 +22,7 @@ public partial class PolicyListViewModel(PoliciesService service) : ObservableOb
     public ObservableCollection<PolicyGroup> Policies { get; } = [];
 
     [RelayCommand]
-    private async Task LoadPolicy()
+    private async Task LoadPolicies()
     {
         if (IsLoading)
             return;
@@ -31,8 +32,8 @@ public partial class PolicyListViewModel(PoliciesService service) : ObservableOb
             IsLoading = true;
             Policies.Clear();
 
-            var grouped = await service.GetAllPoliciesAsync();
-
+            var grouped = await policyService.GetAllPoliciesAsync();
+            
             foreach (var group in grouped)
             {
                 Policies.Add(group);
@@ -51,8 +52,8 @@ public partial class PolicyListViewModel(PoliciesService service) : ObservableOb
         {
             IsRefreshing = true;
             Policies.Clear();
-            
-            var grouped = await service.GetAllPoliciesAsync();
+
+            var grouped = await policyService.GetAllPoliciesAsync();
 
             foreach (var group in grouped)
             {
@@ -68,6 +69,6 @@ public partial class PolicyListViewModel(PoliciesService service) : ObservableOb
     [RelayCommand]
     private async Task ViewPolicy(Policy policy)
     {
-        await Shell.Current.GoToAsync($"policy?Id={policy.PolicyId}");
+        await Shell.Current.GoToAsync($"policy?id={policy.PolicyId}");
     }
 }

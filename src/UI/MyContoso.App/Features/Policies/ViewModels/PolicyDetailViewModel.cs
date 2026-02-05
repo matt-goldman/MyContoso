@@ -1,11 +1,11 @@
 using CommunityToolkit.Mvvm.ComponentModel;
-using MyContoso.App.Services;
+using MyContoso.App.Features.Policies.Services;
 using Shared;
 
 namespace MyContoso.App.Features.Policies.ViewModels;
 
 [QueryProperty(nameof(PolicyId), "id")]
-public partial class PolicyDetailViewModel(ApiClient apiClient) : ObservableObject
+public partial class PolicyDetailViewModel(PoliciesService service) : ObservableObject
 {
     [ObservableProperty]
     private int policyId;
@@ -29,7 +29,7 @@ public partial class PolicyDetailViewModel(ApiClient apiClient) : ObservableObje
         try
         {
             IsLoading = true;
-            Policy = await apiClient.GetPolicyAsync(PolicyId);
+            Policy = await service.GetPolicyAsync(PolicyId);
         }
         finally
         {

@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using MyContoso.App.Features.Policies.Services;
 using MyContoso.App.Services;
 using Shared;
 
@@ -14,7 +15,7 @@ public class PolicyGroup(string category, IEnumerable<Policy> policies) : Observ
     public string Category { get; } = category;
 }
 
-public partial class PolicyListViewModel(ApiClient apiClient) : ObservableObject
+public partial class PolicyListViewModel(PoliciesService service) : ObservableObject
 {
     [ObservableProperty]
     private bool isLoading;
@@ -38,11 +39,7 @@ public partial class PolicyListViewModel(ApiClient apiClient) : ObservableObject
             IsLoading = true;
             Policies.Clear();
 
-            var policies = await apiClient.GetPoliciesAsync();
-            var grouped = policies
-                .GroupBy(p => p.Category)
-                .OrderBy(g => g.Key)
-                .Select(g => new PolicyGroup(g.Key, g.OrderBy(p => p.Title)));
+            var grouped = await service.GetAllPoliciesAsync();
 
             foreach (var group in grouped)
             {
@@ -62,12 +59,8 @@ public partial class PolicyListViewModel(ApiClient apiClient) : ObservableObject
         {
             IsRefreshing = true;
             Policies.Clear();
-
-            var policies = await apiClient.GetPoliciesAsync();
-            var grouped = policies
-                .GroupBy(p => p.Category)
-                .OrderBy(g => g.Key)
-                .Select(g => new PolicyGroup(g.Key, g.OrderBy(p => p.Title)));
+            
+            var grouped = await service.GetAllPoliciesAsync();
 
             foreach (var group in grouped)
             {

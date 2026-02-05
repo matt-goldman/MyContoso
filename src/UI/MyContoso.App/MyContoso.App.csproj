@@ -90,7 +90,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Features\Updates\" />
+	  <Folder Include="Features\Updates\Pages\" />
+	  <Folder Include="Features\Updates\Services\" />
+	  <Folder Include="Features\Updates\ViewModels\" />
 	</ItemGroup>
 
 	<ItemGroup>

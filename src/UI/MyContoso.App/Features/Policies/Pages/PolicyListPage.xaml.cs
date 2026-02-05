@@ -1,6 +1,7 @@
-using MyContoso.App.ViewModels;
 
-namespace MyContoso.App.Pages;
+using MyContoso.App.Features.Policies.ViewModels;
+
+namespace MyContoso.App.Features.Policies.Pages;
 
 public partial class PolicyListPage : ContentPage
 {
@@ -16,7 +17,7 @@ public partial class PolicyListPage : ContentPage
 
         if (BindingContext is PolicyListViewModel vm && vm.Policies.Count == 0)
         {
-            await vm.LoadPoliciesCommand.ExecuteAsync(null);
+            await vm.LoadPolicyCommand.ExecuteAsync(null);
         }
     }
 }

@@ -6,7 +6,8 @@
     xmlns:controls="clr-namespace:MyContoso.App.Controls"
     xmlns:views="clr-namespace:MyContoso.App.Pages"
     xmlns:accr="clr-namespace:MyContoso.App.Features.Accreditations.Pages"
-    xmlns:pages="clr-namespace:MyContoso.App.Features.Employees.Pages">
+    xmlns:pages="clr-namespace:MyContoso.App.Features.Employees.Pages"
+    xmlns:pages1="clr-namespace:MyContoso.App.Features.Policies.Pages">
     <Shell.TitleView>
         <controls:TitleView />
     </Shell.TitleView>
@@ -25,9 +26,9 @@
             Route="employees" />
 
         <ShellContent
-            Title="Handbook"
+            Title="Policies"
             Icon="{FontImageSource FontFamily='lucide', Glyph={DynamicResource BookOpen}}"
-            ContentTemplate="{DataTemplate views:PolicyListPage}"
+            ContentTemplate="{DataTemplate pages1:PolicyListPage}"
             Route="policies" />
 
         <ShellContent

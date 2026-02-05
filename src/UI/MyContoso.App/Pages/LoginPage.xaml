@@ -79,7 +79,7 @@
                <Label TextColor="Gray"
                       HorizontalOptions="Center"
                       HorizontalTextAlignment="Center"
-                      Text="By signing in, you agree to our Terms of Service and Privacy Policy."/>
+                      Text="By signing in, you agree to our Terms of Service and Privacy Policies."/>
            </VerticalStackLayout>
            
            <ActivityIndicator HorizontalOptions="Center"

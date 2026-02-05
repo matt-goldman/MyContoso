@@ -64,6 +64,12 @@
 	  <MauiXaml Update="Features\Accreditations\Pages\AccreditationListPage.xaml">
 	    <SubType>Designer</SubType>
 	  </MauiXaml>
+	  <MauiXaml Update="Features\Policies\Pages\PoliciesDetailPage.xaml">
+	    <SubType>Designer</SubType>
+	  </MauiXaml>
+	  <MauiXaml Update="Features\Policies\Pages\PoliciesListPage.xaml">
+	    <SubType>Designer</SubType>
+	  </MauiXaml>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -84,7 +90,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Features\Handbook\" />
 	  <Folder Include="Features\Updates\" />
 	</ItemGroup>
 
@@ -95,6 +100,14 @@
 	  </Compile>
 	  <Compile Update="Features\Accreditations\Pages\AccreditationListPage.xaml.cs">
 	    <DependentUpon>AccreditationListPage.xaml</DependentUpon>
+	    <SubType>Code</SubType>
+	  </Compile>
+	  <Compile Update="Features\Policies\Pages\PoliciesDetailPage.xaml.cs">
+	    <DependentUpon>PoliciesDetailPage.xaml</DependentUpon>
+	    <SubType>Code</SubType>
+	  </Compile>
+	  <Compile Update="Features\Policies\Pages\PoliciesListPage.xaml.cs">
+	    <DependentUpon>PoliciesListPage.xaml</DependentUpon>
 	    <SubType>Code</SubType>
 	  </Compile>
 	</ItemGroup>

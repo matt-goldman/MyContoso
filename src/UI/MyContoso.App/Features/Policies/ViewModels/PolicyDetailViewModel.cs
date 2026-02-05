@@ -2,7 +2,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using MyContoso.App.Services;
 using Shared;
 
-namespace MyContoso.App.ViewModels;
+namespace MyContoso.App.Features.Policies.ViewModels;
 
 [QueryProperty(nameof(PolicyId), "id")]
 public partial class PolicyDetailViewModel(ApiClient apiClient) : ObservableObject
@@ -18,10 +18,10 @@ public partial class PolicyDetailViewModel(ApiClient apiClient) : ObservableObje
 
     partial void OnPolicyIdChanged(int value)
     {
-        _ = LoadPolicyAsync();
+        _ = LoadPoliciesAsync();
     }
 
-    private async Task LoadPolicyAsync()
+    private async Task LoadPoliciesAsync()
     {
         if (PolicyId <= 0)
             return;

@@ -1,12 +1,12 @@
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using MyContoso.App.Services;
+using MyContoso.App.Features.Employees.Services;
 using Shared;
 
 namespace MyContoso.App.Features.Employees.ViewModels;
 
-public partial class EmployeeListViewModel(ApiClient apiClient) : ObservableObject
+public partial class EmployeeListViewModel(EmployeeService service) : ObservableObject
 {
     [ObservableProperty]
     private bool isLoading;
@@ -30,7 +30,7 @@ public partial class EmployeeListViewModel(ApiClient apiClient) : ObservableObje
             IsLoading = true;
             Employees.Clear();
 
-            var employees = await apiClient.GetEmployeesAsync();
+            var employees = await service.GetEmployeesAsync();
             foreach (var employee in employees.OrderBy(e => e.Name))
             {
                 Employees.Add(employee);
@@ -50,7 +50,7 @@ public partial class EmployeeListViewModel(ApiClient apiClient) : ObservableObje
             IsRefreshing = true;
             Employees.Clear();
 
-            var employees = await apiClient.GetEmployeesAsync();
+            var employees = await service.GetEmployeesAsync();
             foreach (var employee in employees.OrderBy(e => e.Name))
             {
                 Employees.Add(employee);

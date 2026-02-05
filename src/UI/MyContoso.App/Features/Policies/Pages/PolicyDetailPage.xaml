@@ -2,10 +2,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:fs="clr-namespace:FlagstoneUI.Core.Controls;assembly=FlagstoneUI.Core"
-             xmlns:vm="clr-namespace:MyContoso.App.ViewModels"
              xmlns:idk="clr-namespace:Indiko.Maui.Controls.Markdown;assembly=Indiko.Maui.Controls.Markdown"
-             x:Class="MyContoso.App.Pages.PolicyDetailPage"
-             x:DataType="vm:PolicyDetailViewModel"
+             xmlns:viewModels="clr-namespace:MyContoso.App.Features.Policies.ViewModels"
+             x:Class="MyContoso.App.Features.Policies.Pages.PolicyDetailPage"
+             x:DataType="viewModels:PolicyDetailViewModel"
              Title="Policy Details">
     
     <ScrollView>
@@ -116,7 +116,7 @@
                                FontAttributes="Bold"
                                FontFamily="{OnPlatform iOS='OpenSansBold'}"/>
                         
-                        <Label Text="If you have questions about this policy, please reach out to HR or your manager." />
+                        <Label Text="If you have questions about this Policy, please reach out to HR or your manager." />
                         
                         <fs:FsButton Style="{DynamicResource OutlinedButton}"
                                      CornerRadius="12"

@@ -3,11 +3,6 @@ using ApiCompanyUpdate = MyContoso.App.ApiModels.CompanyUpdate;
 
 namespace MyContoso.App.Services;
 
-/// <summary>
-/// Service for company updates.
-/// Note: This service depends on EmployeeService to fetch author details,
-/// which is a bounded context violation - Updates domain reaching into Employees domain.
-/// </summary>
 public class UpdatesService(IApiClient apiClient, EmployeeService employeeService)
 {
     // Cache employees to avoid repeated calls (makes the problem worse over time)

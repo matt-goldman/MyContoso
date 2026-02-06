@@ -12,13 +12,4 @@ public record CompanyUpdate(
     int Likes,
     int Comments,
     bool IsLiked
-)
-{
-    public Color LikeButtonBackgroundColor => IsLiked
-        ? Color.FromArgb("#1477ee")  // Primary when liked
-        : Colors.Transparent;
-
-    public Color LikeButtonTextColor => IsLiked
-        ? Colors.White
-        : Colors.Black;
-}
+);

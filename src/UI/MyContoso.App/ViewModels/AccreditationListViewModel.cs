@@ -26,7 +26,7 @@ public partial class AccreditationListViewModel(IApiClient apiClient) : Observab
     [ObservableProperty]
     private int pendingCount;
 
-    public ObservableCollection<Accreditation> Accreditations { get; } = [];
+    public ObservableCollection<AccreditationItemViewModel> Accreditations { get; } = [];
 
     [RelayCommand]
     private async Task LoadAccreditationsAsync()
@@ -51,7 +51,7 @@ public partial class AccreditationListViewModel(IApiClient apiClient) : Observab
 
             foreach (var accreditation in accreditationList.OrderBy(a => a.Name))
             {
-                Accreditations.Add(accreditation);
+                Accreditations.Add(new AccreditationItemViewModel(accreditation));
             }
         }
         finally
@@ -80,7 +80,7 @@ public partial class AccreditationListViewModel(IApiClient apiClient) : Observab
 
             foreach (var accreditation in accreditationList.OrderBy(a => a.Name))
             {
-                Accreditations.Add(accreditation);
+                Accreditations.Add(new AccreditationItemViewModel(accreditation));
             }
         }
         finally
@@ -90,6 +90,6 @@ public partial class AccreditationListViewModel(IApiClient apiClient) : Observab
     }
 
     [RelayCommand]
-    private static Task ViewAccreditationAsync(Accreditation accreditation)
-        => Shell.Current.GoToAsync($"accreditation?id={accreditation.AccreditationId}");
+    private static Task ViewAccreditationAsync(AccreditationItemViewModel item)
+        => Shell.Current.GoToAsync($"accreditation?id={item.AccreditationId}");
 }

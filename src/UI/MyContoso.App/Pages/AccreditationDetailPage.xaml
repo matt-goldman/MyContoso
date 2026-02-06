@@ -21,25 +21,25 @@
                             StrokeShape="RoundRectangle 12"
                             HorizontalOptions="Start"
                             Padding="0"
-                            BackgroundColor="{Binding Accreditation.StatusBackgroundColor}"
+                            BackgroundColor="{Binding StatusBackgroundColor}"
                             Stroke="Transparent">
-                        <lucide:Icon Name="{Binding Accreditation.StatusIcon}"
+                        <lucide:Icon Name="{Binding StatusIcon}"
                                      Size="32"
-                                     Color="{Binding Accreditation.StatusIconColor}"
+                                     Color="{Binding StatusIconColor}"
                                      HorizontalOptions="Center"
                                      VerticalOptions="Center" />
                     </Border>
 
                     <!-- Status Badge -->
                     <Border Padding="12,4"
-                            BackgroundColor="{Binding Accreditation.StatusBadgeColor}"
+                            BackgroundColor="{Binding StatusBadgeColor}"
                             StrokeThickness="0"
                             HorizontalOptions="Start">
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="12" />
                         </Border.StrokeShape>
                         <Label Text="{Binding Accreditation.Status}"
-                               TextColor="{Binding Accreditation.StatusBadgeTextColor}"
+                               TextColor="{Binding StatusBadgeTextColor}"
                                FontSize="12"
                                FontAttributes="Bold" />
                     </Border>

@@ -14,7 +14,7 @@ public partial class CompanyFeedViewModel(IApiClient apiClient) : ObservableObje
     [ObservableProperty]
     private bool isRefreshing;
 
-    public ObservableCollection<CompanyUpdate> Updates { get; } = [];
+    public ObservableCollection<CompanyUpdateItemViewModel> Updates { get; } = [];
 
     [RelayCommand]
     public async Task LoadUpdatesAsync()
@@ -30,7 +30,7 @@ public partial class CompanyFeedViewModel(IApiClient apiClient) : ObservableObje
             var updates = await apiClient.GetCompanyUpdatesAsync();
             foreach (var update in updates.OrderByDescending(u => u.PublishedDate))
             {
-                Updates.Add(update);
+                Updates.Add(new CompanyUpdateItemViewModel(update));
             }
         }
         finally
@@ -50,7 +50,7 @@ public partial class CompanyFeedViewModel(IApiClient apiClient) : ObservableObje
             var updates = await apiClient.GetCompanyUpdatesAsync();
             foreach (var update in updates.OrderByDescending(u => u.PublishedDate))
             {
-                Updates.Add(update);
+                Updates.Add(new CompanyUpdateItemViewModel(update));
             }
         }
         finally
@@ -60,8 +60,8 @@ public partial class CompanyFeedViewModel(IApiClient apiClient) : ObservableObje
     }
 
     [RelayCommand]
-    public async Task ViewUpdateAsync(CompanyUpdate update)
+    public async Task ViewUpdateAsync(CompanyUpdateItemViewModel item)
     {
-        await Shell.Current.GoToAsync($"companyupdate?id={update.UpdateId}");
+        await Shell.Current.GoToAsync($"companyupdate?id={item.UpdateId}");
     }
 }

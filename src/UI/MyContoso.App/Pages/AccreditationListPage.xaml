@@ -125,7 +125,7 @@
                 </CollectionView.EmptyView>
 
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Accreditation">
+                    <DataTemplate x:DataType="vm:AccreditationItemViewModel">
                         <Grid Padding="2,0">
                             <fs:FsCard Style="{DynamicResource ElevatedCard}"
                                        Elevation="1">

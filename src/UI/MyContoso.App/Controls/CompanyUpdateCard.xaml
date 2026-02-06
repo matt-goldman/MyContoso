@@ -6,7 +6,7 @@
              xmlns:vm="clr-namespace:MyContoso.App.ViewModels"
              xmlns:lucide="clr-namespace:Plugin.Maui.Lucide.Controls;assembly=Plugin.Maui.Lucide"
              xmlns:models="clr-namespace:MyContoso.App.Models"
-             x:DataType="models:CompanyUpdate"
+             x:DataType="vm:CompanyUpdateItemViewModel"
              x:Class="MyContoso.App.Controls.CompanyUpdateCard">
     <fs:FsCard Style="{DynamicResource ElevatedCard}"
                Elevation="2">

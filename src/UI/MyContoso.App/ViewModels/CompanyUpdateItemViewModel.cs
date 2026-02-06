@@ -2,11 +2,6 @@ using MyContoso.App.Models;
 
 namespace MyContoso.App.ViewModels;
 
-/// <summary>
-/// 🚨 Anti-pattern: Item ViewModel with UI presentation properties.
-/// This couples the ViewModel layer to specific UI concerns (colors).
-/// The correct approach is to use ValueConverters in the View layer.
-/// </summary>
 public class CompanyUpdateItemViewModel(CompanyUpdate update)
 {
     // The underlying model
@@ -25,9 +20,8 @@ public class CompanyUpdateItemViewModel(CompanyUpdate update)
     public int Comments => Update.Comments;
     public bool IsLiked => Update.IsLiked;
 
-    // 🚨 UI presentation logic that should be in ValueConverters
     public Color LikeButtonBackgroundColor => IsLiked
-        ? Color.FromArgb("#7C3AED")  // Primary purple when liked
+        ? Color.FromArgb("#1477ee") 
         : Colors.Transparent;
 
     public Color LikeButtonTextColor => IsLiked

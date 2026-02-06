@@ -3,11 +3,6 @@ using Plugin.Maui.Lucide;
 
 namespace MyContoso.App.ViewModels;
 
-/// <summary>
-/// 🚨 Anti-pattern: Item ViewModel with UI presentation properties.
-/// This couples the ViewModel layer to specific UI concerns (colors, icons).
-/// The correct approach is to use ValueConverters in the View layer.
-/// </summary>
 public class AccreditationItemViewModel(Accreditation accreditation)
 {
     // The underlying model
@@ -21,7 +16,6 @@ public class AccreditationItemViewModel(Accreditation accreditation)
     public string Category => Accreditation.Category;
     public DateTime? ExpiryDate => Accreditation.ExpiryDate;
 
-    // 🚨 UI presentation logic that should be in ValueConverters
     private static readonly Color ValidPrimary = Color.FromArgb("#7C3AED");
     private static readonly Color ValidBackground = Color.FromArgb("#EDE9FE");
     private static readonly Color ExpiredPrimary = Color.FromArgb("#EF4444");

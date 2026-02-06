@@ -30,8 +30,6 @@ public partial class AccreditationDetailViewModel(IApiClient apiClient) : Observ
     [ObservableProperty]
     private bool isShareable;
 
-    // 🚨 Anti-pattern: UI presentation properties in ViewModel
-    // These should be ValueConverters in the View layer
     private static readonly Color ValidPrimary = Color.FromArgb("#7C3AED");
     private static readonly Color ValidBackground = Color.FromArgb("#EDE9FE");
     private static readonly Color ExpiredPrimary = Color.FromArgb("#EF4444");

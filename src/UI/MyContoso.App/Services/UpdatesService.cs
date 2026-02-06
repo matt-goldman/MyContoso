@@ -30,7 +30,6 @@ public class UpdatesService(IApiClient apiClient, EmployeeService employeeServic
 
     private async Task<CompanyUpdate> MapToModelAsync(ApiCompanyUpdate api)
     {
-        // 🚨 Cross-domain call: Updates service reaching into Employees domain
         var author = await GetAuthorAsync(api.AuthorId);
 
         return new CompanyUpdate(

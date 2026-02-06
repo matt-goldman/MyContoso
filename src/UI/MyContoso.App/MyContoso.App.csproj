@@ -70,6 +70,15 @@
 	  <MauiXaml Update="Features\Policies\Pages\PoliciesListPage.xaml">
 	    <SubType>Designer</SubType>
 	  </MauiXaml>
+	  <MauiXaml Update="Features\Updates\Pages\CompanyFeedPage.xaml">
+	    <SubType>Designer</SubType>
+	  </MauiXaml>
+	  <MauiXaml Update="Features\Updates\Pages\CompanyUpdateDetailPage.xaml">
+	    <SubType>Designer</SubType>
+	  </MauiXaml>
+	  <MauiXaml Update="Features\Updates\Controls\CompanyUpdateCard.xaml">
+	    <SubType>Designer</SubType>
+	  </MauiXaml>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -90,12 +99,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Features\Updates\Pages\" />
-	  <Folder Include="Features\Updates\Services\" />
-	  <Folder Include="Features\Updates\ViewModels\" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <Compile Update="Features\Accreditations\Pages\AccreditationDetailPage.xaml.cs">
 	    <DependentUpon>AccreditationDetailPage.xaml</DependentUpon>
 	    <SubType>Code</SubType>
@@ -110,6 +113,18 @@
 	  </Compile>
 	  <Compile Update="Features\Policies\Pages\PoliciesListPage.xaml.cs">
 	    <DependentUpon>PoliciesListPage.xaml</DependentUpon>
+	    <SubType>Code</SubType>
+	  </Compile>
+	  <Compile Update="Features\Updates\Pages\CompanyFeedPage.xaml.cs">
+	    <DependentUpon>CompanyFeedPage.xaml</DependentUpon>
+	    <SubType>Code</SubType>
+	  </Compile>
+	  <Compile Update="Features\Updates\Pages\CompanyUpdateDetailPage.xaml.cs">
+	    <DependentUpon>CompanyUpdateDetailPage.xaml</DependentUpon>
+	    <SubType>Code</SubType>
+	  </Compile>
+	  <Compile Update="Features\Updates\Controls\CompanyUpdateCard.xaml.cs">
+	    <DependentUpon>CompanyUpdateCard.xaml</DependentUpon>
 	    <SubType>Code</SubType>
 	  </Compile>
 	</ItemGroup>

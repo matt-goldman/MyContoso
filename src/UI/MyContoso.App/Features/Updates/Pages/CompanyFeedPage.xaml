@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:MyContoso.App.ViewModels"
              xmlns:shared="clr-namespace:Shared;assembly=Shared"
-             xmlns:controls="clr-namespace:MyContoso.App.Controls"
+             xmlns:controls="clr-namespace:MyContoso.App.Features.Updates.Controls"
              x:Class="MyContoso.App.Pages.CompanyFeedPage"
              x:DataType="vm:CompanyFeedViewModel"
              BackgroundColor="{DynamicResource Color.Background}">

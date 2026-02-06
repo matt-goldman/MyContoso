@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using MyContoso.App.Features.Accreditations;
 using MyContoso.App.Features.Employees;
 using MyContoso.App.Features.Policies;
+using MyContoso.App.Features.Updates;
 using MyContoso.App.Services;
 using MyContoso.App.ViewModels;
 using MyContoso.App.Pages;
@@ -43,21 +44,22 @@ namespace MyContoso.App
                 client.BaseAddress = new Uri("http://localhost:5506");//"https+http://webapi");
             });
 
+            // register modules
             builder
                 .AddAccreditationsModule()
                 .AddEmployeesModule()
-                .AddPoliciesModule();
+                .AddPoliciesModule()
+                .AddUpdatesModule();
 
             // Register ViewModels
             builder.Services.AddSingleton<LoginViewModel>();
-            builder.Services.AddSingleton<CompanyFeedViewModel>();
-            builder.Services.AddSingleton<CompanyUpdateDetailViewModel>();
-            
+            builder.Services.AddSingleton<TitleViewViewModel>();
 
             // Register Views
             builder.Services.AddSingleton<LoginPage>();
-            builder.Services.AddSingleton<CompanyFeedPage>();
-            builder.Services.AddSingleton<CompanyUpdateDetailPage>();
+            
+            // register services
+            builder.Services.AddSingleton<IAuthenticationService, AuthenticationService>();
             
 
             return builder.Build();

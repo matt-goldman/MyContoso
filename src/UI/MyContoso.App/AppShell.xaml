@@ -9,7 +9,7 @@
     xmlns:pages="clr-namespace:MyContoso.App.Features.Employees.Pages"
     xmlns:pages1="clr-namespace:MyContoso.App.Features.Policies.Pages">
     <Shell.TitleView>
-        <controls:TitleView />
+        <controls:TitleView x:Name="titleView" />
     </Shell.TitleView>
 
     <TabBar>

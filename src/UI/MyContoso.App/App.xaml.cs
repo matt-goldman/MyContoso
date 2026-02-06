@@ -1,34 +1,17 @@
-﻿using CommunityToolkit.Mvvm.Messaging;
-using MyContoso.App.Messages;
-using MyContoso.App.Pages;
-using Shared;
+﻿namespace MyContoso.App;
 
-namespace MyContoso.App
+public partial class App : Application
 {
-    public partial class App : Application
+    private readonly AppShell shell;
+
+    public App(AppShell shell)
     {
-        private readonly LoginPage loginPage;
+        this.shell = shell;
+        InitializeComponent();
+    }
 
-        public static Employee? CurrentUser
-        {
-            get;
-            set
-            {
-                if (field == value) return;
-                field = value;
-                WeakReferenceMessenger.Default.Send(new LoggedInUserChangedMessage(field!));
-            }
-        }
-
-        public App(LoginPage loginPage)
-        {
-            this.loginPage = loginPage;
-            InitializeComponent();
-        }
-
-        protected override Window CreateWindow(IActivationState? activationState)
-        {
-            return new Window(new AppShell(loginPage));
-        }
+    protected override Window CreateWindow(IActivationState? activationState)
+    {
+        return new Window(shell);
     }
 }

@@ -1,11 +1,12 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using MyContoso.App.Features.Employees.Services;
+using MyContoso.App.Services;
 using Shared;
 
 namespace MyContoso.App.Features.Employees.ViewModels;
 
 [QueryProperty(nameof(EmployeeId), "id")]
-public partial class EmployeeProfileViewModel(EmployeeService service) : ObservableObject
+public partial class EmployeeProfileViewModel(EmployeeService service, IAuthenticationService authService) : ObservableObject
 {
     [ObservableProperty]
     private int employeeId;
@@ -49,7 +50,7 @@ public partial class EmployeeProfileViewModel(EmployeeService service) : Observa
 
             if (!IsMyProfile)
             {
-                IsMyProfile = App.CurrentUser?.EmployeeId == EmployeeId;
+                IsMyProfile = authService.CurrentUser?.EmployeeId == EmployeeId;
             }
         }
         finally

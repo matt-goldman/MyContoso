@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:lucide="clr-namespace:Plugin.Maui.Lucide.Controls;assembly=Plugin.Maui.Lucide"
              xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:vm="clr-namespace:MyContoso.App.ViewModels"
+             x:DataType="vm:TitleViewViewModel"
              x:Class="MyContoso.App.Controls.TitleView">
     <FlexLayout Direction="Row"
                 JustifyContent="SpaceBetween"
@@ -46,8 +48,13 @@
                             FontSize="12"
                             HeightRequest="30"
                             WidthRequest="30"
+                            Text="{Binding Employee.Name,
+                                                        Converter={StaticResource InitialsConverter}}"
+                            ImageSource="{Binding Employee.AvatarUrl}"
                             TextColor="White"
-                            Background="{StaticResource Color.Primary}"/>
+                            Background="{StaticResource Color.Primary}"
+                            IsVisible="{Binding Employee,
+                                                                Converter={StaticResource IsNotNullConverter}}"/>
         </HorizontalStackLayout>
     </FlexLayout>
 </ContentView>

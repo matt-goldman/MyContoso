@@ -7,7 +7,7 @@
              xmlns:lucide="clr-namespace:Plugin.Maui.Lucide.Controls;assembly=Plugin.Maui.Lucide"
              xmlns:shared="clr-namespace:Shared;assembly=Shared"
              x:DataType="shared:CompanyUpdate"
-             x:Class="MyContoso.App.Controls.CompanyUpdateCard">
+             x:Class="MyContoso.App.Features.Updates.Controls.CompanyUpdateCard">
     <fs:FsCard Style="{DynamicResource ElevatedCard}"
                Elevation="2">
         <fs:FsCard.GestureRecognizers>

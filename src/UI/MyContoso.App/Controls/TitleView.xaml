@@ -16,7 +16,7 @@
                     WidthRequest="30"
                     StrokeThickness="0"
                     VerticalOptions="Center"
-                    Background="{StaticResource PrimaryToSecondary}">
+                    Background="{DynamicResource PrimaryToSecondary}">
                 <Label TextColor="White"
                        FontAttributes="Bold"
                        FontFamily="{OnPlatform iOS='OpenSansBold'}"
@@ -27,7 +27,7 @@
                        HorizontalTextAlignment="Center"
                        FontSize="Large"/>
             </Border>
-            <Label TextColor="{StaticResource Color.Primary}"
+            <Label TextColor="{DynamicResource Color.Primary}"
                    FontAttributes="Bold"
                    FontFamily="{OnPlatform iOS='OpenSansBold'}"
                    Text="MyContoso"
@@ -36,7 +36,8 @@
                    VerticalTextAlignment="Center" />
         </HorizontalStackLayout>
         
-        <HorizontalStackLayout Spacing="10">
+        <HorizontalStackLayout Spacing="10" IsVisible="{Binding Employee,
+                                                                Converter={StaticResource IsNotNullConverter}}">
             <lucide:Icon Name="{DynamicResource Search}"
                          Margin="0,0,15,0"
                          Size="18"/>
@@ -52,9 +53,7 @@
                                                         Converter={StaticResource InitialsConverter}}"
                             ImageSource="{Binding Employee.AvatarUrl}"
                             TextColor="White"
-                            Background="{StaticResource Color.Primary}"
-                            IsVisible="{Binding Employee,
-                                                                Converter={StaticResource IsNotNullConverter}}"/>
+                            Background="{DynamicResource Color.Primary}"/>
         </HorizontalStackLayout>
     </FlexLayout>
 </ContentView>

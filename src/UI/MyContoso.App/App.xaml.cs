@@ -1,13 +1,22 @@
-﻿namespace MyContoso.App;
+﻿using MyContoso.App.Pages;
+using MyContoso.App.Services;
+using MyContoso.App.ViewModels;
+
+namespace MyContoso.App;
 
 public partial class App : Application
 {
-    private readonly AppShell shell;
 
-    public App(AppShell shell)
+    private AppShell shell;
+    
+    public App(
+        IAuthenticationService authenticationService,
+        LoginPage loginPage,
+        TitleViewViewModel titleViewViewModel)
     {
-        this.shell = shell;
         InitializeComponent();
+        
+        shell = new AppShell(authenticationService, loginPage, titleViewViewModel);
     }
 
     protected override Window CreateWindow(IActivationState? activationState)

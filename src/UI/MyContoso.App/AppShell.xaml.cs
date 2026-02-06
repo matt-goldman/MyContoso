@@ -1,4 +1,5 @@
-﻿using MyContoso.App.Pages;
+﻿using MyContoso.App.Controls;
+using MyContoso.App.Pages;
 using MyContoso.App.Features.Accreditations;
 using MyContoso.App.Features.Employees;
 using MyContoso.App.Features.Policies;
@@ -16,13 +17,14 @@ namespace MyContoso.App
         public AppShell(
             IAuthenticationService authService,
             LoginPage loginPage,
-            TitleViewViewModel tvViewModel)
+            TitleViewViewModel titleViewViewModel)
         {
+            InitializeComponent();
+            
             this.authService = authService;
             this.loginPage = loginPage;
             
-            titleView.BindingContext = tvViewModel;
-            InitializeComponent();
+            titleView.BindingContext = titleViewViewModel;
 
             // Register routes for detail pages
             AccreditationsModule.RegisterAccreditationRoutes();

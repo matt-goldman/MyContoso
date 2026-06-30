@@ -1,8 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net10.0-android;net10.0-ios;net10.0-maccatalyst</TargetFrameworks>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net10.0-windows10.0.19041.0</TargetFrameworks>
+		<!-- Always present -->
+		<TargetFrameworks>net10.0-android</TargetFrameworks>
+
+		<!-- Only add Windows TFM on Windows runners -->
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">
+		  $(TargetFrameworks);net10.0-windows10.0.19041.0
+		</TargetFrameworks>
+
+		<!-- Only add Apple TFMs on macOS runners -->
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('osx'))">
+		  $(TargetFrameworks);net10.0-ios;net10.0-maccatalyst
+		</TargetFrameworks>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<IsAspireSharedProject>true</IsAspireSharedProject>
